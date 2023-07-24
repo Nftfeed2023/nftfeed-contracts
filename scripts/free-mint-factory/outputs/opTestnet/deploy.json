@@ -1,0 +1,15 @@
+{
+    "DEPLOYER_ADDRESS": "0x4A499535998e6CeAbDbcd3792B92737B9d41b59A",
+    "TOKEN_ADDRESS": "0xbCC2E7ddE130Ef6cB20AD4Daa360cfA4E6E2b9ac",
+    "verifyData": {
+        "address": "0xbCC2E7ddE130Ef6cB20AD4Daa360cfA4E6E2b9ac",
+        "constructorArguments": [
+            "0xb49dBfEF796737F777B70D2C5201341Ee61d31Ef",
+            {
+                "type": "BigNumber",
+                "hex": "0x02738d24e52000"
+            }
+        ],
+        "contract": "contracts/MintNftFactory.sol:MintNftFactory"
+    }
+}

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
@@ -19,15 +19,11 @@ contract TokenERC1155 is
 
     constructor(string memory _baseUrl) ERC1155(_baseUrl) {
         baseUrl = _baseUrl;
-        
     }
 
-    function uri(uint256 _tokenId)
-        public
-        view
-        override
-        returns (string memory)
-    {
+    function uri(
+        uint256 _tokenId
+    ) public view override returns (string memory) {
         return (
             string(
                 abi.encodePacked(

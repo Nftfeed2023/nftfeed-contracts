@@ -43,15 +43,33 @@ const config: HardhatUserConfig = {
       gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey]
     },
+    baseTestnet: {
+      url: "https://goerli.base.org/",
+      chainId: 84531,
+      gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+    opTestnet: {
+      url: "https://goerli.optimism.io/",
+      chainId: 420,
+      gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+    opMainnet: {
+      url: "https://mainnet.optimism.io/",
+      chainId: 10,
+      gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    }
   },
   solidity: {
     compilers: [
       {
-        version: '0.8.9',
+        version: '0.8.19',
         settings: {
           optimizer: {
             enabled: true,
-            runs: 200,
+            runs: 500,
           },
           metadata: {
             bytecodeHash: 'none',
@@ -77,6 +95,17 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: SCAN_APIKEY,
+    customChains: [
+      {
+        network: "baseTestnet",
+        chainId: 84531,
+        urls: {
+          apiURL: "https://api-goerli.basescan.org/api",
+          browserURL: "https://goerli.basescan.org"
+        }
+
+      }
+    ]
   },
 };
 

@@ -10,7 +10,14 @@ import { delayTime } from "../@helpers/block-chain.helper";
 const { utils, getSigners, getContractFactory, provider } = ethers;
 const { formatEther } = utils;
 
-const { NODE_ENV, NETWORK_PROVIDER, TOKEN_ADDRESS, DEX_CONTRACT } = configArgs;
+const { NODE_ENV, NETWORK_PROVIDER, TOKEN_ADDRESS, DEX_CONTRACT,
+    treasureAddress,
+    devFeeAddress,
+    daoAddress,
+    mktAddress,
+    sharingAddress
+
+} = configArgs;
 
 async function main() {
     const output: any = {};
@@ -23,7 +30,16 @@ async function main() {
     })
 
     const tokenFactory = await getContractFactory("FeedVault");
-    const tokenCt = await tokenFactory.deploy(TOKEN_ADDRESS.BUSD, DEX_CONTRACT.ROUTER, DEX_CONTRACT.FACTORY);
+
+    const tokenCt = await tokenFactory.deploy(
+        TOKEN_ADDRESS.BUSD,
+        DEX_CONTRACT.ROUTER,
+        DEX_CONTRACT.FACTORY,
+        treasureAddress,
+        devFeeAddress, daoAddress,
+        mktAddress,
+        sharingAddress
+    );
     await tokenCt.deployed();
 
     console.log(`${"FeedVault"} deployed to:`, tokenCt.address);
@@ -36,7 +52,13 @@ async function main() {
         verifyData: {
             address: tokenCt.address,
             constructorArguments: [
-                TOKEN_ADDRESS.BUSD, DEX_CONTRACT.ROUTER, DEX_CONTRACT.FACTORY
+                TOKEN_ADDRESS.BUSD,
+                DEX_CONTRACT.ROUTER,
+                DEX_CONTRACT.FACTORY,
+                treasureAddress,
+                devFeeAddress, daoAddress,
+                mktAddress,
+                sharingAddress
             ],
             contract: "contracts/FeedVault.sol:FeedVault"
         }

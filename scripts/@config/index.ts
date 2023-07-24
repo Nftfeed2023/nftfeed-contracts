@@ -7,12 +7,13 @@ export interface IEnvConfig {
     USDT: string;
     USDC: string;
     BUSD: string;
-    FEED_TOKEN: string;
+    DOO_DOO: string;
   },
   DEX_CONTRACT: {
     FACTORY: string;
     ROUTER: string;
   },
+  DEX_ROUTERS: string[],
   NETWORK_PROVIDER: {
     URL_RPC: string;
     URL_SCAN: string;

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.19;
 
 library SafeArray {
     function quickSort(
@@ -28,11 +28,9 @@ library SafeArray {
         return true;
     }
 
-    function sort(uint256[] memory data)
-        public
-        pure
-        returns (uint256[] memory)
-    {
+    function sort(
+        uint256[] memory data
+    ) public pure returns (uint256[] memory) {
         quickSort(data, int256(0), int256(data.length - 1));
         return data;
     }
