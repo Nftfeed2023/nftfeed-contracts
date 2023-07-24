@@ -108,23 +108,23 @@ describe("MintNftFactory", () => {
 
       {
 
-        const qty = 10;
-        const totalPool = await vaultCt.totalPool();
-        const nftAddress = await vaultCt.containerNfts(totalPool);
-        const amountOut = await vaultCt.getAmountOut(nftAddress, qty)
-        console.log(`-------------------`);
-        console.log({ nftAddress });
-        console.log(`-------------------`);
+        // const qty = 10;
+        // const totalPool = await vaultCt.totalPool();
+        // const nftAddress = await vaultCt.containerNfts(totalPool);
+        // const amountOut = await vaultCt.getAmountOut(nftAddress, qty)
+        // console.log(`-------------------`);
+        // console.log({ nftAddress });
+        // console.log(`-------------------`);
 
-        const { transactionHash } = await (await vaultCt.connect(user1).mint(nftAddress, qty, {
-          value: amountOut
-        })).wait()
-        const balanceUser0 = formatAmountToken(await user0.getBalance());
-        const balanceUser1 = formatAmountToken(await user1.getBalance());
+        // const { transactionHash } = await (await vaultCt.connect(user1).mint(nftAddress, qty, {
+        //   value: amountOut
+        // })).wait()
+        // const balanceUser0 = formatAmountToken(await user0.getBalance());
+        // const balanceUser1 = formatAmountToken(await user1.getBalance());
 
-        console.log(`-------BALANCE STEP02------------`);
-        console.log({ balanceUser0, balanceUser1 });
-        console.log(`-------------------`);
+        // console.log(`-------BALANCE STEP02------------`);
+        // console.log({ balanceUser0, balanceUser1 });
+        // console.log(`-------------------`);
 
       }
 

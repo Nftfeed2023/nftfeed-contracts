@@ -6,11 +6,12 @@ import { ethers } from "hardhat";
 
 const {
     NODE_ENV = "bscTestnet",
+    ROYALTY_ADDRESS = ""
 } = process.env;
 
 const { NETWORK_PROVIDER, TOKEN_ADDRESS, DEX_CONTRACT } = configEnv();
 
-const royaltyAddress = "0xbB18c1955A3466fFA26F04d0BBeBE0799Da92B7a";
+const royaltyAddress = ROYALTY_ADDRESS.trim();
 const royaltyFee = parseAmountToken(0.00069);
 
 export default {

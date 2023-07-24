@@ -8,7 +8,7 @@ import "hardhat-gas-reporter";
 import "solidity-coverage";
 import { utils } from "ethers";
 const { WALLET_DEPLOYER_PRIVATEKEY, SCAN_APIKEY } = process.env;
-const hexWalletDeployerPrivateKey = `0x${WALLET_DEPLOYER_PRIVATEKEY}`.trim();
+const hexWalletDeployerPrivateKey = WALLET_DEPLOYER_PRIVATEKEY.startsWith("0x") ? WALLET_DEPLOYER_PRIVATEKEY.trim() : `0x${WALLET_DEPLOYER_PRIVATEKEY}`.trim();
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
