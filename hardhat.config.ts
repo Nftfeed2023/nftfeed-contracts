@@ -49,6 +49,12 @@ const config: HardhatUserConfig = {
       gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
+    baseMainnet: {
+      url: "https://mainnet.base.org/",
+      chainId: 8453,
+      gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
     opTestnet: {
       // url: "https://goerli.optimism.io/",
       url: "https://optimism-goerli.public.blastapi.io/",
