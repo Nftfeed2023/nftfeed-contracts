@@ -67,13 +67,14 @@ contract MintNftFactory is Ownable, ReentrancyGuard, ERC721Holder {
     function mint(
         address _nft
     ) external payable nonReentrant returns (uint256 tokenId) {
-        require(block.timestamp <= endTimes[_nft], "Time mint ended");
         require(managers[_nft] != address(0), "Nft not config manager");
+        require(block.timestamp <= endTimes[_nft], "Time mint ended");
         require(
             maxTotalSupplys[_nft] > ERC721Template(_nft).totalSupply(),
             "Qty over max total supply"
         );
         require(!minteds[_nft][msg.sender], "User is minted");
+
         uint256 amount = mapPrice[_nft] + royaltyFee;
         require(msg.value >= amount, "Not enough amount to mint");
         payable(royaltyAddress).transfer(royaltyFee);

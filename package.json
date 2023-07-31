@@ -29,7 +29,12 @@
     "token-tool:verify": "hardhat run scripts/token-tool/verify.ts",
     "token-tool:verify-token-erc721": "hardhat run scripts/token-tool/verify-token-erc721.ts",
     "free-mint-factory:deploy": "hardhat run scripts/free-mint-factory/deploy.ts",
-    "free-mint-factory:verify": "hardhat run scripts/free-mint-factory/verify.ts"
+    "free-mint-factory:verify": "hardhat run scripts/free-mint-factory/verify.ts",
+    "stake-multiple-erc721:deploy": "hardhat run scripts/stake-multiple-erc721/deploy.ts",
+    "stake-multiple-erc721:update-params": "hardhat run scripts/stake-multiple-erc721/update-params.ts",
+    "stake-multiple-erc721:verify": "hardhat run scripts/stake-multiple-erc721/verify.ts",
+    "stake-nft-factory:deploy": "hardhat run scripts/stake-nft-factory/deploy.ts",
+    "stake-nft-factory:verify": "hardhat run scripts/stake-nft-factory/verify.ts"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.3",

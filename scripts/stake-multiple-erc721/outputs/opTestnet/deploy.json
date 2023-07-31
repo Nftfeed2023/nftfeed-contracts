@@ -1,0 +1,1 @@
+{"DEPLOYER_ADDRESS":"0x4A499535998e6CeAbDbcd3792B92737B9d41b59A","TOKEN_ADDRESS":"0xDA75f538b73f58C005b5542BC5d30da0b09aBdC9","verifyData":{"address":"0xDA75f538b73f58C005b5542BC5d30da0b09aBdC9","constructorArguments":[{"type":"BigNumber","hex":"0x027ca57357c000"}],"contract":"contracts/StakeMultipleERC721.sol:StakeMultipleERC721"}}

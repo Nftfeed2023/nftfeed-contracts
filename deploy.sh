@@ -27,7 +27,17 @@
 # NODE_ENV=baseTestnet yarn token-tool:verify-token-erc721;
 
 
-NODE_ENV=opTestnet yarn free-mint-factory:deploy;
-NODE_ENV=opTestnet yarn free-mint-factory:verify;
+# NODE_ENV=opTestnet yarn free-mint-factory:deploy;
+# NODE_ENV=opTestnet yarn free-mint-factory:verify;
+
+# NODE_ENV=opTestnet yarn stake-nft-factory:deploy;
+# NODE_ENV=opTestnet yarn stake-nft-factory:verify;
+
+NODE_ENV=opMainnet yarn stake-multiple-erc721:deploy;
+# NODE_ENV=opMainnet yarn stake-multiple-erc721:update-params;
+NODE_ENV=opMainnet yarn stake-multiple-erc721:verify;
+
+
+
 
 

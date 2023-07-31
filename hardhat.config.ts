@@ -50,7 +50,8 @@ const config: HardhatUserConfig = {
       accounts: [hexWalletDeployerPrivateKey],
     },
     opTestnet: {
-      url: "https://goerli.optimism.io/",
+      // url: "https://goerli.optimism.io/",
+      url: "https://optimism-goerli.public.blastapi.io/",
       chainId: 420,
       gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
