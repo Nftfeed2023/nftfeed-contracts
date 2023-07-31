@@ -5,7 +5,7 @@ import { configEnv } from "./@config";
 import { BigNumber, Contract } from "ethers";
 import { provider, sendMultipleBnb, sendMultipleToken } from "./@helpers/tools.helper";
 import { dateStrToSeconds, delayTime, parseAmountToken, stringDateToUTCDate } from "./@helpers/block-chain.helper";
-import { ERC1155__factory, ERC20, ERC20__factory, ERC721, ERC721Enumerable, ERC721Enumerable__factory, ERC721__factory, FeedVault, FeedVault__factory, MintNftFactory, MintNftFactory__factory, StakeNftFactory, StakeNftFactory__factory, StakeNftPool__factory, TokenERC721, TokenERC721__factory } from "../typechain";
+import { ERC1155__factory, ERC20, ERC20__factory, ERC721, ERC721Enumerable, ERC721Enumerable__factory, ERC721__factory, FeedVault, FeedVault__factory, MintNftFactory, MintNftFactory__factory, StakeNftFactory, StakeNftFactory__factory, TokenERC721, TokenERC721__factory } from "../typechain";
 import { dir } from "console";
 import { writeFileSync } from "fs";
 import { join } from "path";
@@ -210,57 +210,6 @@ async function main() {
     // }
 
 
-    {
-        const params = {
-            nftAddress: "0xf80A719F127A86C845F12d6aC5E70011351B0385",
-            nftPrice: parseAmountToken("0.0007"),
-            daysLocked: 30,
-            bonusOneNft: parseAmountToken("0.0054"),
-            startTime: Math.floor(stringDateToUTCDate("2023/07/28 00:00:00").getTime() / 1000),
-            endTime: Math.floor(stringDateToUTCDate("2023/09/30 00:00:00").getTime() / 1000),
-        }
-
-
-
-        // 86400 số giây của 1 ngày 
-        const rewardPerSecond = params.bonusOneNft.div(BigNumber.from(params.daysLocked).mul(86400))
-
-        const { nftAddress,
-            nftPrice,
-            daysLocked,
-            startTime,
-            endTime, } = params;
-        const factoryCt = new Contract(
-            "0x3C5314b6A0611D8E8b5a074b0120c02923AA3435",
-            StakeNftFactory__factory.abi,
-            provider
-        ) as StakeNftFactory;
-
-        console.log(`-------------------`);
-        console.log({
-            nftAddress,
-            nftPrice,
-            daysLocked,
-            rewardPerSecond,
-            startTime,
-            endTime,
-        });
-        console.log(`-------------------`);
-
-        // const { transactionHash } = await (await factoryCt.connect(deployer).deploy(
-        //     nftAddress,
-        //     nftPrice,
-        //     daysLocked,
-        //     rewardPerSecond,
-        //     startTime,
-        //     endTime,
-        // )).wait();
-
-        // const txLink = `${NETWORK_PROVIDER.URL_SCAN}/tx/${transactionHash}`.trim();
-        // console.log('--------link TX-----------');
-        // console.log(txLink);
-        // console.log('-------------------');
-    }
 
 }
 
