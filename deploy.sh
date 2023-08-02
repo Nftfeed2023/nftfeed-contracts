@@ -32,8 +32,7 @@
 
 
 
-# NODE_ENV=baseTestnet yarn free-mint-factory:deploy;
-# NODE_ENV=baseTestnet yarn free-mint-factory:verify;
+
 
 # NODE_ENV=opTestnet yarn stake-nft-factory:deploy;
 # NODE_ENV=opTestnet yarn stake-nft-factory:verify;
@@ -42,6 +41,9 @@
 # NODE_ENV=opMainnet yarn stake-multiple-erc721:update-params;
 # NODE_ENV=opMainnet yarn stake-multiple-erc721:verify;
 
+
+NODE_ENV=baseTestnet yarn free-mint-factory:deploy;
+NODE_ENV=baseTestnet yarn free-mint-factory:verify;
 
 
 

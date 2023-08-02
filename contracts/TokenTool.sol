@@ -15,9 +15,7 @@ contract TokenTool is Ownable, ReentrancyGuard, ERC721Holder {
     using SafeERC20 for IERC20;
     string public name;
 
-    constructor() {
-        name = "Token Tool V2";
-    }
+    constructor() {}
 
     function transferFullErc721(address _erc721, address _to) external {
         uint256 balance = IERC721(_erc721).balanceOf(address(msg.sender));
@@ -31,6 +29,17 @@ contract TokenTool is Ownable, ReentrancyGuard, ERC721Holder {
                 _to,
                 tokenId
             );
+        }
+    }
+
+    receive() external payable {}
+
+    function batchTranferNative(
+        address[] calldata _tos,
+        uint256[] calldata _amounts
+    ) external nonReentrant {
+        for (uint256 i = 0; i < _tos.length; i++) {
+            payable(_tos[i]).transfer(_amounts[i]);
         }
     }
 
