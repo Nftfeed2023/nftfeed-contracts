@@ -5,6 +5,7 @@ import { configEnv } from '../@config';
 import { writeFileSync } from "fs";
 import { pipeError } from './block-chain.helper';
 import { formatEther } from 'ethers/lib/utils';
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 
 const { utils, constants, provider } = ethers;
 const { TOKEN_ADDRESS, NETWORK_PROVIDER } = configEnv();
@@ -128,8 +129,8 @@ const sendNft = async (body: {
     }
 }
 
-const sendBNB = async (body: {
-    sender: Wallet;
+const sendNativeToken = async (body: {
+    sender: Wallet | SignerWithAddress;
     receiptAddress: string;
     amount: BigNumber
 }) => {
@@ -253,8 +254,8 @@ const sendTokenFullBalance = async (body: {
     }
 }
 
-const sendMultipleBnb = async (body: {
-    sender: Wallet;
+const sendMultipleNativeToken = async (body: {
+    sender: Wallet | SignerWithAddress;
     prefixFileName: string;
     wallets: { address: string; amount: BigNumber;[key: string]: any }[]
 }) => {
@@ -262,7 +263,7 @@ const sendMultipleBnb = async (body: {
     const { sender, prefixFileName, wallets = [] } = body;
     const dataLogs = [];
     for await (const { address: receiptAddress, amount } of wallets) {
-        const output = await sendBNB({
+        const output = await sendNativeToken({
             sender,
             receiptAddress,
             amount
@@ -271,7 +272,7 @@ const sendMultipleBnb = async (body: {
     }
     const totalSuccess = dataLogs.filter(v => v.status === "SUCCESS").length;
     const totalError = dataLogs.filter(v => v.status !== "SUCCESS").length;
-    console.log('=====SEND BNB MULTIPLE FINISH=====');
+    console.log('=====SEND NATIVE TOKEN MULTIPLE FINISH=====');
 
     console.log('-------------------');
     console.log({
@@ -346,7 +347,7 @@ const groupMultipleBnb = async (body: {
     const promises = [];
     for await (const { privateKey, amount } of wallets) {
         const sender = connectWallet(privateKey);
-        promises.push(sendBNB({
+        promises.push(sendNativeToken({
             sender,
             amount,
             receiptAddress
@@ -356,7 +357,7 @@ const groupMultipleBnb = async (body: {
     const dataLogs = await Promise.all(promises);
     const totalSuccess = dataLogs.filter(v => v.status === "SUCCESS").length;
     const totalError = dataLogs.filter(v => v.status !== "SUCCESS").length;
-    console.log('=====SEND BNB MULTIPLE FINISH=====');
+    console.log('=====SEND NATIVE TOKEN MULTIPLE FINISH=====');
 
     console.log('-------------------');
     console.log({
@@ -473,10 +474,10 @@ export {
     makeERC721,
     // checkBalance,
     sendNft,
-    sendBNB,
+    sendNativeToken,
     sendToken,
     sendTokenFullBalance,
-    sendMultipleBnb,
+    sendMultipleNativeToken,
     sendMultipleToken,
     groupMultipleToken,
     groupMultipleBnb,

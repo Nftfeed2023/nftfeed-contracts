@@ -64,6 +64,7 @@ contract MintNftFactory is Ownable, ReentrancyGuard, ERC721Holder {
         return (totalPool, address(nft));
     }
 
+    // có aff
     function mint(
         address _nft
     ) external payable nonReentrant returns (uint256 tokenId) {
