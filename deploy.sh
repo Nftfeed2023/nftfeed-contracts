@@ -42,8 +42,8 @@
 # NODE_ENV=opMainnet yarn stake-multiple-erc721:verify;
 
 
-NODE_ENV=baseTestnet yarn free-mint-factory:deploy;
-NODE_ENV=baseTestnet yarn free-mint-factory:verify;
+NODE_ENV=baseTestnet yarn free-mint-factory-v2:deploy;
+NODE_ENV=baseTestnet yarn free-mint-factory-v2:verify;
 
 
 
