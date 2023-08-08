@@ -86,21 +86,24 @@ contract MintNftFactoryV2 is Ownable, ReentrancyGuard, ERC721Holder {
         require(managers[_nft] != address(0), "Nft not config manager");
         require(block.timestamp <= endTimes[_nft], "Time mint ended");
 
-        require(
-            maxTotalSupplys[_nft] != 0 &&
+        if (maxTotalSupplys[_nft] != 0) {
+            require(
                 maxTotalSupplys[_nft] > ERC721Template(_nft).totalSupply(),
-            "Qty over max total supply"
-        );
-        require(
-            maxAllocationPerUsers[_nft] != 0 &&
+                "Qty over max total supply"
+            );
+        }
+
+        if (maxAllocationPerUsers[_nft] != 0) {
+            require(
                 minteds[_nft][msg.sender] < maxAllocationPerUsers[_nft],
-            "User over allocation minted"
-        );
+                "User over allocation minted"
+            );
+        }
 
         uint256 amount = mapPrice[_nft] + royaltyFee;
         require(msg.value >= amount, "Not enough amount to mint");
 
-        minteds[_nft][msg.sender] = minteds[_nft][msg.sender] + 1;
+        minteds[_nft][msg.sender] += 1;
         uint256 amountAffPrice;
         uint256 amountAffSystem;
         if (percentAffs[_nft] > 0) {

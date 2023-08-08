@@ -11,6 +11,8 @@
         "ignoreConstructors": true
       }
     ],
+    "no-console": "warn",
+    "no-global-import": "off",
     "var-name-mixedcase": "off",
     "no-empty-blocks": "off",
     "reason-string": "off",
