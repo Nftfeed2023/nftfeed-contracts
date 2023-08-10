@@ -48,7 +48,7 @@ describe("MintNftFactoryV2", () => {
 
 
   beforeEach(async function () {
-    const royaltyFee = parseAmountToken(1000);
+    const royaltyFee = parseAmountToken(100);
     vaultCt = await vaultFactory.connect(deployer).deploy(
       royaltyAddress.address,
       royaltyFee
@@ -70,10 +70,10 @@ describe("MintNftFactoryV2", () => {
 
     it("Run", async () => {
 
-      const user0 = users[0];
-      const user1 = users[1];
-      const user2 = users[2];
-      const user3 = users[3];
+      const project = users[0];
+      const partner = users[1];
+      const userMint = users[2];
+      const userRef = users[3];
 
 
 
@@ -84,16 +84,16 @@ describe("MintNftFactoryV2", () => {
         console.log(`-------------------`);
       }
       await logUser(royaltyAddress, "Royalty");
-      await logUser(user0, "US-00");
-      await logUser(user1, "US-01");
-      await logUser(user2, "US-02");
-      await logUser(user3, "US-03");
+      await logUser(project, "project");
+      await logUser(partner, "partner");
+      await logUser(userMint, "userMint");
+      await logUser(userRef, "userRef");
       {
-        const { transactionHash } = await (await vaultCt.connect(user0).deploy(
+        const { } = await (await vaultCt.connect(project).deploy(
           "NFTA",
           "NFTA",
           "https://qa.cdn.nftfeed.guru/files/ecommerce/53c6a545d7764c508087a7fa6b7564feThie%CC%82%CC%81t%20ke%CC%82%CC%81%20chu%CC%9Ba%20co%CC%81%20te%CC%82n%20(42).png",
-          parseAmountToken(0),
+          parseAmountToken(400),
           Math.floor(stringDateToUTCDate("2023/10/16 15:00:00").getTime() / 1000),
           0,
           0,
@@ -102,10 +102,10 @@ describe("MintNftFactoryV2", () => {
 
         console.log(`=====AFTER DEPLOY=====`);
         await logUser(royaltyAddress, "Royalty");
-        await logUser(user0, "US-00");
-        await logUser(user1, "US-01");
-        await logUser(user2, "US-02");
-        await logUser(user3, "US-03");
+        await logUser(project, "project");
+        await logUser(partner, "partner");
+        await logUser(userMint, "userMint");
+        await logUser(userRef, "userRef");
       }
 
 
@@ -114,10 +114,10 @@ describe("MintNftFactoryV2", () => {
 
         console.log(`=====START MINT=====`);
         await logUser(royaltyAddress, "Royalty");
-        await logUser(user0, "US-00");
-        await logUser(user1, "US-01");
-        await logUser(user2, "US-02");
-        await logUser(user3, "US-03");
+        await logUser(project, "project");
+        await logUser(partner, "partner");
+        await logUser(userMint, "userMint");
+        await logUser(userRef, "userRef");
 
         const totalPool = await vaultCt.totalPool();
         const nftAddress = await vaultCt.containerNfts(totalPool);
@@ -126,9 +126,16 @@ describe("MintNftFactoryV2", () => {
         console.log({ nftAddress });
         console.log(`-------------------`);
 
+        const { } = await (await vaultCt.connect(deployer).changeSystemPercentAff(nftAddress, 5000)).wait();
+        const { } = await (await vaultCt.connect(deployer).updatePartnerAff(nftAddress, [partner.address], true)).wait();
+
         try {
-          for (let i = 0; i < 9; i++) {
-            const { } = await (await vaultCt.connect(user1).mint(nftAddress, user2.address, {
+          for (let i = 0; i < 1; i++) {
+            const { } = await (await vaultCt.connect(userMint).mint(nftAddress, partner.address, {
+              value: amountOut
+            })).wait()
+
+            const { } = await (await vaultCt.connect(userMint).mint(nftAddress, userRef.address, {
               value: amountOut
             })).wait()
 
@@ -140,17 +147,7 @@ describe("MintNftFactoryV2", () => {
 
 
 
-        try {
-          for (let i = 0; i < 5; i++) {
-            const { } = await (await vaultCt.connect(user3).mint(nftAddress, user2.address, {
-              value: amountOut
-            })).wait()
 
-          }
-          console.log(`=====U3 SUCCESS=====`);
-        } catch (error) {
-          console.log(`=====U3 ERROR=====`);
-        }
 
 
 
@@ -160,10 +157,10 @@ describe("MintNftFactoryV2", () => {
 
         console.log(`=====END MINT=====`);
         await logUser(royaltyAddress, "Royalty");
-        await logUser(user0, "US-00");
-        await logUser(user1, "US-01");
-        await logUser(user2, "US-02");
-        await logUser(user3, "US-03");
+        await logUser(project, "project");
+        await logUser(partner, "partner");
+        await logUser(userMint, "userMint");
+        await logUser(userRef, "userRef");
 
       }
 
