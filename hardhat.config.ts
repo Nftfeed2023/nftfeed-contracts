@@ -44,7 +44,7 @@ const config: HardhatUserConfig = {
       accounts: [hexWalletDeployerPrivateKey]
     },
     baseTestnet: {
-      url: "https://goerli.base.org/",
+      url: "https://base-goerli.public.blastapi.io/",
       chainId: 84531,
       gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],

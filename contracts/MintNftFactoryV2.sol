@@ -51,6 +51,12 @@ contract MintNftFactoryV2 is Ownable, ReentrancyGuard {
     // nft address => user address => qty minteds
     mapping(address => mapping(address => uint256)) public minteds;
 
+    // nft address => promotionQty
+    mapping(address => uint256[]) public promotionQtys;
+
+    // nft address => promotionPercent
+    mapping(address => uint256[]) public promotionPercents;
+
     event DeployNft(uint256 poolId, address nftAddress, address manager);
 
     modifier onlyAdmin() {
@@ -167,6 +173,88 @@ contract MintNftFactoryV2 is Ownable, ReentrancyGuard {
         return tokenId;
     }
 
+    function getPromotionPercentByQty(
+        address _nft,
+        uint256 _qty
+    ) public view returns (uint256) {
+        if (
+            promotionQtys[_nft].length == 0 ||
+            promotionPercents[_nft].length == 0
+        ) {
+            return 0;
+        }
+        for (uint i = 0; i < promotionQtys[_nft].length; i++) {
+            if (promotionQtys[_nft][i] <= _qty) {
+                return promotionPercents[_nft][i];
+            }
+        }
+        return 0;
+    }
+
+    // mint and check Promotion
+    function mintByQty(
+        address _nft,
+        uint256 _qty,
+        address _ref
+    ) external payable nonReentrant returns (uint256[] memory tokenIds) {
+        require(managers[_nft] != address(0), "Nft not config manager");
+        require(block.timestamp <= endTimes[_nft], "Time mint ended");
+        if (maxTotalSupplys[_nft] != 0) {
+            require(
+                maxTotalSupplys[_nft] >
+                    ERC721Template(_nft).totalSupply() + _qty,
+                "Qty over max total supply"
+            );
+        }
+
+        if (maxAllocationPerUsers[_nft] != 0) {
+            require(
+                minteds[_nft][msg.sender] + _qty < maxAllocationPerUsers[_nft],
+                "User over allocation minted"
+            );
+        }
+
+        uint256 systemFeeAmount = royaltyFee * _qty;
+        uint256 principalAmount = mapPrice[_nft] * _qty;
+
+        uint256 promotionalAmount = principalAmount -
+            (principalAmount * getPromotionPercentByQty(_nft, _qty)) /
+            ONE_HUNDRED_PERCENT;
+
+        require(
+            msg.value >= promotionalAmount + systemFeeAmount,
+            "Not enough amount to mint"
+        );
+
+        minteds[_nft][msg.sender] += 1;
+        uint256 amountAffPrice;
+        uint256 amountAffSystem;
+        if (_ref != address(0)) {
+            if (percentAffs[_nft] > 0 && mapPrice[_nft] > 0) {
+                amountAffPrice =
+                    (principalAmount * percentAffs[_nft]) /
+                    ONE_HUNDRED_PERCENT;
+            }
+            if (systemPercentAffs[_nft] > 0 && partnerAffs[_nft][_ref]) {
+                amountAffSystem =
+                    (systemFeeAmount * systemPercentAffs[_nft]) /
+                    ONE_HUNDRED_PERCENT;
+            }
+        }
+
+        if (amountAffPrice + amountAffSystem > 0) {
+            payable(_ref).transfer(amountAffPrice + amountAffSystem);
+        }
+        if (promotionalAmount - amountAffPrice > 0) {
+            payable(managers[_nft]).transfer(
+                promotionalAmount - amountAffPrice
+            );
+        }
+        payable(royaltyAddress).transfer(systemFeeAmount - amountAffSystem);
+        tokenIds = ERC721Template(_nft).mintBatch(address(msg.sender), _qty);
+        return tokenIds;
+    }
+
     function changeSystemPercentAff(
         address _nft,
         uint256 _percentAff
@@ -209,6 +297,23 @@ contract MintNftFactoryV2 is Ownable, ReentrancyGuard {
         uint256 _priceNft
     ) external nonReentrant verifyManager(_nft) {
         mapPrice[_nft] = _priceNft;
+    }
+
+    // default qty from large to small
+    function changePromotion(
+        address _nft,
+        uint256[] calldata _qtys,
+        uint256[] calldata _percents
+    ) external nonReentrant verifyManager(_nft) {
+        require(_qtys.length == _percents.length, "Invalid inputs");
+        delete promotionQtys[_nft];
+        delete promotionPercents[_nft];
+        for (uint i = 0; i < _qtys.length; i++) {
+            // max percent promotion 30%
+            require(_percents[i] <= 3000, "Percent promotion over 30%");
+            promotionQtys[_nft].push(_qtys[i]);
+            promotionPercents[_nft].push(_percents[i]);
+        }
     }
 
     function changeEndTime(
@@ -254,5 +359,17 @@ contract MintNftFactoryV2 is Ownable, ReentrancyGuard {
     ) public view returns (uint256 amountOut) {
         amountOut = mapPrice[_nft] + royaltyFee;
         return amountOut;
+    }
+
+    function getAmountOutByQty(
+        address _nft,
+        uint256 _qty
+    ) public view returns (uint256 amountOut) {
+        uint256 systemFeeAmount = royaltyFee * _qty;
+        uint256 principalAmount = mapPrice[_nft] * _qty;
+        uint256 promotionalAmount = principalAmount -
+            (principalAmount * getPromotionPercentByQty(_nft, _qty)) /
+            ONE_HUNDRED_PERCENT;
+        return promotionalAmount + systemFeeAmount;
     }
 }

@@ -48,7 +48,7 @@ describe("MintNftFactoryV2", () => {
 
 
   beforeEach(async function () {
-    const royaltyFee = parseAmountToken(100);
+    const royaltyFee = parseAmountToken(10);
     vaultCt = await vaultFactory.connect(deployer).deploy(
       royaltyAddress.address,
       royaltyFee
@@ -93,7 +93,7 @@ describe("MintNftFactoryV2", () => {
           "NFTA",
           "NFTA",
           "https://qa.cdn.nftfeed.guru/files/ecommerce/53c6a545d7764c508087a7fa6b7564feThie%CC%82%CC%81t%20ke%CC%82%CC%81%20chu%CC%9Ba%20co%CC%81%20te%CC%82n%20(42).png",
-          parseAmountToken(400),
+          parseAmountToken(40),
           Math.floor(stringDateToUTCDate("2023/10/16 15:00:00").getTime() / 1000),
           0,
           0,
@@ -121,25 +121,44 @@ describe("MintNftFactoryV2", () => {
 
         const totalPool = await vaultCt.totalPool();
         const nftAddress = await vaultCt.containerNfts(totalPool);
-        const amountOut = await vaultCt.getAmountOut(nftAddress)
+
         console.log(`-------------------`);
         console.log({ nftAddress });
         console.log(`-------------------`);
 
-        const { } = await (await vaultCt.connect(deployer).changeSystemPercentAff(nftAddress, 5000)).wait();
-        const { } = await (await vaultCt.connect(deployer).updatePartnerAff(nftAddress, [partner.address], true)).wait();
+        // const { } = await (await vaultCt.connect(deployer).changeSystemPercentAff(nftAddress, 5000)).wait();
+        // const { } = await (await vaultCt.connect(deployer).updatePartnerAff(nftAddress, [partner.address], true)).wait();
+        const { } = await (await vaultCt.connect(project).changePromotion(nftAddress, [50, 20, 10], [20, 10, 5].map(v => v * 100))).wait();
 
         try {
-          for (let i = 0; i < 1; i++) {
-            const { } = await (await vaultCt.connect(userMint).mint(nftAddress, partner.address, {
+
+          {
+            const qtyMint = 51;
+            const amountOut = await vaultCt.getAmountOutByQty(nftAddress, qtyMint);
+            const { } = await (await vaultCt.connect(userMint).mintByQty(nftAddress, qtyMint, partner.address, {
               value: amountOut
             })).wait()
-
-            const { } = await (await vaultCt.connect(userMint).mint(nftAddress, userRef.address, {
-              value: amountOut
-            })).wait()
-
           }
+
+
+          // {
+          //   const qtyMint = 5;
+          //   const amountOut = await vaultCt.getAmountOutByQty(nftAddress, qtyMint);
+          //   const { } = await (await vaultCt.connect(userMint).mintByQty(nftAddress, qtyMint, partner.address, {
+          //     value: amountOut
+          //   })).wait()
+          // }
+
+
+
+          // {
+          //   const qtyMint = 10;
+          //   const amountOut = await vaultCt.getAmountOutByQty(nftAddress, qtyMint);
+          //   const { } = await (await vaultCt.connect(userMint).mintByQty(nftAddress, qtyMint, partner.address, {
+          //     value: amountOut
+          //   })).wait()
+          // }
+
           console.log(`=====U1 SUCCESS=====`);
         } catch (error) {
           console.log(`=====U1 ERROR=====`);
