@@ -1,8 +1,8 @@
 {
     "DEPLOYER_ADDRESS": "0x4A499535998e6CeAbDbcd3792B92737B9d41b59A",
-    "TOKEN_ADDRESS": "0xB562E74acF8932fFAEe572961cA7b413fccFed8c",
+    "TOKEN_ADDRESS": "0x21587995689c10DC375C87d44e3e8b2220eC31b8",
     "verifyData": {
-        "address": "0xB562E74acF8932fFAEe572961cA7b413fccFed8c",
+        "address": "0x21587995689c10DC375C87d44e3e8b2220eC31b8",
         "constructorArguments": [
             "0xb49dBfEF796737F777B70D2C5201341Ee61d31Ef",
             {

@@ -373,9 +373,26 @@ contract MintNftFactoryV2 is Ownable, ReentrancyGuard {
         return promotionalAmount + systemFeeAmount;
     }
 
+    function getPromotionAmountByQty(
+        address _nft,
+        uint256 _qty
+    ) public view returns (uint256) {
+        uint256 principalAmount = mapPrice[_nft] * _qty;
+        uint256 promotionalAmount = principalAmount -
+            (principalAmount * getPromotionPercentByQty(_nft, _qty)) /
+            ONE_HUNDRED_PERCENT;
+        return promotionalAmount;
+    }
+
     function getPromotionQtys(
         address _nft
     ) public view returns (uint256[] memory) {
         return promotionQtys[_nft];
+    }
+
+    function getPromotionPercents(
+        address _nft
+    ) public view returns (uint256[] memory) {
+        return promotionPercents[_nft];
     }
 }
