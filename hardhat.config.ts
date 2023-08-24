@@ -67,7 +67,14 @@ const config: HardhatUserConfig = {
       chainId: 10,
       gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
-    }
+    },
+    zetaTestnet: {
+      accounts: [hexWalletDeployerPrivateKey],
+      chainId: 7001,
+      gas: 5000000,
+      gasPrice: 80000000000,
+      url: 'https://zetachain-athens-evm.blockpi.network/v1/rpc/public'
+    },
   },
   solidity: {
     compilers: [

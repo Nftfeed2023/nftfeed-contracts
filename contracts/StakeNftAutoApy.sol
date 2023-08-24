@@ -30,11 +30,11 @@ contract StakeNftAutoApy is Ownable, ReentrancyGuard, ERC721Holder {
     uint256 public startTime;
     uint256 public endTimeBonus;
 
-    // The seconds  of the last pool update
-    uint256 public lastRewardSeconds;
-
     // Tokens rewarded per seconds.
     uint256 public rewardPerSeconds;
+
+    // The seconds  of the last pool update
+    uint256 public lastRewardSeconds;
 
     // Accrued token per share
     uint256 public accTokenPerShare;
@@ -60,12 +60,15 @@ contract StakeNftAutoApy is Ownable, ReentrancyGuard, ERC721Holder {
         address _tokenReward,
         address _nft,
         uint256 _startTime,
-        uint256 _endTimeBonus
+        uint256 _endTimeBonus,
+        uint256 _rewardPerSeconds
     ) validateZeroAddress(_tokenReward) validateZeroAddress(_nft) {
         tokenReward = _tokenReward;
         nft = _nft;
         startTime = _startTime;
         endTimeBonus = _endTimeBonus;
+        rewardPerSeconds = _rewardPerSeconds;
+        lastRewardSeconds = startTime;
     }
 
     /*
@@ -112,7 +115,7 @@ contract StakeNftAutoApy is Ownable, ReentrancyGuard, ERC721Holder {
         UserInfo storage user = userInfo[msg.sender];
 
         require(
-            user.tokenIds.length() + _tokenIds.length > 40,
+            user.tokenIds.length() + _tokenIds.length <= 40,
             "Qty stake over 40"
         );
         _updatePool();
@@ -139,17 +142,20 @@ contract StakeNftAutoApy is Ownable, ReentrancyGuard, ERC721Holder {
             PRECISION_FACTOR;
     }
 
+    // if tokenIds.length == 0 claim reward
     function unStakes(uint256[] calldata _tokenIds) external nonReentrant {
         UserInfo storage user = userInfo[msg.sender];
-        require(_tokenIds.length > 0, "Empty nft input");
-
         _updatePool();
-
         uint256 pending = (user.tokenIds.length() * accTokenPerShare) /
             PRECISION_FACTOR -
             user.rewardDebt;
 
         for (uint256 i = 0; i < _tokenIds.length; i++) {
+            IERC721(nft).safeTransferFrom(
+                address(this),
+                address(msg.sender),
+                _tokenIds[i]
+            );
             user.tokenIds.remove(_tokenIds[i]);
         }
 
@@ -222,5 +228,17 @@ contract StakeNftAutoApy is Ownable, ReentrancyGuard, ERC721Holder {
 
     function emergencyRewardWithdraw(uint256 _amount) external onlyOwner {
         IERC20(tokenReward).safeTransfer(address(msg.sender), _amount);
+    }
+
+    function getTokenIdsStakedByUser(
+        address _user
+    ) public view returns (uint256[] memory tokenIds) {
+        uint256 size = userInfo[_user].tokenIds.length();
+        tokenIds = new uint256[](size);
+
+        for (uint256 i = 0; i < size; i++) {
+            tokenIds[i] = userInfo[_user].tokenIds.at(i);
+        }
+        return tokenIds;
     }
 }

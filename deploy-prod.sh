@@ -1,2 +1,2 @@
-NODE_ENV=baseMainnet yarn free-mint-factory-v2:deploy;
-NODE_ENV=baseMainnet yarn free-mint-factory-v2:verify;
+NODE_ENV=baseMainnet yarn sharkie-token:deploy;
+NODE_ENV=baseMainnet yarn sharkie-token:verify;
