@@ -1,1 +1,14 @@
-{"DEPLOYER_ADDRESS":"0xefe50209F15eDC61E10e6974A9bb7939313dD40e","TOKEN_ADDRESS":"0x12CcE7bcA11364Da0D120Fb82B4042a46a8Cf586","verifyData":{"address":"0x12CcE7bcA11364Da0D120Fb82B4042a46a8Cf586","constructorArguments":[{"type":"BigNumber","hex":"0x027ca57357c000"}],"contract":"contracts/StakeMultipleERC721.sol:StakeMultipleERC721"}}
+{
+    "DEPLOYER_ADDRESS": "0xefe50209F15eDC61E10e6974A9bb7939313dD40e",
+    "TOKEN_ADDRESS": "0x12CcE7bcA11364Da0D120Fb82B4042a46a8Cf586",
+    "verifyData": {
+        "address": "0x12CcE7bcA11364Da0D120Fb82B4042a46a8Cf586",
+        "constructorArguments": [
+            {
+                "type": "BigNumber",
+                "hex": "0x027ca57357c000"
+            }
+        ],
+        "contract": "contracts/StakeMultipleERC721.sol:StakeMultipleERC721"
+    }
+}

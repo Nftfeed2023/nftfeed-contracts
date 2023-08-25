@@ -30,28 +30,9 @@ async function main() {
     console.log("Deploying contracts with the account:", deployer.address);
     const balance = await deployer.getBalance();
     console.log("Account balance:", formatEther(balance));
-    const STAKE_NFT_AUTO_APY = "0x32Ef943Ea2Da78139d138EcBa4b74974a3CA8592".trim();
-
-    const poolCt = new Contract(STAKE_NFT_AUTO_APY, StakeNftAutoApy__factory.abi, provider) as StakeNftAutoApy;
-    const totalReward = parseAmountToken(1000_000);
-    const startTime = Math.floor(stringDateToUTCDate("2023/08/20 07:10:00").getTime() / 1000);
-    const endTimeBonus = Math.floor(stringDateToUTCDate("2023/10/20 07:10:00").getTime() / 1000);
-    const rewardPerSeconds = totalReward.div(BigNumber.from(endTimeBonus).sub(BigNumber.from(startTime)));
-    {
-        const { transactionHash } = await (await poolCt.connect(deployer).updateTimeActive(
-            startTime,
-            endTimeBonus
-        )).wait();
-    }
-
-    const { transactionHash } = await (await poolCt.connect(deployer).updateRewardPerSeconds(
-        rewardPerSeconds
-    )).wait();
 
 
-    console.log(`-------------------`);
-    console.log(transactionHash);
-    console.log(`-------------------`);
+
 
 
 
