@@ -31,10 +31,100 @@ async function main() {
     const balance = await deployer.getBalance();
     console.log("Account balance:", formatEther(balance));
 
+    interface IEvm {
+        chainId: number
+        chainName: string
+        nativeCurrency: NativeCurrency
+        rpcUrls: string[]
+        blockExplorerUrls: string[]
+        iconUrls: string[]
+        logo: string
+    }
+
+    interface NativeCurrency {
+        name: string
+        symbol: string
+        decimals: number
+    }
 
 
+    const data = [{
+        "name": "ZetaChain Mainnet",
+        "chain": "ZetaChain",
+        "icon": "zetachain",
+        "rpc": [
+            "https://api.mainnet.zetachain.com/evm"
+        ],
+        "faucets": [],
+        "nativeCurrency": {
+            "name": "Zeta",
+            "symbol": "ZETA",
+            "decimals": 18
+        },
+        "infoURL": "https://zetachain.com/docs/",
+        "shortName": "zetachain-mainnet",
+        "chainId": 7000,
+        "networkId": 7000,
+        "status": "incubating",
+        "explorers": [
+            {
+                "name": "ZetaChain Mainnet Explorer",
+                "url": "https://explorer.mainnet.zetachain.com",
+                "standard": "none"
+            }
+        ]
+    },
+    {
+        "name": "ZetaChain Athens 3 Testnet",
+        "chain": "ZetaChain",
+        "icon": "zetachain",
+        "rpc": [
+            "https://rpc.ankr.com/zetachain_evm_athens_testnet"
+        ],
+        "faucets": [
+            "https://labs.zetachain.com/get-zeta"
+        ],
+        "nativeCurrency": {
+            "name": "Zeta",
+            "symbol": "aZETA",
+            "decimals": 18
+        },
+        "infoURL": "https://zetachain.com/docs",
+        "shortName": "zetachain-athens",
+        "chainId": 7001,
+        "networkId": 7001,
+        "status": "active",
+        "explorers": [
+            {
+                "name": "ZetaChain Athens Testnet Explorer",
+                "url": "https://athens3.explorer.zetachain.com",
+                "standard": "none"
+            },
+            {
+                "name": "blockscout",
+                "url": "https://zetachain-athens-3.blockscout.com",
+                "icon": "blockscout",
+                "standard": "EIP3091"
+            }
+        ]
+    },]
+
+    const outputs = data.map(v => {
+        return {
+            chainId: v.chainId,
+            chainName: v.name,
+            nativeCurrency: v.nativeCurrency,
+            rpcUrls: v.rpc,
+            blockExplorerUrls: v.explorers.map(t => t.url),
+            iconUrls: [],
+            logo: ""
+        } as IEvm
+    })
 
 
+    console.log(`-------------------`);
+    console.log(outputs.byMap(["chainId"]));
+    console.log(`-------------------`);
 
 }
 
