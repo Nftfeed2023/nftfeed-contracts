@@ -89,6 +89,7 @@ async function main() {
         qty
     }));
 
+    const pointBounusOneNft = 300;
 
     const outputs = data.reduce<{ [key: string]: number }>((result, item) => {
         const qty = result[item.walletAddress] || 0;
@@ -99,10 +100,50 @@ async function main() {
     }, {})
 
 
+    const stakePoint = Object.keys(output).map(walletAddress => {
+        const point = outputs[walletAddress] * pointBounusOneNft;
+        return {
+            walletAddress,
+            point
+        }
+    })
 
-    console.log(`-------------------`);
-    console.log(outputs);
-    console.log(`-------------------`);
+    const galxePointRaw = require("../inputs/galxe.json");
+
+    const zealyPointRaw = require("../inputs/zealy.json");
+
+    const galxePoint = galxePointRaw.map(({ walletAddress, point }) => ({
+        walletAddress: walletAddress.toLowerCase(), point
+    }));
+
+    const zealyPoint = zealyPointRaw.map(({ walletAddress, point }) => ({
+        walletAddress: walletAddress.toLowerCase(), point
+    }))
+
+    const listPoint = stakePoint.concat(galxePoint).concat(zealyPoint);
+
+
+    const mapPoint = listPoint.reduce<{ [key: string]: number }>((result, item) => {
+        const point = result[item.walletAddress] || 0;
+        Object.assign(result, {
+            [item.walletAddress]: point + item.point
+        })
+        return result;
+    }, {})
+
+
+    const points = Object.keys(mapPoint).map(evmAddress => ({
+        evmAddress,
+        point: mapPoint[evmAddress]
+    }))
+
+    try {
+        const fileName = `./snapshot.json`;
+        writeFileSync(fileName, JSON.stringify(points));
+    } catch (error) {
+
+    }
+
 
 }
 
