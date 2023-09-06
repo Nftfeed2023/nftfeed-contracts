@@ -1,1 +1,18 @@
-{"DEPLOYER_ADDRESS":"0xefe50209F15eDC61E10e6974A9bb7939313dD40e","TOKEN_ADDRESS":"0xfc161FFb28599a0d07941c265F4FcFeF60f3034f","verifyData":{"address":"0xfc161FFb28599a0d07941c265F4FcFeF60f3034f","constructorArguments":["0x03D8A7ad755E5645145D0a7c3CFD0DCF5F52DF8C","0x268174fF68633901A2EC6511b33c590aAC4Fe263",1692516600,1697787000,{"type":"BigNumber","hex":"0x02a2168ab1ca76c0"}],"contract":"contracts/StakeNftAutoApy.sol:StakeNftAutoApy"}}
+{
+    "DEPLOYER_ADDRESS": "0xefe50209F15eDC61E10e6974A9bb7939313dD40e",
+    "TOKEN_ADDRESS": "0xfc161FFb28599a0d07941c265F4FcFeF60f3034f",
+    "verifyData": {
+        "address": "0xfc161FFb28599a0d07941c265F4FcFeF60f3034f",
+        "constructorArguments": [
+            "0x03D8A7ad755E5645145D0a7c3CFD0DCF5F52DF8C",
+            "0x268174fF68633901A2EC6511b33c590aAC4Fe263",
+            1692516600,
+            1697787000,
+            {
+                "type": "BigNumber",
+                "hex": "0x02a2168ab1ca76c0"
+            }
+        ],
+        "contract": "contracts/StakeNftAutoApy.sol:StakeNftAutoApy"
+    }
+}

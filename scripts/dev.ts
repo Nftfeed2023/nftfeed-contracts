@@ -5,7 +5,7 @@ import { configEnv } from "./@config";
 import { BigNumber, Contract } from "ethers";
 import { provider, sendMultipleNativeToken, sendMultipleToken } from "./@helpers/tools.helper";
 import { dateStrToSeconds, delayTime, parseAmountToken, stringDateToUTCDate } from "./@helpers/block-chain.helper";
-import { ERC1155__factory, ERC20, ERC20__factory, ERC721, ERC721Enumerable, ERC721Enumerable__factory, ERC721__factory, FeedVault, FeedVault__factory, MintNftFactory, MintNftFactoryV2, MintNftFactoryV2__factory, MintNftFactory__factory, StakeNftAutoApy, StakeNftAutoApy__factory, StakeNftFactory, StakeNftFactory__factory, TokenERC721, TokenERC721__factory } from "../typechain";
+import { ERC1155__factory, ERC20, ERC20__factory, ERC721, ERC721Enumerable, ERC721Enumerable__factory, ERC721__factory, FeedVault, FeedVault__factory, MintNftFactory, MintNftFactoryV2, MintNftFactoryV2__factory, MintNftFactory__factory, StakeMultipleERC721, StakeMultipleERC721__factory, StakeNftAutoApy, StakeNftAutoApy__factory, StakeNftFactory, StakeNftFactory__factory, TokenERC721, TokenERC721__factory } from "../typechain";
 import { dir } from "console";
 import { writeFileSync } from "fs";
 import { join } from "path";
@@ -32,47 +32,77 @@ async function main() {
     const balance = await deployer.getBalance();
     console.log("Account balance:", formatEther(balance));
 
-    const ct = new Contract("0xAf1FF8e04Aa97d2C155fBa9829CB152169bfD8fD",
-        MintNftFactoryV2__factory.abi,
-        provider
-    ) as MintNftFactoryV2;
+    const autoApyPool = "0xfc161FFb28599a0d07941c265F4FcFeF60f3034f"; // base
+
+    const stakeMultipleErc721 = "0x12CcE7bcA11364Da0D120Fb82B4042a46a8Cf586"; // op
 
 
-    const nftAddress = "0x5F05FA19200F054a7249b092Ff4CBAA6ae3A75A1";
+
+
+    const dataOp: { walletAddress: string; qty: number }[] = require("../inputs/op_stake.json");
+
+    const dataBase: { walletAddress: string; qty: number }[] = require("../inputs/base_stake.json");
+
     // {
-    //     const { transactionHash } = await (await ct
-    //         .connect(deployer)
-    //         .changeSystemPercentAff(nftAddress, 23.5 * 100)).wait()
 
-    //     const txHash = `${URL_SCAN}/tx/${transactionHash}`.trim();
-    //     console.log('--------tx1-----------');
-    //     console.log(txHash);
-    //     console.log('-------------------');
+    //     const outputs = []
+    //     const ct = new Contract(stakeMultipleErc721, StakeMultipleERC721__factory.abi, provider) as StakeMultipleERC721;
+    //     const totalPool = await ct.totalPool();
+    //     const promises = [];
+    //     for (let index = 0; index < totalPool.toNumber(); index++) {
+    //         promises.push(ct.containerNfts(1));
+
+    //     }
+    //     const nfts = await Promise.all(promises);
+    //     const getQtyNft = async (walletAddress: string) => {
+    //         let qty = 0;
+    //         for (const nft of nfts) {
+    //             const qtyItem = await ct.getQtyStakedByUser(nft, walletAddress).then(qty => qty.toNumber()).catch(_ => 0);
+    //             qty += qtyItem;
+    //         }
+    //         console.log(`-------------------`);
+    //         console.log({
+    //             qty, walletAddress
+    //         });
+    //         console.log(`-------------------`);
+    //         return {
+    //             walletAddress,
+    //             qty
+    //         }
+    //     }
+
+    //     for (const walletAddress of stakeWallets) {
+    //         outputs.push(await getQtyNft(walletAddress))
+    //     }
+    //     try {
+    //         const fileName = `./op_stake.json`;
+    //         writeFileSync(fileName, JSON.stringify(outputs));
+    //     } catch (error) {
+
+    //     }
+
 
     // }
 
-    {
+    const data: { walletAddress: string; qty: number }[] = dataOp.concat(dataBase).map(({ walletAddress, qty }) => ({
+        walletAddress: walletAddress.toLowerCase(),
+        qty
+    }));
 
-        const list = [
-            "0x27b0b4033b6bdcdf12c8d4b86969e3aee53ca107",
-            "0xdA3d7DbB9fe32eD3b4455BA0507B9c66B4607710",
-            "0x08E2B5a2227dc40E2483eA076A2083b1E5c3AE3A",
-            "0xf7c7730eBdB3D6473DF9ed96288Ef28b22169c60",
-        ].filter(v => isAddress(v)).map(v => v.trim());
 
-        console.log(`-------------------`);
-        console.log(list);
-        console.log(`-------------------`);
-        const { transactionHash } = await (await ct
-            .connect(deployer)
-            .updatePartnerAff(nftAddress, list, true)).wait()
+    const outputs = data.reduce<{ [key: string]: number }>((result, item) => {
+        const qty = result[item.walletAddress] || 0;
+        Object.assign(result, {
+            [item.walletAddress]: qty + item.qty
+        })
+        return result;
+    }, {})
 
-        const txHash = `${URL_SCAN}/tx/${transactionHash}`.trim();
-        console.log('--------txHash2-----------');
-        console.log(txHash);
-        console.log('-------------------');
 
-    }
+
+    console.log(`-------------------`);
+    console.log(outputs);
+    console.log(`-------------------`);
 
 }
 
