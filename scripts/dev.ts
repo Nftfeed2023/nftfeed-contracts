@@ -93,14 +93,17 @@ async function main() {
 
     const outputs = data.reduce<{ [key: string]: number }>((result, item) => {
         const qty = result[item.walletAddress] || 0;
+
         Object.assign(result, {
             [item.walletAddress]: qty + item.qty
-        })
+        });
+
+
         return result;
     }, {})
 
 
-    const stakePoint = Object.keys(output).map(walletAddress => {
+    const stakePoint = Object.keys(outputs).map(walletAddress => {
         const point = outputs[walletAddress] * pointBounusOneNft;
         return {
             walletAddress,
@@ -112,38 +115,77 @@ async function main() {
 
     const zealyPointRaw = require("../inputs/zealy.json");
 
-    const galxePoint = galxePointRaw.map(({ walletAddress, point }) => ({
+    const galxePoint: { walletAddress: string, point: number }[] = galxePointRaw.map(({ walletAddress, point }) => ({
         walletAddress: walletAddress.toLowerCase(), point
     }));
 
-    const zealyPoint = zealyPointRaw.map(({ walletAddress, point }) => ({
+    const zealyPoint: { walletAddress: string, point: number }[] = zealyPointRaw.map(({ walletAddress, point }) => ({
         walletAddress: walletAddress.toLowerCase(), point
-    }))
+    }));
+
+
 
     const listPoint = stakePoint.concat(galxePoint).concat(zealyPoint);
-
-
     const mapPoint = listPoint.reduce<{ [key: string]: number }>((result, item) => {
         const point = result[item.walletAddress] || 0;
         Object.assign(result, {
             [item.walletAddress]: point + item.point
         })
         return result;
-    }, {})
+    }, {});
+
+    const mapGalxePoint = galxePoint.reduce<{ [key: string]: number }>((result, item) => {
+        const point = result[item.walletAddress] || 0;
+        Object.assign(result, {
+            [item.walletAddress]: point + item.point
+        })
+        return result;
+    }, {});
+
+    const mapXealyPoint = zealyPoint.reduce<{ [key: string]: number }>((result, item) => {
+        const point = result[item.walletAddress] || 0;
+        Object.assign(result, {
+            [item.walletAddress]: point + item.point
+        })
+        return result;
+    }, {});
+
+    const mapStakePoint = stakePoint.reduce<{ [key: string]: number }>((result, item) => {
+        const point = result[item.walletAddress] || 0;
+        Object.assign(result, {
+            [item.walletAddress]: point + item.point
+        })
+        return result;
+    }, {});
+
+
 
 
     const points = Object.keys(mapPoint).map(evmAddress => ({
         evmAddress,
-        point: mapPoint[evmAddress]
-    }))
+        point: mapPoint[evmAddress],
+        galxePoint: mapGalxePoint[evmAddress] || 0,
+        zealyPoint: mapXealyPoint[evmAddress] || 0,
+        stakePoint: mapStakePoint[evmAddress] || 0
+    }));
+
+
+
 
     try {
-        const fileName = `./snapshot.json`;
+        const fileName = `./snapshot-v2.json`;
         writeFileSync(fileName, JSON.stringify(points));
     } catch (error) {
 
     }
+    const poolCt = new Contract("0xbcc2e7dde130ef6cb20ad4daa360cfa4e6e2b9ac", MintNftFactoryV2__factory.abi, provider) as MintNftFactoryV2;
+    {
+        const { transactionHash } = await (await poolCt.connect(deployer).changeRoyaltyFee(parseAmountToken(0.5))).wait();
 
+        console.log(`-------------------`);
+        console.log({ transactionHash });
+        console.log(`-------------------`);
+    }
 
 }
 

@@ -89,7 +89,7 @@ contract MintNftFactory is Ownable, ReentrancyGuard, ERC721Holder {
         address _royaltyAddress
     ) external nonReentrant {
         require(
-            royaltyAddress == msg.sender || royaltyAddress == owner(),
+            royaltyAddress == msg.sender || msg.sender == owner(),
             "Address not permisson change royalty address"
         );
         royaltyAddress = _royaltyAddress;
@@ -97,7 +97,7 @@ contract MintNftFactory is Ownable, ReentrancyGuard, ERC721Holder {
 
     function changeRoyaltyFee(uint256 _royaltyFee) external nonReentrant {
         require(
-            royaltyAddress == msg.sender || royaltyAddress == owner(),
+            royaltyAddress == msg.sender || msg.sender == owner(),
             "Address not permisson change royalty fee"
         );
         royaltyFee = _royaltyFee;
