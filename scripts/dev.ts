@@ -84,105 +84,111 @@ async function main() {
 
     // }
 
-    const data: { walletAddress: string; qty: number }[] = dataOp.concat(dataBase).map(({ walletAddress, qty }) => ({
-        walletAddress: walletAddress.toLowerCase(),
-        qty
-    }));
+    // const data: { walletAddress: string; qty: number }[] = dataOp.concat(dataBase).map(({ walletAddress, qty }) => ({
+    //     walletAddress: walletAddress.toLowerCase(),
+    //     qty
+    // }));
 
-    const pointBounusOneNft = 300;
+    // const pointBounusOneNft = 300;
 
-    const outputs = data.reduce<{ [key: string]: number }>((result, item) => {
-        const qty = result[item.walletAddress] || 0;
+    // const outputs = data.reduce<{ [key: string]: number }>((result, item) => {
+    //     const qty = result[item.walletAddress] || 0;
 
-        Object.assign(result, {
-            [item.walletAddress]: qty + item.qty
-        });
-
-
-        return result;
-    }, {})
+    //     Object.assign(result, {
+    //         [item.walletAddress]: qty + item.qty
+    //     });
 
 
-    const stakePoint = Object.keys(outputs).map(walletAddress => {
-        const point = outputs[walletAddress] * pointBounusOneNft;
-        return {
-            walletAddress,
-            point
-        }
-    })
-
-    const galxePointRaw = require("../inputs/galxe.json");
-
-    const zealyPointRaw: any[] = require("../inputs/zealy_v2.json");
-
-    const galxePoint: { walletAddress: string, point: number }[] = galxePointRaw.map(({ walletAddress, point }) => ({
-        walletAddress: walletAddress.toLowerCase(), point
-    }));
-
-    const zealyPoint: { walletAddress: string, point: number }[] = zealyPointRaw
-        .filter(v => isAddress(v.walletAddress))
-        .map(({ walletAddress, point }) => ({
-            walletAddress: walletAddress.toLowerCase(), point
-        }));
+    //     return result;
+    // }, {})
 
 
+    // const stakePoint = Object.keys(outputs).map(walletAddress => {
+    //     const point = outputs[walletAddress] * pointBounusOneNft;
+    //     return {
+    //         walletAddress,
+    //         point
+    //     }
+    // })
 
-    const listPoint = stakePoint.concat(galxePoint).concat(zealyPoint);
-    const mapPoint = listPoint.reduce<{ [key: string]: number }>((result, item) => {
-        const point = result[item.walletAddress] || 0;
-        Object.assign(result, {
-            [item.walletAddress]: point + item.point
-        })
-        return result;
-    }, {});
+    // const galxePointRaw = require("../inputs/galxe.json");
 
-    const mapGalxePoint = galxePoint.reduce<{ [key: string]: number }>((result, item) => {
-        const point = result[item.walletAddress] || 0;
-        Object.assign(result, {
-            [item.walletAddress]: point + item.point
-        })
-        return result;
-    }, {});
+    // const zealyPointRaw: any[] = require("../inputs/zealy_v2.json");
 
-    const mapXealyPoint = zealyPoint.reduce<{ [key: string]: number }>((result, item) => {
-        const point = result[item.walletAddress] || 0;
-        Object.assign(result, {
-            [item.walletAddress]: point + item.point
-        })
-        return result;
-    }, {});
+    // const galxePoint: { walletAddress: string, point: number }[] = galxePointRaw.map(({ walletAddress, point }) => ({
+    //     walletAddress: walletAddress.toLowerCase(), point
+    // }));
 
-    const mapStakePoint = stakePoint.reduce<{ [key: string]: number }>((result, item) => {
-        const point = result[item.walletAddress] || 0;
-        Object.assign(result, {
-            [item.walletAddress]: point + item.point
-        })
-        return result;
-    }, {});
+    // const zealyPoint: { walletAddress: string, point: number }[] = zealyPointRaw
+    //     .filter(v => isAddress(v.walletAddress))
+    //     .map(({ walletAddress, point }) => ({
+    //         walletAddress: walletAddress.toLowerCase(), point
+    //     }));
 
 
 
+    // const listPoint = stakePoint.concat(galxePoint).concat(zealyPoint);
+    // const mapPoint = listPoint.reduce<{ [key: string]: number }>((result, item) => {
+    //     const point = result[item.walletAddress] || 0;
+    //     Object.assign(result, {
+    //         [item.walletAddress]: point + item.point
+    //     })
+    //     return result;
+    // }, {});
 
-    const points = Object.keys(mapPoint).map(evmAddress => ({
-        evmAddress,
-        point: mapPoint[evmAddress],
-        galxePoint: mapGalxePoint[evmAddress] || 0,
-        zealyPoint: mapXealyPoint[evmAddress] || 0,
-        stakePoint: mapStakePoint[evmAddress] || 0
-    }));
+    // const mapGalxePoint = galxePoint.reduce<{ [key: string]: number }>((result, item) => {
+    //     const point = result[item.walletAddress] || 0;
+    //     Object.assign(result, {
+    //         [item.walletAddress]: point + item.point
+    //     })
+    //     return result;
+    // }, {});
+
+    // const mapXealyPoint = zealyPoint.reduce<{ [key: string]: number }>((result, item) => {
+    //     const point = result[item.walletAddress] || 0;
+    //     Object.assign(result, {
+    //         [item.walletAddress]: point + item.point
+    //     })
+    //     return result;
+    // }, {});
+
+    // const mapStakePoint = stakePoint.reduce<{ [key: string]: number }>((result, item) => {
+    //     const point = result[item.walletAddress] || 0;
+    //     Object.assign(result, {
+    //         [item.walletAddress]: point + item.point
+    //     })
+    //     return result;
+    // }, {});
+
+
+
+
+    // const points = Object.keys(mapPoint).map(evmAddress => ({
+    //     evmAddress,
+    //     point: mapPoint[evmAddress],
+    //     galxePoint: mapGalxePoint[evmAddress] || 0,
+    //     zealyPoint: mapXealyPoint[evmAddress] || 0,
+    //     stakePoint: mapStakePoint[evmAddress] || 0
+    // }));
+
+
+    // console.log(`-------------------`);
+    // console.log(points.filter(v => v.zealyPoint > 0).length);
+    // console.log(`-------------------`);
+
+    // try {
+    //     const fileName = `./snapshot-v2.json`;
+    //     writeFileSync(fileName, JSON.stringify(points));
+    // } catch (error) {
+
+    // }
 
 
     console.log(`-------------------`);
-    console.log(points.filter(v => v.zealyPoint > 0).length);
+    console.log({
+        endTime: Math.floor(stringDateToUTCDate("2023/11/01 00:00:00").getTime() / 1000),
+    });
     console.log(`-------------------`);
-
-    try {
-        const fileName = `./snapshot-v2.json`;
-        writeFileSync(fileName, JSON.stringify(points));
-    } catch (error) {
-
-    }
-
 
 }
 
