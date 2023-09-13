@@ -113,15 +113,17 @@ async function main() {
 
     const galxePointRaw = require("../inputs/galxe.json");
 
-    const zealyPointRaw = require("../inputs/zealy.json");
+    const zealyPointRaw: any[] = require("../inputs/zealy_v2.json");
 
     const galxePoint: { walletAddress: string, point: number }[] = galxePointRaw.map(({ walletAddress, point }) => ({
         walletAddress: walletAddress.toLowerCase(), point
     }));
 
-    const zealyPoint: { walletAddress: string, point: number }[] = zealyPointRaw.map(({ walletAddress, point }) => ({
-        walletAddress: walletAddress.toLowerCase(), point
-    }));
+    const zealyPoint: { walletAddress: string, point: number }[] = zealyPointRaw
+        .filter(v => isAddress(v.walletAddress))
+        .map(({ walletAddress, point }) => ({
+            walletAddress: walletAddress.toLowerCase(), point
+        }));
 
 
 
@@ -170,7 +172,9 @@ async function main() {
     }));
 
 
-
+    console.log(`-------------------`);
+    console.log(points.filter(v => v.zealyPoint > 0).length);
+    console.log(`-------------------`);
 
     try {
         const fileName = `./snapshot-v2.json`;
@@ -178,14 +182,7 @@ async function main() {
     } catch (error) {
 
     }
-    const poolCt = new Contract("0xbcc2e7dde130ef6cb20ad4daa360cfa4e6e2b9ac", MintNftFactoryV2__factory.abi, provider) as MintNftFactoryV2;
-    {
-        const { transactionHash } = await (await poolCt.connect(deployer).changeRoyaltyFee(parseAmountToken(0.5))).wait();
 
-        console.log(`-------------------`);
-        console.log({ transactionHash });
-        console.log(`-------------------`);
-    }
 
 }
 
