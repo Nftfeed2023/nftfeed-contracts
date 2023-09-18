@@ -29,6 +29,8 @@
     "token-tool:deploy": "hardhat run scripts/token-tool/deploy.ts",
     "token-tool:verify": "hardhat run scripts/token-tool/verify.ts",
     "token-tool:verify-token-erc721": "hardhat run scripts/token-tool/verify-token-erc721.ts",
+    "batch-transfer-tool:deploy": "hardhat run scripts/batch-transfer-tool/deploy.ts",
+    "batch-transfer-tool:verify": "hardhat run scripts/batch-transfer-tool/verify.ts",
     "free-mint-factory:deploy": "hardhat run scripts/free-mint-factory/deploy.ts",
     "free-mint-factory:verify": "hardhat run scripts/free-mint-factory/verify.ts",
     "free-mint-factory-v2:deploy": "hardhat run scripts/free-mint-factory-v2/deploy.ts",

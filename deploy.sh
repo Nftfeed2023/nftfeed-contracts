@@ -1,3 +1,3 @@
 
-NODE_ENV=zetaTestnet yarn free-mint-factory-v2:deploy;
-NODE_ENV=zetaTestnet yarn free-mint-factory-v2:verify;
+NODE_ENV=baseMainnet yarn batch-transfer-tool:deploy;
+NODE_ENV=baseMainnet yarn batch-transfer-tool:verify;

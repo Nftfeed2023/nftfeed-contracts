@@ -1,0 +1,1 @@
+{"DEPLOYER_ADDRESS":"0x773942f50E170CAB330A4d1d87d94941753Ac5C9","TOKEN_ADDRESS":"0xC5D9f31180579284eeB5f891dDc7b1c83eFfD63d","verifyData":{"address":"0xC5D9f31180579284eeB5f891dDc7b1c83eFfD63d","constructorArguments":[],"contract":"contracts/BatchTransferTool.sol:BatchTransferTool"}}
