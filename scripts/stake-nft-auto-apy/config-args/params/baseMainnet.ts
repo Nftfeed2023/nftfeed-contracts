@@ -3,14 +3,14 @@ import { parseAmountToken, stringDateToUTCDate } from "../../../@helpers/block-c
 
 
 
-const totalReward = parseAmountToken(1000_000);
+const totalReward = parseAmountToken(700_000);
 
-const startTime = Math.floor(stringDateToUTCDate("2023/08/20 07:30:00").getTime() / 1000);
-const endTimeBonus = Math.floor(stringDateToUTCDate("2023/10/20 07:30:00").getTime() / 1000);
+const startTime = Math.floor(stringDateToUTCDate("2023/09/29 10:00:00").getTime() / 1000);
+const endTimeBonus = Math.floor(stringDateToUTCDate("2023/10/30 10:00:00").getTime() / 1000);
 
 export const params = {
-    tokenReward: "0x03D8A7ad755E5645145D0a7c3CFD0DCF5F52DF8C",
-    nft: "0x268174fF68633901A2EC6511b33c590aAC4Fe263",
+    tokenReward: "0x78A0ad4EB97A71077B12fBDaC2ECA3550767eE2b",
+    nft: "0x27dac2f25edb24c75cd1781e68b0358c91a9765a", // base Punk
     startTime,
     endTimeBonus,
     rewardPerSeconds: totalReward.div(BigNumber.from(endTimeBonus).sub(BigNumber.from(startTime)))
