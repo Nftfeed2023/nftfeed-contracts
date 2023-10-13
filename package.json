@@ -8,6 +8,7 @@
     "compile": "hardhat compile",
     "build": "yarn clean && yarn compile",
     "dev": "hardhat run scripts/dev.ts",
+    "create-chain-data": "hardhat run scripts/create-chain-data.ts",
     "verify": "hardhat run scripts/verify.ts",
     "make-wallet": "NODE_ENV=maticMainnet hardhat run scripts/make-wallet.ts",
     "deploy-erc20": "hardhat run scripts/deploy-erc20.ts",
