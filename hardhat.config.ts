@@ -75,6 +75,22 @@ const config: HardhatUserConfig = {
       gasPrice: 80000000000,
       url: 'https://zetachain-athens-evm.blockpi.network/v1/rpc/public'
     },
+
+    zksyncTestnet: {
+      // url: "https://goerli.optimism.io/",
+      url: "https://testnet.era.zksync.dev",
+      chainId: 280,
+      gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+    zksyncMainnet: {
+      url: "https://mainnet.era.zksync.io",
+      chainId: 324,
+      gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+
+
   },
   solidity: {
     compilers: [
