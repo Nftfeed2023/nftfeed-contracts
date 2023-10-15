@@ -91,6 +91,22 @@ const config: HardhatUserConfig = {
     },
 
 
+
+    arbitrumTestnet: {
+      // url: "https://goerli.optimism.io/",
+      url: "https://arbitrum-goerli.publicnode.com",
+      chainId: 421613,
+      gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+    arbitrumMainnet: {
+      url: "https://arbitrum-one.publicnode.com",
+      chainId: 42161,
+      gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+
+
   },
   solidity: {
     compilers: [

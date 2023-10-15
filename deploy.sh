@@ -1,2 +1,3 @@
-NODE_ENV=baseMainnet yarn stake-nft-auto-apy:deploy;
-NODE_ENV=baseMainnet yarn stake-nft-auto-apy:verify;
+
+NODE_ENV=arbitrumTestnet yarn free-mint-factory-v2:deploy;
+NODE_ENV=arbitrumTestnet yarn free-mint-factory-v2:verify;

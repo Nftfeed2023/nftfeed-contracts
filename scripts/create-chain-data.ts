@@ -43,73 +43,85 @@ async function main() {
     }
     const data = [
         {
-            "name": "zkSync Era Testnet",
+            "name": "Arbitrum One",
+            "chainId": 42161,
+            "shortName": "arb1",
             "chain": "ETH",
-            "rpc": [
-                "https://testnet.era.zksync.dev"
-            ],
-            "faucets": [
-                "https://goerli.portal.zksync.io/faucet"
-            ],
+            "networkId": 42161,
             "nativeCurrency": {
                 "name": "Ether",
                 "symbol": "ETH",
                 "decimals": 18
             },
-            "infoURL": "https://era.zksync.io/docs/",
-            "shortName": "zksync-goerli",
-            "chainId": 280,
-            "networkId": 280,
-            "icon": "zksync-era",
+            "rpc": [
+                "https://arbitrum-mainnet.infura.io/v3/${INFURA_API_KEY}",
+                "https://arb-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}",
+                "https://arb1.arbitrum.io/rpc",
+                "https://arbitrum-one.publicnode.com",
+                "wss://arbitrum-one.publicnode.com"
+            ],
+            "faucets": [],
             "explorers": [
                 {
-                    "name": "zkSync Era Block Explorer",
-                    "url": "https://goerli.explorer.zksync.io",
-                    "icon": "zksync-era",
+                    "name": "Arbiscan",
+                    "url": "https://arbiscan.io",
+                    "standard": "EIP3091"
+                },
+                {
+                    "name": "Arbitrum Explorer",
+                    "url": "https://explorer.arbitrum.io",
+                    "standard": "EIP3091"
+                },
+                {
+                    "name": "dexguru",
+                    "url": "https://arbitrum.dex.guru",
+                    "icon": "dexguru",
                     "standard": "EIP3091"
                 }
             ],
+            "infoURL": "https://arbitrum.io",
             "parent": {
                 "type": "L2",
                 "chain": "eip155-1",
                 "bridges": [
                     {
-                        "url": "https://goerli.portal.zksync.io/bridge"
+                        "url": "https://bridge.arbitrum.io"
                     }
                 ]
             }
         },
         {
-            "name": "zkSync Era Mainnet",
+            "name": "Arbitrum Goerli",
+            "title": "Arbitrum Goerli Rollup Testnet",
+            "chainId": 421613,
+            "shortName": "arb-goerli",
             "chain": "ETH",
-            "rpc": [
-                "https://mainnet.era.zksync.io"
-            ],
-            "faucets": [],
+            "networkId": 421613,
             "nativeCurrency": {
-                "name": "Ether",
-                "symbol": "ETH",
+                "name": "Arbitrum Goerli Ether",
+                "symbol": "AGOR",
                 "decimals": 18
             },
-            "infoURL": "https://zksync.io/",
-            "shortName": "zksync",
-            "chainId": 324,
-            "networkId": 324,
-            "icon": "zksync-era",
+            "rpc": [
+                "https://goerli-rollup.arbitrum.io/rpc",
+                "https://arbitrum-goerli.publicnode.com",
+                "wss://arbitrum-goerli.publicnode.com"
+            ],
+            "faucets": [],
+            "infoURL": "https://arbitrum.io/",
             "explorers": [
                 {
-                    "name": "zkSync Era Block Explorer",
-                    "url": "https://explorer.zksync.io",
-                    "icon": "zksync-era",
+                    "name": "Arbitrum Goerli Arbiscan",
+                    "url": "https://goerli.arbiscan.io",
                     "standard": "EIP3091"
                 }
             ],
             "parent": {
                 "type": "L2",
-                "chain": "eip155-1",
+                "chain": "eip155-5",
                 "bridges": [
                     {
-                        "url": "https://bridge.zksync.io/"
+                        "url": "https://bridge.arbitrum.io/"
                     }
                 ]
             }
