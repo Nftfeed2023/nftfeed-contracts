@@ -100,9 +100,9 @@ const config: HardhatUserConfig = {
       accounts: [hexWalletDeployerPrivateKey],
     },
     arbitrumMainnet: {
-      url: "https://arbitrum-one.publicnode.com",
+      url: "https://arbitrum.llamarpc.com",
       chainId: 42161,
-      gasPrice: 20000000000,
+      //   gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
 

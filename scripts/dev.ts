@@ -33,7 +33,11 @@ async function main() {
     console.log("Account balance:", formatEther(balance));
 
 
-
+    console.log(`-------------------`);
+    console.log({
+        d: utils.formatEther("427637880000000000")
+    });
+    console.log(`-------------------`);
 
 
 
