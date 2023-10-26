@@ -10,7 +10,7 @@ artifacts
 .env.prod
 .env.production
 prod.env
-/outputs
+outputs
 .DS_Store
 *-mainnet.env
 !spec/*-mainnet.env
