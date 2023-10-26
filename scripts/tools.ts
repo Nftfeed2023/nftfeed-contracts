@@ -23,6 +23,7 @@ const { TOKEN_ADDRESS, NETWORK_PROVIDER } = configEnv();
 const { URL_SCAN } = NETWORK_PROVIDER;
 
 
+
 async function main() {
 
     const output: any = {};
@@ -34,14 +35,19 @@ async function main() {
 
 
 
-    const nftAddress = "";
-    const factoryAddress = "";
+    const nftAddress = "0x73e6225087d0b06d3c8edb51161a1c3af7105dfc";
+    const factoryAddress = "0xAf1FF8e04Aa97d2C155fBa9829CB152169bfD8fD";
     const factoryCt = new Contract(factoryAddress, MintNftFactoryV2__factory.abi, provider) as MintNftFactoryV2;
 
-    const mint = async ({ qty, owner }: { qty: number; owner: Signer }) => {
+    const mint = async ({ owner }: { owner: Signer }) => {
         try {
-            const value = await factoryCt.getAmountOutByQty(nftAddress, qty);
-            const { transactionHash } = await ((await factoryCt.connect(owner).mintByQty(nftAddress, qty, AddressZero, {
+            const value = await factoryCt.getAmountOut(nftAddress);
+            console.log(`-------------------`);
+            console.log({
+                value: formatEther(value)
+            });
+            console.log(`-------------------`);
+            const { transactionHash } = await ((await factoryCt.connect(owner).mint(nftAddress, AddressZero, {
                 value
             })).wait())
             return {
@@ -50,6 +56,9 @@ async function main() {
                 owner: await owner.getAddress()
             }
         } catch (error) {
+            console.log(`-------------------`);
+            console.log(error);
+            console.log(`-------------------`);
             return {
                 status: "ERROR",
                 transactionHash: "",
@@ -58,6 +67,14 @@ async function main() {
         }
     }
 
+
+    const listWallets = require("../outputs/list.json") as { privateKey: string }[];
+
+
+
+    const res = await mint({
+        owner: connectWallet(listWallets[0].privateKey)
+    })
 
 
 }

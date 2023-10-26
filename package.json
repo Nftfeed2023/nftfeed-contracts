@@ -11,7 +11,7 @@
     "tools": "hardhat run scripts/tools.ts",
     "create-chain-data": "hardhat run scripts/create-chain-data.ts",
     "verify": "hardhat run scripts/verify.ts",
-    "make-wallet": "NODE_ENV=maticMainnet hardhat run scripts/make-wallet.ts",
+    "make-wallet": "hardhat run scripts/make-wallet.ts",
     "deploy-erc20": "hardhat run scripts/deploy-erc20.ts",
     "deploy-erc721": "hardhat run scripts/deploy-erc721.ts",
     "usd-token:deploy": "hardhat run scripts/usd-token/deploy.ts",

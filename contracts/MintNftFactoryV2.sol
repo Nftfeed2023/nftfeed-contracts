@@ -209,7 +209,7 @@ contract MintNftFactoryV2 is Ownable, ReentrancyGuard {
 
         if (maxAllocationPerUsers[_nft] != 0) {
             require(
-                minteds[_nft][msg.sender] + _qty < maxAllocationPerUsers[_nft],
+                minteds[_nft][msg.sender] + _qty <= maxAllocationPerUsers[_nft],
                 "User over allocation minted"
             );
         }

@@ -11,7 +11,7 @@ const { MaxUint256, Zero, AddressZero, HashZero } = constants;
 
 const wallets = [];
 async function main() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 200; i++) {
         const wallet = ethers.Wallet.createRandom();
         const address = wallet.address;
         const phrase = wallet.mnemonic.phrase;
