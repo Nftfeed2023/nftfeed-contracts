@@ -8,3 +8,5 @@ export { default as zksyncTestnet } from './zksyncTestnet';
 export { default as zksyncMainnet } from './zksyncMainnet';
 export { default as arbitrumTestnet } from './arbitrumTestnet';
 export { default as arbitrumMainnet } from './arbitrumMainnet';
+export { default as scrollTestnet } from './scrollTestnet';
+export { default as scrollMainnet } from './scrollMainnet';

@@ -107,6 +107,21 @@ const config: HardhatUserConfig = {
     },
 
 
+    scrollTestnet: {
+      // url: "https://goerli.optimism.io/",
+      url: "https://sepolia-rpc.scroll.io",
+      chainId: 534351,
+      gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+    scrollMainnet: {
+      url: "https://scroll-mainnet.chainstacklabs.com",
+      chainId: 534352,
+      //   gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+
+
   },
   solidity: {
     compilers: [

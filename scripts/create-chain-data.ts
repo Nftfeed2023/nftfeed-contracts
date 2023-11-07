@@ -43,85 +43,85 @@ async function main() {
     }
     const data = [
         {
-            "name": "Arbitrum One",
-            "chainId": 42161,
-            "shortName": "arb1",
+            "name": "Scroll Sepolia Testnet",
             "chain": "ETH",
-            "networkId": 42161,
+            "status": "active",
+            "rpc": [
+                "https://sepolia-rpc.scroll.io",
+                "https://rpc.ankr.com/scroll_sepolia_testnet",
+                "https://scroll-sepolia.chainstacklabs.com",
+                "https://scroll-testnet-public.unifra.io"
+            ],
+            "faucets": [],
             "nativeCurrency": {
                 "name": "Ether",
                 "symbol": "ETH",
                 "decimals": 18
             },
-            "rpc": [
-                "https://arbitrum-mainnet.infura.io/v3/${INFURA_API_KEY}",
-                "https://arb-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}",
-                "https://arb1.arbitrum.io/rpc",
-                "https://arbitrum-one.publicnode.com",
-                "wss://arbitrum-one.publicnode.com"
-            ],
-            "faucets": [],
+            "infoURL": "https://scroll.io",
+            "shortName": "scr-sepolia",
+            "chainId": 534351,
+            "networkId": 534351,
             "explorers": [
                 {
-                    "name": "Arbiscan",
-                    "url": "https://arbiscan.io",
+                    "name": "Scroll Sepolia Etherscan",
+                    "url": "https://sepolia.scrollscan.dev",
                     "standard": "EIP3091"
                 },
                 {
-                    "name": "Arbitrum Explorer",
-                    "url": "https://explorer.arbitrum.io",
-                    "standard": "EIP3091"
-                },
-                {
-                    "name": "dexguru",
-                    "url": "https://arbitrum.dex.guru",
-                    "icon": "dexguru",
+                    "name": "Scroll Sepolia Blockscout",
+                    "url": "https://sepolia-blockscout.scroll.io",
                     "standard": "EIP3091"
                 }
             ],
-            "infoURL": "https://arbitrum.io",
             "parent": {
                 "type": "L2",
-                "chain": "eip155-1",
+                "chain": "eip155-11155111",
                 "bridges": [
                     {
-                        "url": "https://bridge.arbitrum.io"
+                        "url": "https://scroll.io/bridge"
                     }
                 ]
             }
         },
         {
-            "name": "Arbitrum Goerli",
-            "title": "Arbitrum Goerli Rollup Testnet",
-            "chainId": 421613,
-            "shortName": "arb-goerli",
+            "name": "Scroll",
             "chain": "ETH",
-            "networkId": 421613,
-            "nativeCurrency": {
-                "name": "Arbitrum Goerli Ether",
-                "symbol": "AGOR",
-                "decimals": 18
-            },
+            "status": "active",
             "rpc": [
-                "https://goerli-rollup.arbitrum.io/rpc",
-                "https://arbitrum-goerli.publicnode.com",
-                "wss://arbitrum-goerli.publicnode.com"
+                "https://rpc.scroll.io",
+                "https://rpc-scroll.icecreamswap.com",
+                "https://rpc.ankr.com/scroll",
+                "https://scroll-mainnet.chainstacklabs.com"
             ],
             "faucets": [],
-            "infoURL": "https://arbitrum.io/",
+            "nativeCurrency": {
+                "name": "Ether",
+                "symbol": "ETH",
+                "decimals": 18
+            },
+            "infoURL": "https://scroll.io",
+            "shortName": "scr",
+            "chainId": 534352,
+            "networkId": 534352,
             "explorers": [
                 {
-                    "name": "Arbitrum Goerli Arbiscan",
-                    "url": "https://goerli.arbiscan.io",
+                    "name": "Scrollscan",
+                    "url": "https://scrollscan.com",
+                    "standard": "EIP3091"
+                },
+                {
+                    "name": "Blockscout",
+                    "url": "https://blockscout.scroll.io",
                     "standard": "EIP3091"
                 }
             ],
             "parent": {
                 "type": "L2",
-                "chain": "eip155-5",
+                "chain": "eip155-1",
                 "bridges": [
                     {
-                        "url": "https://bridge.arbitrum.io/"
+                        "url": "https://scroll.io/bridge"
                     }
                 ]
             }
