@@ -172,6 +172,14 @@ const config: HardhatUserConfig = {
           apiURL: "https://api.basescan.org/api",
           browserURL: "https://basescan.org"
         }
+      },
+      {
+        network: "scrollMainnet",
+        chainId: 534352,
+        urls: {
+          apiURL: "https://api.scrollscan.com/api",
+          browserURL: "https://scrollscan.com"
+        }
       }
     ]
   },
