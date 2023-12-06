@@ -32,6 +32,22 @@ async function main() {
     const balance = await deployer.getBalance();
     console.log("Account balance:", formatEther(balance));
 
+    const nftAddress = '0x271067dab0bcdc8ba36bee226a590f6efa7abae3';
+    const getLogs = async () => {
+        const latestBlock = await provider.getBlockNumber();
+        const nftCt = new Contract(nftAddress, ERC721__factory.abi, provider) as ERC721;
+
+        const filter = nftCt.filters["Transfer(address,address,uint256)"](null, null, null)
+        const events = await provider.getLogs({
+            address: nftAddress,
+            topics: [utils.id("Transfer(address,address,uint256)")]
+        });
+
+        console.log(`-------------------`);
+        console.log({ events });
+        console.log(`-------------------`);
+    };
+
 
 
 
