@@ -27,7 +27,7 @@ const config: HardhatUserConfig = {
       accounts: [hexWalletDeployerPrivateKey]
     },
     maticMainnet: {
-      url: "https://matic-mainnet-full-rpc.bwarelabs.com/",
+      url: "https://polygon-rpc.com",
       chainId: 137,
       accounts: [hexWalletDeployerPrivateKey],
     },
@@ -120,6 +120,9 @@ const config: HardhatUserConfig = {
       //   gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
+
+
+
 
 
   },
