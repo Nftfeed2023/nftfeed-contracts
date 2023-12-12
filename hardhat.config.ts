@@ -122,6 +122,20 @@ const config: HardhatUserConfig = {
     },
 
 
+    avaxMainnet: {
+      url: "https://avalanche.drpc.org",
+      chainId: 43114,
+      //   gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+
+
+    zoraMainnet: {
+      url: "https://rpc.zora.energy",
+      chainId: 7777777,
+      //   gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
 
 
 

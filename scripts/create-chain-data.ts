@@ -43,14 +43,10 @@ async function main() {
     }
     const data = [
         {
-            "name": "Scroll Sepolia Testnet",
+            "name": "Zora",
             "chain": "ETH",
-            "status": "active",
             "rpc": [
-                "https://sepolia-rpc.scroll.io",
-                "https://rpc.ankr.com/scroll_sepolia_testnet",
-                "https://scroll-sepolia.chainstacklabs.com",
-                "https://scroll-testnet-public.unifra.io"
+                "https://rpc.zora.energy/"
             ],
             "faucets": [],
             "nativeCurrency": {
@@ -58,73 +54,51 @@ async function main() {
                 "symbol": "ETH",
                 "decimals": 18
             },
-            "infoURL": "https://scroll.io",
-            "shortName": "scr-sepolia",
-            "chainId": 534351,
-            "networkId": 534351,
+            "icon": "zora",
+            "infoURL": "https://zora.energy",
+            "shortName": "zora",
+            "chainId": 7777777,
+            "networkId": 7777777,
             "explorers": [
                 {
-                    "name": "Scroll Sepolia Etherscan",
-                    "url": "https://sepolia.scrollscan.dev",
-                    "standard": "EIP3091"
-                },
-                {
-                    "name": "Scroll Sepolia Blockscout",
-                    "url": "https://sepolia-blockscout.scroll.io",
+                    "name": "Zora Network Explorer",
+                    "url": "https://explorer.zora.energy",
                     "standard": "EIP3091"
                 }
-            ],
-            "parent": {
-                "type": "L2",
-                "chain": "eip155-11155111",
-                "bridges": [
-                    {
-                        "url": "https://scroll.io/bridge"
-                    }
-                ]
-            }
+            ]
         },
         {
-            "name": "Scroll",
-            "chain": "ETH",
-            "status": "active",
+            "name": "Avalanche C-Chain",
+            "chain": "AVAX",
+            "icon": "avax",
             "rpc": [
-                "https://rpc.scroll.io",
-                "https://rpc-scroll.icecreamswap.com",
-                "https://rpc.ankr.com/scroll",
-                "https://scroll-mainnet.chainstacklabs.com"
+                "https://api.avax.network/ext/bc/C/rpc",
+                "https://avalanche-c-chain.publicnode.com",
+                "wss://avalanche-c-chain.publicnode.com"
+            ],
+            "features": [
+                {
+                    "name": "EIP1559"
+                }
             ],
             "faucets": [],
             "nativeCurrency": {
-                "name": "Ether",
-                "symbol": "ETH",
+                "name": "Avalanche",
+                "symbol": "AVAX",
                 "decimals": 18
             },
-            "infoURL": "https://scroll.io",
-            "shortName": "scr",
-            "chainId": 534352,
-            "networkId": 534352,
+            "infoURL": "https://www.avax.network/",
+            "shortName": "avax",
+            "chainId": 43114,
+            "networkId": 43114,
+            "slip44": 9005,
             "explorers": [
                 {
-                    "name": "Scrollscan",
-                    "url": "https://scrollscan.com",
-                    "standard": "EIP3091"
-                },
-                {
-                    "name": "Blockscout",
-                    "url": "https://blockscout.scroll.io",
+                    "name": "snowtrace",
+                    "url": "https://snowtrace.io",
                     "standard": "EIP3091"
                 }
-            ],
-            "parent": {
-                "type": "L2",
-                "chain": "eip155-1",
-                "bridges": [
-                    {
-                        "url": "https://scroll.io/bridge"
-                    }
-                ]
-            }
+            ]
         },
     ]
 

@@ -1,5 +1,5 @@
 import "../env-config";
-import { ethers } from "hardhat";
+import { ethers, run } from "hardhat";
 
 import { configEnv } from "./@config";
 import { BigNumber, Contract, Wallet } from "ethers";
@@ -32,25 +32,37 @@ async function main() {
     const balance = await deployer.getBalance();
     console.log("Account balance:", formatEther(balance));
 
-    const nftAddress = '0x271067dab0bcdc8ba36bee226a590f6efa7abae3';
-    const getLogs = async () => {
-        const latestBlock = await provider.getBlockNumber();
-        const nftCt = new Contract(nftAddress, ERC721__factory.abi, provider) as ERC721;
 
-        const filter = nftCt.filters["Transfer(address,address,uint256)"](null, null, null)
-        const events = await provider.getLogs({
-            address: nftAddress,
-            topics: [utils.id("Transfer(address,address,uint256)")]
+
+    const tokenFactory = await getContractFactory("PythPriceUpdater");
+
+    const tokenCt = await tokenFactory.deploy("0xA2aa501b19aff244D90cc15a4Cf739D2725B5729");
+    await tokenCt.deployed();
+
+    console.log(`${"StakeNftFactory"} deployed to:`, tokenCt.address);
+    const linkDeploy = `${NETWORK_PROVIDER.URL_SCAN}/address/${tokenCt.address}`.trim();
+    console.log('--------linkDeploy-----------');
+    console.log(linkDeploy);
+    console.log('-------------------');
+
+    const verifyData = {
+        address: tokenCt.address,
+        constructorArguments: [
+            "0xA2aa501b19aff244D90cc15a4Cf739D2725B5729"
+        ],
+        contract: "contracts/PythPriceUpdater.sol:PythPriceUpdater"
+    }
+
+    try {
+        console.log('--------verify-----------');
+        await run("verify:verify", {
+            ...verifyData
         });
-
-        console.log(`-------------------`);
-        console.log({ events });
-        console.log(`-------------------`);
-    };
-
-
-
-
+    } catch (error) {
+        console.log('---------Verify error----------');
+        console.log(error);
+        console.log('-------------------');
+    }
 }
 
 main().catch((error) => {

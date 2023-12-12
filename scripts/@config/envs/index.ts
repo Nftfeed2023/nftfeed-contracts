@@ -12,3 +12,5 @@ export { default as scrollTestnet } from './scrollTestnet';
 export { default as scrollMainnet } from './scrollMainnet';
 export { default as maticMainnet } from './maticMainnet';
 export { default as maticTestnet } from './maticTestnet';
+export { default as avaxMainnet } from './avaxMainnet';
+export { default as zoraMainnet } from './zoraMainnet';

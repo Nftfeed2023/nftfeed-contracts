@@ -74,6 +74,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.9.0",
+    "@pythnetwork/pyth-sdk-solidity": "^2.3.0",
     "axios": "^0.26.0",
     "extensionsjs": "^1.1.6",
     "merkletreejs": "^0.2.31",
