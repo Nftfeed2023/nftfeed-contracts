@@ -7,11 +7,31 @@ import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 import { utils } from "ethers";
-const { WALLET_DEPLOYER_PRIVATEKEY, SCAN_APIKEY } = process.env;
+const { WALLET_DEPLOYER_PRIVATEKEY, SCAN_APIKEY, NODE_ENV } = process.env;
 const hexWalletDeployerPrivateKey = WALLET_DEPLOYER_PRIVATEKEY.startsWith("0x") ? WALLET_DEPLOYER_PRIVATEKEY.trim() : `0x${WALLET_DEPLOYER_PRIVATEKEY}`.trim();
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
+
+
+
+
+const getApiKey = () => {
+  if (NODE_ENV === "avaxMainnet") {
+    return {
+      avaxMainnet: "snowtrace"
+    }
+  }
+
+  if (NODE_ENV === "zoraMainnet") {
+    return {
+      zoraMainnet: "zora"
+    }
+  }
+
+  return SCAN_APIKEY;
+}
+const apiKey = getApiKey();
 
 const config: HardhatUserConfig = {
   networks: {
@@ -172,7 +192,7 @@ const config: HardhatUserConfig = {
     currency: "USD",
   },
   etherscan: {
-    apiKey: SCAN_APIKEY,
+    apiKey,
     customChains: [
       {
         network: "baseTestnet",
@@ -196,6 +216,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api.scrollscan.com/api",
           browserURL: "https://scrollscan.com"
+        }
+      },
+      {
+        network: "avaxMainnet",
+        chainId: 43114,
+        urls: {
+          apiURL: "https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan",
+          browserURL: "https://avalanche.routescan.io"
+        }
+      },
+      {
+        network: "zoraMainnet",
+        chainId: 7777777,
+        urls: {
+          apiURL: "https://api.routescan.io/v2/network/mainnet/evm/7777777/etherscan",
+          browserURL: "https://zora.superscan.network"
         }
       }
     ]

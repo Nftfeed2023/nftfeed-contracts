@@ -81,8 +81,8 @@ async function main() {
     const tokenCt = await tokenFactory.deploy(
         royaltyAddress,
         royaltyFee,
-
     );
+
     await tokenCt.deployed();
 
 

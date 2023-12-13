@@ -34,35 +34,17 @@ async function main() {
 
 
 
-    const tokenFactory = await getContractFactory("PythPriceUpdater");
 
-    const tokenCt = await tokenFactory.deploy("0xA2aa501b19aff244D90cc15a4Cf739D2725B5729");
-    await tokenCt.deployed();
 
-    console.log(`${"StakeNftFactory"} deployed to:`, tokenCt.address);
-    const linkDeploy = `${NETWORK_PROVIDER.URL_SCAN}/address/${tokenCt.address}`.trim();
-    console.log('--------linkDeploy-----------');
-    console.log(linkDeploy);
-    console.log('-------------------');
+    const tokenCt = new Contract("0xe24165ba2bE15a27f5569d179C1bB07369Bc903a", MintNftFactoryV2__factory.abi, provider) as MintNftFactoryV2;
 
-    const verifyData = {
-        address: tokenCt.address,
-        constructorArguments: [
-            "0xA2aa501b19aff244D90cc15a4Cf739D2725B5729"
-        ],
-        contract: "contracts/PythPriceUpdater.sol:PythPriceUpdater"
-    }
 
-    try {
-        console.log('--------verify-----------');
-        await run("verify:verify", {
-            ...verifyData
-        });
-    } catch (error) {
-        console.log('---------Verify error----------');
-        console.log(error);
-        console.log('-------------------');
-    }
+    const { transactionHash } = await (await tokenCt.connect(deployer).changeRoyaltyFee(parseAmountToken(0.025))).wait();
+
+    console.log(`-------------------`);
+    console.log({ transactionHash });
+    console.log(`-------------------`);
+
 }
 
 main().catch((error) => {

@@ -10,7 +10,7 @@ const {
 } = process.env;
 
 async function main() {
-    const address = "0x8a6d05b02e0ad3a200abd14966904f0d8cfe7ea9";
+    const address = "0xfc1cd25eefeafb059fd04b57277a9e5c4b9fbdab";
 
     const nftCt = new Contract(
         address,

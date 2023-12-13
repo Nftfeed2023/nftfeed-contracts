@@ -19,7 +19,7 @@ const config: IEnvConfig = {
   ],
   NETWORK_PROVIDER: {
     URL_RPC: "https://avalanche.drpc.org",
-    URL_SCAN: "https://avascan.info"
+    URL_SCAN: "https://snowtrace.io"
   }
 
 
