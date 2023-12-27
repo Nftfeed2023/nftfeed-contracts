@@ -2,7 +2,7 @@ import "../env-config";
 import { ethers, run } from "hardhat";
 
 import { configEnv } from "./@config";
-import { BigNumber, Contract, Wallet } from "ethers";
+import { BigNumber, Contract, Wallet, providers } from "ethers";
 import { connectWallet, provider, sendMultipleNativeToken, sendMultipleToken } from "./@helpers/tools.helper";
 import { dateStrToSeconds, delayTime, parseAmountToken, stringDateToUTCDate } from "./@helpers/block-chain.helper";
 import { BatchTransferTool, BatchTransferTool__factory, ERC1155__factory, ERC20, ERC20__factory, ERC721, ERC721Enumerable, ERC721Enumerable__factory, ERC721Template, ERC721Template__factory, ERC721__factory, FeedVault, FeedVault__factory, MintNftFactory, MintNftFactoryV2, MintNftFactoryV2__factory, MintNftFactory__factory, StakeMultipleERC721, StakeMultipleERC721__factory, StakeNftAutoApy, StakeNftAutoApy__factory, StakeNftFactory, StakeNftFactory__factory, TokenERC721, TokenERC721__factory } from "../typechain";
@@ -28,22 +28,13 @@ async function main() {
     const output: any = {};
     const [deployer] = await getSigners();
 
-    console.log("Deploying contracts with the account:", deployer.address);
-    const balance = await deployer.getBalance();
-    console.log("Account balance:", formatEther(balance));
+    // console.log("Deploying contracts with the account:", deployer.address);
+    // const balance = await deployer.getBalance();
+    // console.log("Account balance:", formatEther(balance));
 
 
 
 
-
-    const tokenCt = new Contract("0xe24165ba2bE15a27f5569d179C1bB07369Bc903a", MintNftFactoryV2__factory.abi, provider) as MintNftFactoryV2;
-
-
-    const { transactionHash } = await (await tokenCt.connect(deployer).changeRoyaltyFee(parseAmountToken(0.025))).wait();
-
-    console.log(`-------------------`);
-    console.log({ transactionHash });
-    console.log(`-------------------`);
 
 }
 

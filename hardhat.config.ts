@@ -15,7 +15,6 @@ const hexWalletDeployerPrivateKey = WALLET_DEPLOYER_PRIVATEKEY.startsWith("0x") 
 
 
 
-
 const getApiKey = () => {
   if (NODE_ENV === "avaxMainnet") {
     return {
@@ -26,6 +25,17 @@ const getApiKey = () => {
   if (NODE_ENV === "zoraMainnet") {
     return {
       zoraMainnet: "zora"
+    }
+  }
+  if (NODE_ENV === "opBNBTestnet") {
+    return {
+      opBNBTestnet: "8530489dc922448c9204a1f83fb6823c"
+    }
+  }
+
+  if (NODE_ENV === "opBNBMainnet") {
+    return {
+      opBNBMainnet: "8530489dc922448c9204a1f83fb6823c"
     }
   }
 
@@ -158,6 +168,22 @@ const config: HardhatUserConfig = {
     },
 
 
+    opBNBMainnet: {
+      url: "https://opbnb-mainnet-rpc.bnbchain.org",
+      chainId: 204,
+      gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+
+
+    opBNBTestnet: {
+      url: "https://opbnb-testnet-rpc.bnbchain.org",
+      chainId: 5611,
+      gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+
+
 
   },
   solidity: {
@@ -233,7 +259,25 @@ const config: HardhatUserConfig = {
           apiURL: "https://api.routescan.io/v2/network/mainnet/evm/7777777/etherscan",
           browserURL: "https://zora.superscan.network"
         }
-      }
+      },
+
+      {
+        network: "opBNBMainnet",
+        chainId: 204,
+        urls: {
+          apiURL: "https://opbnb-mainnet.nodereal.io/v1/8530489dc922448c9204a1f83fb6823c",
+          browserURL: "https://opbnbscan.com"
+        }
+      },
+
+      {
+        network: "opBNBTestnet",
+        chainId: 5611,
+        urls: {
+          apiURL: "https://open-platform.nodereal.io/8530489dc922448c9204a1f83fb6823c/op-bnb-testnet/contract",
+          browserURL: "https://testnet.opbnbscan.com"
+        }
+      },
     ]
   },
 };

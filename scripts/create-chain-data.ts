@@ -43,59 +43,70 @@ async function main() {
     }
     const data = [
         {
-            "name": "Zora",
-            "chain": "ETH",
+            "name": "opBNB Mainnet",
+            "icon": "bnbchain",
+            "chain": "opBNB",
             "rpc": [
-                "https://rpc.zora.energy/"
+                "https://opbnb-mainnet-rpc.bnbchain.org",
+                "https://opbnb-mainnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3",
+                "wss://opbnb-mainnet.nodereal.io/ws/v1/64a9df0874fb4a93b9d0a3849de012d3",
+                "https://opbnb-mainnet.nodereal.io/v1/e9a36765eb8a40b9bd12e680a1fd2bc5",
+                "wss://opbnb-mainnet.nodereal.io/ws/v1/e9a36765eb8a40b9bd12e680a1fd2bc5",
+                "https://opbnb.publicnode.com",
+                "wss://opbnb.publicnode.com"
             ],
             "faucets": [],
             "nativeCurrency": {
-                "name": "Ether",
-                "symbol": "ETH",
+                "name": "BNB Chain Native Token",
+                "symbol": "BNB",
                 "decimals": 18
             },
-            "icon": "zora",
-            "infoURL": "https://zora.energy",
-            "shortName": "zora",
-            "chainId": 7777777,
-            "networkId": 7777777,
+            "infoURL": "https://opbnb.bnbchain.org/en",
+            "shortName": "obnb",
+            "chainId": 204,
+            "networkId": 204,
+            "slip44": 714,
             "explorers": [
                 {
-                    "name": "Zora Network Explorer",
-                    "url": "https://explorer.zora.energy",
+                    "name": "opbnbscan",
+                    "url": "https://mainnet.opbnbscan.com",
                     "standard": "EIP3091"
                 }
             ]
         },
         {
-            "name": "Avalanche C-Chain",
-            "chain": "AVAX",
-            "icon": "avax",
+            "name": "opBNB Testnet",
+            "chain": "opBNB",
+            "icon": "bnbchain",
             "rpc": [
-                "https://api.avax.network/ext/bc/C/rpc",
-                "https://avalanche-c-chain.publicnode.com",
-                "wss://avalanche-c-chain.publicnode.com"
+                "https://opbnb-testnet-rpc.bnbchain.org",
+                "https://opbnb-testnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3",
+                "wss://opbnb-testnet.nodereal.io/ws/v1/64a9df0874fb4a93b9d0a3849de012d3",
+                "https://opbnb-testnet.nodereal.io/v1/e9a36765eb8a40b9bd12e680a1fd2bc5",
+                "wss://opbnb-testnet.nodereal.io/ws/v1/e9a36765eb8a40b9bd12e680a1fd2bc5"
             ],
-            "features": [
-                {
-                    "name": "EIP1559"
-                }
+            "faucets": [
+                "https://testnet.bnbchain.org/faucet-smart"
             ],
-            "faucets": [],
             "nativeCurrency": {
-                "name": "Avalanche",
-                "symbol": "AVAX",
+                "name": "BNB Chain Native Token",
+                "symbol": "tBNB",
                 "decimals": 18
             },
-            "infoURL": "https://www.avax.network/",
-            "shortName": "avax",
-            "chainId": 43114,
-            "networkId": 43114,
-            "slip44": 9005,
+            "infoURL": "https://opbnb.bnbchain.org/en",
+            "shortName": "obnbt",
+            "chainId": 5611,
+            "networkId": 5611,
+            "slip44": 1,
             "explorers": [
                 {
-                    "name": "snowtrace",
-                    "url": "https://snowtrace.io",
+                    "name": "bscscan-opbnb-testnet",
+                    "url": "https://opbnb-testnet.bscscan.com",
+                    "standard": "EIP3091"
+                },
+                {
+                    "name": "opbnbscan",
+                    "url": "https://opbnbscan.com",
                     "standard": "EIP3091"
                 }
             ]

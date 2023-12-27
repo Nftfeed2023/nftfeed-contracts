@@ -1,3 +1,2 @@
-
-NODE_ENV=zoraMainnet yarn free-mint-factory-v2:deploy;
-NODE_ENV=zoraMainnet yarn free-mint-factory-v2:verify;
+NODE_ENV=opBNBMainnet yarn free-mint-factory-v2:deploy;
+NODE_ENV=opBNBMainnet yarn free-mint-factory-v2:verify;
