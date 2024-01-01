@@ -47,7 +47,9 @@
     "stake-nft-auto-apy:deploy": "hardhat run scripts/stake-nft-auto-apy/deploy.ts",
     "stake-nft-auto-apy:verify": "hardhat run scripts/stake-nft-auto-apy/verify.ts",
     "sharkie-token:deploy": "hardhat run scripts/sharkie-token/deploy.ts",
-    "sharkie-token:verify": "hardhat run scripts/sharkie-token/verify.ts"
+    "sharkie-token:verify": "hardhat run scripts/sharkie-token/verify.ts",
+    "rex-fee-factory:deploy": "hardhat run scripts/rex-fee-factory/deploy.ts",
+    "rex-fee-factory:verify": "hardhat run scripts/rex-fee-factory/verify.ts"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.3",

@@ -1,2 +1,2 @@
-NODE_ENV=opBNBMainnet yarn free-mint-factory-v2:deploy;
-NODE_ENV=opBNBMainnet yarn free-mint-factory-v2:verify;
+NODE_ENV=scrollMainnet yarn rex-fee-factory:deploy;
+NODE_ENV=scrollMainnet yarn rex-fee-factory:verify;
