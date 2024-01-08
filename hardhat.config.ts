@@ -183,6 +183,21 @@ const config: HardhatUserConfig = {
       accounts: [hexWalletDeployerPrivateKey],
     },
 
+    lineaTestnet: {
+      url: "https://rpc.goerli.linea.build",
+      chainId: 59140,
+      // gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+
+    lineaMainnet: {
+      url: "https://rpc.linea.build",
+      chainId: 59144,
+      // gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+
+
 
 
   },

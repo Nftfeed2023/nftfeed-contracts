@@ -39,7 +39,7 @@ contract RexFeeFactory is Ownable, ReentrancyGuard {
         royaltyFee = _royaltyFee;
     }
 
-    function takeFee(
+    function transactionVerification(
         address _nftAddress,
         uint256 _qty
     ) external payable nonReentrant {

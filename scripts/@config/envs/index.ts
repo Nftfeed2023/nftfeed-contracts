@@ -18,3 +18,6 @@ export { default as zoraMainnet } from './zoraMainnet';
 
 export { default as opBNBMainnet } from './opBNBMainnet';
 export { default as opBNBTestnet } from './opBNBTestnet';
+
+export { default as lineaMainnet } from './lineaMainnet';
+export { default as lineaTestnet } from './lineaTestnet';

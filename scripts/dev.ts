@@ -34,23 +34,18 @@ async function main() {
     console.log("Account balance:", formatEther(balance));
 
 
-    const ct = new Contract("0x3e77A158aFbE3a015200cCFcD943b8Fd4E81B6a9", RexFeeFactory__factory.abi, provider) as RexFeeFactory;
-
-    const value = await ct.getFeeByQty(10);
-
-    {
-        const { transactionHash } = await (
-            await (ct.connect(deployer).takeFee("0x3e77A158aFbE3a015200cCFcD943b8Fd4E81B6a9", 10, {
-                value
-            }))
-        ).wait();
-
-        console.log(`-------------------`);
-        console.log({ transactionHash });
-        console.log(`-------------------`);
-    }
+    const ct = new Contract(
+        "0xbcc2e7dde130ef6cb20ad4daa360cfa4e6e2b9ac",
+        MintNftFactoryV2__factory.abi,
+        provider
+    ) as MintNftFactoryV2;
 
 
+    const a = await ct.managers("0x9fea1bf229764b0012cf9e70465f388c3e45a9d3");
+
+    console.log(`-------------------`);
+    console.log({ a });
+    console.log(`-------------------`);
 }
 
 main().catch((error) => {

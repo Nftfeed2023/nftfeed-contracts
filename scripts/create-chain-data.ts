@@ -43,73 +43,105 @@ async function main() {
     }
     const data = [
         {
-            "name": "opBNB Mainnet",
-            "icon": "bnbchain",
-            "chain": "opBNB",
+            "name": "Linea Testnet",
+            "title": "Linea Goerli Testnet",
+            "chain": "ETH",
             "rpc": [
-                "https://opbnb-mainnet-rpc.bnbchain.org",
-                "https://opbnb-mainnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3",
-                "wss://opbnb-mainnet.nodereal.io/ws/v1/64a9df0874fb4a93b9d0a3849de012d3",
-                "https://opbnb-mainnet.nodereal.io/v1/e9a36765eb8a40b9bd12e680a1fd2bc5",
-                "wss://opbnb-mainnet.nodereal.io/ws/v1/e9a36765eb8a40b9bd12e680a1fd2bc5",
-                "https://opbnb.publicnode.com",
-                "wss://opbnb.publicnode.com"
+                "https://rpc.goerli.linea.build",
+                "wss://rpc.goerli.linea.build",
+                "https://linea-goerli.infura.io/v3/${INFURA_API_KEY}",
+                "wss://linea-goerli.infura.io/ws/v3/${INFURA_API_KEY}"
+            ],
+            "faucets": [
+                "https://faucetlink.to/goerli"
+            ],
+            "nativeCurrency": {
+                "name": "Linea Ether",
+                "symbol": "ETH",
+                "decimals": 18
+            },
+            "infoURL": "https://linea.build",
+            "shortName": "linea-testnet",
+            "chainId": 59140,
+            "networkId": 59140,
+            "slip44": 1,
+            "icon": "linea",
+            "parent": {
+                "type": "L2",
+                "chain": "eip155-5",
+                "bridges": [
+                    {
+                        "url": "https://goerli.hop.exchange/#/send?token=ETH&sourceNetwork=ethereum&destNetwork=linea"
+                    }
+                ]
+            },
+            "explorers": [
+                {
+                    "name": "Etherscan",
+                    "url": "https://goerli.lineascan.build",
+                    "standard": "EIP3091",
+                    "icon": "linea"
+                },
+                {
+                    "name": "Blockscout",
+                    "url": "https://explorer.goerli.linea.build",
+                    "standard": "EIP3091",
+                    "icon": "linea"
+                }
+            ],
+            "status": "active"
+        },
+        {
+            "name": "Linea",
+            "title": "Linea Mainnet",
+            "chain": "ETH",
+            "rpc": [
+                "https://rpc.linea.build",
+                "wss://rpc.linea.build",
+                "https://linea-mainnet.infura.io/v3/${INFURA_API_KEY}",
+                "wss://linea-mainnet.infura.io/ws/v3/${INFURA_API_KEY}"
             ],
             "faucets": [],
             "nativeCurrency": {
-                "name": "BNB Chain Native Token",
-                "symbol": "BNB",
+                "name": "Linea Ether",
+                "symbol": "ETH",
                 "decimals": 18
             },
-            "infoURL": "https://opbnb.bnbchain.org/en",
-            "shortName": "obnb",
-            "chainId": 204,
-            "networkId": 204,
-            "slip44": 714,
-            "explorers": [
-                {
-                    "name": "opbnbscan",
-                    "url": "https://mainnet.opbnbscan.com",
-                    "standard": "EIP3091"
-                }
-            ]
-        },
-        {
-            "name": "opBNB Testnet",
-            "chain": "opBNB",
-            "icon": "bnbchain",
-            "rpc": [
-                "https://opbnb-testnet-rpc.bnbchain.org",
-                "https://opbnb-testnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3",
-                "wss://opbnb-testnet.nodereal.io/ws/v1/64a9df0874fb4a93b9d0a3849de012d3",
-                "https://opbnb-testnet.nodereal.io/v1/e9a36765eb8a40b9bd12e680a1fd2bc5",
-                "wss://opbnb-testnet.nodereal.io/ws/v1/e9a36765eb8a40b9bd12e680a1fd2bc5"
-            ],
-            "faucets": [
-                "https://testnet.bnbchain.org/faucet-smart"
-            ],
-            "nativeCurrency": {
-                "name": "BNB Chain Native Token",
-                "symbol": "tBNB",
-                "decimals": 18
+            "infoURL": "https://linea.build",
+            "shortName": "linea",
+            "chainId": 59144,
+            "networkId": 59144,
+            "icon": "linea",
+            "parent": {
+                "type": "L2",
+                "chain": "eip155-1",
+                "bridges": [
+                    {
+                        "url": "https://bridge.linea.build"
+                    }
+                ]
             },
-            "infoURL": "https://opbnb.bnbchain.org/en",
-            "shortName": "obnbt",
-            "chainId": 5611,
-            "networkId": 5611,
-            "slip44": 1,
             "explorers": [
                 {
-                    "name": "bscscan-opbnb-testnet",
-                    "url": "https://opbnb-testnet.bscscan.com",
-                    "standard": "EIP3091"
+                    "name": "Etherscan",
+                    "url": "https://lineascan.build",
+                    "standard": "EIP3091",
+                    "icon": "linea"
                 },
                 {
-                    "name": "opbnbscan",
-                    "url": "https://opbnbscan.com",
-                    "standard": "EIP3091"
+                    "name": "Blockscout",
+                    "url": "https://explorer.linea.build",
+                    "standard": "EIP3091",
+                    "icon": "linea"
+                },
+                {
+                    "name": "L2scan",
+                    "url": "https://linea.l2scan.co",
+                    "standard": "EIP3091",
+                    "icon": "linea"
                 }
-            ]
+            ],
+            "status": "active"
         },
     ]
 

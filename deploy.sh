@@ -1,5 +1,5 @@
-# NODE_ENV=scrollMainnet yarn rex-fee-factory:deploy;
-# NODE_ENV=scrollMainnet yarn rex-fee-factory:verify;
+# NODE_ENV=opBNBMainnet yarn rex-fee-factory:deploy;
+# NODE_ENV=opBNBMainnet yarn rex-fee-factory:verify;
 
-NODE_ENV=bscMainnet yarn free-mint-factory-v2:deploy;
-NODE_ENV=bscMainnet yarn free-mint-factory-v2:verify;
+NODE_ENV=lineaMainnet yarn free-mint-factory-v2:deploy;
+NODE_ENV=lineaMainnet yarn free-mint-factory-v2:verify;
