@@ -293,6 +293,14 @@ const config: HardhatUserConfig = {
           browserURL: "https://testnet.opbnbscan.com"
         }
       },
+      {
+        network: "lineaMainnet",
+        chainId: 59144,
+        urls: {
+          apiURL: "https://api.lineascan.build/api",
+          browserURL: "https://lineascan.build/"
+        }
+      }
     ]
   },
 };
