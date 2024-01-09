@@ -6,12 +6,12 @@ import { ethers } from "hardhat";
 
 const {
     NODE_ENV = "bscTestnet",
-    REX_ROYALTY_ADDRESS = ""
+    FEE_ADDRESS = ""
 } = process.env;
 
 const { NETWORK_PROVIDER, TOKEN_ADDRESS, DEX_CONTRACT } = configEnv();
 
-const royaltyAddress = REX_ROYALTY_ADDRESS.trim();
+const royaltyAddress = FEE_ADDRESS.trim();
 const mapRoyaltyFee = {
     ["opMainnet"]: parseAmountToken('0.000021'),
     ["opBNBMainnet"]: parseAmountToken('0.00016'),
