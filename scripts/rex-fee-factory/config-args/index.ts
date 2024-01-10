@@ -16,7 +16,6 @@ const mapRoyaltyFee = {
     ["opMainnet"]: parseAmountToken('0.000021'),
     ["opBNBMainnet"]: parseAmountToken('0.00016'),
     ["bscMainnet"]: parseAmountToken('0.00016'),
-
 }
 
 
