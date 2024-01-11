@@ -76,13 +76,13 @@ const config: HardhatUserConfig = {
     baseTestnet: {
       url: "https://base-goerli.public.blastapi.io/",
       chainId: 84531,
-      gasPrice: 20000000000,
+      // gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
     baseMainnet: {
       url: "https://mainnet.base.org/",
       chainId: 8453,
-      gasPrice: 20000000000,
+      // gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
     opTestnet: {
