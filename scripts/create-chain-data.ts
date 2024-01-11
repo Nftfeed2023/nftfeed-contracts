@@ -43,105 +43,112 @@ async function main() {
     }
     const data = [
         {
-            "name": "Linea Testnet",
-            "title": "Linea Goerli Testnet",
+            "name": "Ethereum Mainnet",
             "chain": "ETH",
+            "icon": "ethereum",
             "rpc": [
-                "https://rpc.goerli.linea.build",
-                "wss://rpc.goerli.linea.build",
-                "https://linea-goerli.infura.io/v3/${INFURA_API_KEY}",
-                "wss://linea-goerli.infura.io/ws/v3/${INFURA_API_KEY}"
+                "https://mainnet.infura.io/v3/${INFURA_API_KEY}",
+                "wss://mainnet.infura.io/ws/v3/${INFURA_API_KEY}",
+                "https://api.mycryptoapi.com/eth",
+                "https://cloudflare-eth.com",
+                "https://ethereum.publicnode.com",
+                "wss://ethereum.publicnode.com",
+                "https://mainnet.gateway.tenderly.co",
+                "wss://mainnet.gateway.tenderly.co",
+                "https://rpc.blocknative.com/boost",
+                "https://rpc.flashbots.net",
+                "https://rpc.flashbots.net/fast",
+                "https://rpc.mevblocker.io",
+                "https://rpc.mevblocker.io/fast",
+                "https://rpc.mevblocker.io/noreverts",
+                "https://rpc.mevblocker.io/fullprivacy"
             ],
-            "faucets": [
-                "https://faucetlink.to/goerli"
-            ],
-            "nativeCurrency": {
-                "name": "Linea Ether",
-                "symbol": "ETH",
-                "decimals": 18
-            },
-            "infoURL": "https://linea.build",
-            "shortName": "linea-testnet",
-            "chainId": 59140,
-            "networkId": 59140,
-            "slip44": 1,
-            "icon": "linea",
-            "parent": {
-                "type": "L2",
-                "chain": "eip155-5",
-                "bridges": [
-                    {
-                        "url": "https://goerli.hop.exchange/#/send?token=ETH&sourceNetwork=ethereum&destNetwork=linea"
-                    }
-                ]
-            },
-            "explorers": [
+            "features": [
                 {
-                    "name": "Etherscan",
-                    "url": "https://goerli.lineascan.build",
-                    "standard": "EIP3091",
-                    "icon": "linea"
+                    "name": "EIP155"
                 },
                 {
-                    "name": "Blockscout",
-                    "url": "https://explorer.goerli.linea.build",
-                    "standard": "EIP3091",
-                    "icon": "linea"
+                    "name": "EIP1559"
                 }
-            ],
-            "status": "active"
-        },
-        {
-            "name": "Linea",
-            "title": "Linea Mainnet",
-            "chain": "ETH",
-            "rpc": [
-                "https://rpc.linea.build",
-                "wss://rpc.linea.build",
-                "https://linea-mainnet.infura.io/v3/${INFURA_API_KEY}",
-                "wss://linea-mainnet.infura.io/ws/v3/${INFURA_API_KEY}"
             ],
             "faucets": [],
             "nativeCurrency": {
-                "name": "Linea Ether",
+                "name": "Ether",
                 "symbol": "ETH",
                 "decimals": 18
             },
-            "infoURL": "https://linea.build",
-            "shortName": "linea",
-            "chainId": 59144,
-            "networkId": 59144,
-            "icon": "linea",
-            "parent": {
-                "type": "L2",
-                "chain": "eip155-1",
-                "bridges": [
-                    {
-                        "url": "https://bridge.linea.build"
-                    }
-                ]
+            "infoURL": "https://ethereum.org",
+            "shortName": "eth",
+            "chainId": 1,
+            "networkId": 1,
+            "slip44": 60,
+            "ens": {
+                "registry": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
             },
             "explorers": [
                 {
-                    "name": "Etherscan",
-                    "url": "https://lineascan.build",
-                    "standard": "EIP3091",
-                    "icon": "linea"
+                    "name": "etherscan",
+                    "url": "https://etherscan.io",
+                    "standard": "EIP3091"
                 },
                 {
-                    "name": "Blockscout",
-                    "url": "https://explorer.linea.build",
-                    "standard": "EIP3091",
-                    "icon": "linea"
+                    "name": "blockscout",
+                    "url": "https://eth.blockscout.com",
+                    "icon": "blockscout",
+                    "standard": "EIP3091"
                 },
                 {
-                    "name": "L2scan",
-                    "url": "https://linea.l2scan.co",
-                    "standard": "EIP3091",
-                    "icon": "linea"
+                    "name": "dexguru",
+                    "url": "https://ethereum.dex.guru",
+                    "icon": "dexguru",
+                    "standard": "EIP3091"
                 }
+            ]
+        },
+        {
+            "name": "Goerli",
+            "title": "Ethereum Testnet Goerli",
+            "chain": "ETH",
+            "rpc": [
+                "https://goerli.infura.io/v3/${INFURA_API_KEY}",
+                "wss://goerli.infura.io/v3/${INFURA_API_KEY}",
+                "https://rpc.goerli.mudit.blog/",
+                "https://ethereum-goerli.publicnode.com",
+                "wss://ethereum-goerli.publicnode.com",
+                "https://goerli.gateway.tenderly.co",
+                "wss://goerli.gateway.tenderly.co"
             ],
-            "status": "active"
+            "faucets": [
+                "http://fauceth.komputing.org?chain=5&address=${ADDRESS}",
+                "https://goerli-faucet.slock.it?address=${ADDRESS}",
+                "https://faucet.goerli.mudit.blog"
+            ],
+            "nativeCurrency": {
+                "name": "Goerli Ether",
+                "symbol": "ETH",
+                "decimals": 18
+            },
+            "infoURL": "https://goerli.net/#about",
+            "shortName": "gor",
+            "chainId": 5,
+            "networkId": 5,
+            "slip44": 1,
+            "ens": {
+                "registry": "0x112234455c3a32fd11230c42e7bccd4a84e02010"
+            },
+            "explorers": [
+                {
+                    "name": "etherscan-goerli",
+                    "url": "https://goerli.etherscan.io",
+                    "standard": "EIP3091"
+                },
+                {
+                    "name": "blockscout-goerli",
+                    "url": "https://eth-goerli.blockscout.com",
+                    "icon": "blockscout",
+                    "standard": "EIP3091"
+                }
+            ]
         },
     ]
 

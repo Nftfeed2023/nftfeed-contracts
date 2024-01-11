@@ -198,6 +198,20 @@ const config: HardhatUserConfig = {
     },
 
 
+    ethTestnet: {
+      // url: "https://goerli.optimism.io/",
+      url: "https://ethereum-goerli.publicnode.com",
+      chainId: 5,
+      // gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+    ethMainnet: {
+      url: "https://ethereum.publicnode.com",
+      chainId: 1,
+      //   gasPrice: 20000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+
 
 
   },

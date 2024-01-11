@@ -21,3 +21,7 @@ export { default as opBNBTestnet } from './opBNBTestnet';
 
 export { default as lineaMainnet } from './lineaMainnet';
 export { default as lineaTestnet } from './lineaTestnet';
+
+
+export { default as ethMainnet } from './ethMainnet';
+export { default as ethTestnet } from './ethTestnet';
