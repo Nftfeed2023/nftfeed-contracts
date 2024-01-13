@@ -13,13 +13,13 @@ const { NETWORK_PROVIDER, TOKEN_ADDRESS, DEX_CONTRACT } = configEnv();
 
 const royaltyAddress = FEE_ADDRESS.trim();
 const mapRoyaltyFee = {
-    ["opMainnet"]: parseAmountToken('0.000021'),
-    ["opBNBMainnet"]: parseAmountToken('0.00016'),
-    ["bscMainnet"]: parseAmountToken('0.00016'),
+    ["opMainnet"]: parseAmountToken('0.00004'),
+    ["opBNBMainnet"]: parseAmountToken('0.00032'),
+    ["bscMainnet"]: parseAmountToken('0.00032'),
 }
 
 
-const royaltyFee = mapRoyaltyFee[NODE_ENV] || parseAmountToken('0.000021');
+const royaltyFee = mapRoyaltyFee[NODE_ENV] || parseAmountToken('0.00004');
 
 export default {
     NODE_ENV,
