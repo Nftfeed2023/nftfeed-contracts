@@ -89,13 +89,13 @@ const config: HardhatUserConfig = {
       // url: "https://goerli.optimism.io/",
       url: "https://optimism-goerli.public.blastapi.io/",
       chainId: 420,
-      gasPrice: 20000000000,
+      // gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
     opMainnet: {
       url: "https://mainnet.optimism.io/",
       chainId: 10,
-      gasPrice: 20000000000,
+      // gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
     zetaTestnet: {
@@ -211,6 +211,17 @@ const config: HardhatUserConfig = {
       //   gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
+
+    mantaMainnet: {
+      url: 'https://pacific-rpc.manta.network/http',
+      chainId: 169,
+      accounts: [hexWalletDeployerPrivateKey]
+    },
+    mantaTestnet: {
+      url: 'https://manta-testnet.calderachain.xyz/http',
+      chainId: 3441005,
+      accounts: [hexWalletDeployerPrivateKey]
+    }
 
 
 

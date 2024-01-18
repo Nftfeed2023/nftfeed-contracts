@@ -10,6 +10,7 @@ import { dir } from "console";
 import { writeFileSync } from "fs";
 import { join } from "path";
 import { isAddress } from "ethers/lib/utils";
+import axios from "axios";
 
 const { utils, constants, getSigners, getContractFactory } = ethers;
 const { formatEther } = utils;
@@ -23,8 +24,88 @@ const { TOKEN_ADDRESS, NETWORK_PROVIDER } = configEnv();
 const { URL_SCAN } = NETWORK_PROVIDER;
 
 
+const chainItemExample = {
+    "name": "Ethereum Mainnet",
+    "chain": "ETH",
+    "icon": "ethereum",
+    "rpc": [
+        "https://mainnet.infura.io/v3/${INFURA_API_KEY}",
+        "wss://mainnet.infura.io/ws/v3/${INFURA_API_KEY}",
+        "https://api.mycryptoapi.com/eth",
+        "https://cloudflare-eth.com",
+        "https://ethereum.publicnode.com",
+        "wss://ethereum.publicnode.com",
+        "https://mainnet.gateway.tenderly.co",
+        "wss://mainnet.gateway.tenderly.co",
+        "https://rpc.blocknative.com/boost",
+        "https://rpc.flashbots.net",
+        "https://rpc.flashbots.net/fast",
+        "https://rpc.mevblocker.io",
+        "https://rpc.mevblocker.io/fast",
+        "https://rpc.mevblocker.io/noreverts",
+        "https://rpc.mevblocker.io/fullprivacy"
+    ],
+    "features": [
+        {
+            "name": "EIP155"
+        },
+        {
+            "name": "EIP1559"
+        }
+    ],
+    "faucets": [],
+    "nativeCurrency": {
+        "name": "Ether",
+        "symbol": "ETH",
+        "decimals": 18
+    },
+    "infoURL": "https://ethereum.org",
+    "shortName": "eth",
+    "chainId": 1,
+    "networkId": 1,
+    "slip44": 60,
+    "ens": {
+        "registry": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+    },
+    "explorers": [
+        {
+            "name": "etherscan",
+            "url": "https://etherscan.io",
+            "standard": "EIP3091"
+        },
+        {
+            "name": "blockscout",
+            "url": "https://eth.blockscout.com",
+            "icon": "blockscout",
+            "standard": "EIP3091"
+        },
+        {
+            "name": "dexguru",
+            "url": "https://ethereum.dex.guru",
+            "icon": "dexguru",
+            "standard": "EIP3091"
+        }
+    ]
+}
+type ChainItem = typeof chainItemExample;
 async function main() {
 
+    const callApi = async () => {
+
+        const config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'https://chainid.network/chains.json',
+            headers: {}
+        } as any;
+
+        const data = await axios.request(config)
+            .then((response) => {
+                return response.data;
+            })
+        return data as ChainItem[];
+
+    }
     interface IEvm {
         chainId: number
         chainName: string
@@ -41,116 +122,23 @@ async function main() {
         symbol: string
         decimals: number
     }
-    const data = [
+
+    const allChain = await callApi();
+
+
+    const chainsFilter = [
+
         {
-            "name": "Ethereum Mainnet",
-            "chain": "ETH",
-            "icon": "ethereum",
-            "rpc": [
-                "https://mainnet.infura.io/v3/${INFURA_API_KEY}",
-                "wss://mainnet.infura.io/ws/v3/${INFURA_API_KEY}",
-                "https://api.mycryptoapi.com/eth",
-                "https://cloudflare-eth.com",
-                "https://ethereum.publicnode.com",
-                "wss://ethereum.publicnode.com",
-                "https://mainnet.gateway.tenderly.co",
-                "wss://mainnet.gateway.tenderly.co",
-                "https://rpc.blocknative.com/boost",
-                "https://rpc.flashbots.net",
-                "https://rpc.flashbots.net/fast",
-                "https://rpc.mevblocker.io",
-                "https://rpc.mevblocker.io/fast",
-                "https://rpc.mevblocker.io/noreverts",
-                "https://rpc.mevblocker.io/fullprivacy"
-            ],
-            "features": [
-                {
-                    "name": "EIP155"
-                },
-                {
-                    "name": "EIP1559"
-                }
-            ],
-            "faucets": [],
-            "nativeCurrency": {
-                "name": "Ether",
-                "symbol": "ETH",
-                "decimals": 18
-            },
-            "infoURL": "https://ethereum.org",
-            "shortName": "eth",
-            "chainId": 1,
-            "networkId": 1,
-            "slip44": 60,
-            "ens": {
-                "registry": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
-            },
-            "explorers": [
-                {
-                    "name": "etherscan",
-                    "url": "https://etherscan.io",
-                    "standard": "EIP3091"
-                },
-                {
-                    "name": "blockscout",
-                    "url": "https://eth.blockscout.com",
-                    "icon": "blockscout",
-                    "standard": "EIP3091"
-                },
-                {
-                    "name": "dexguru",
-                    "url": "https://ethereum.dex.guru",
-                    "icon": "dexguru",
-                    "standard": "EIP3091"
-                }
-            ]
+            chainId: 169,
+            chainName: "mantaMainnet"
         },
         {
-            "name": "Goerli",
-            "title": "Ethereum Testnet Goerli",
-            "chain": "ETH",
-            "rpc": [
-                "https://goerli.infura.io/v3/${INFURA_API_KEY}",
-                "wss://goerli.infura.io/v3/${INFURA_API_KEY}",
-                "https://rpc.goerli.mudit.blog/",
-                "https://ethereum-goerli.publicnode.com",
-                "wss://ethereum-goerli.publicnode.com",
-                "https://goerli.gateway.tenderly.co",
-                "wss://goerli.gateway.tenderly.co"
-            ],
-            "faucets": [
-                "http://fauceth.komputing.org?chain=5&address=${ADDRESS}",
-                "https://goerli-faucet.slock.it?address=${ADDRESS}",
-                "https://faucet.goerli.mudit.blog"
-            ],
-            "nativeCurrency": {
-                "name": "Goerli Ether",
-                "symbol": "ETH",
-                "decimals": 18
-            },
-            "infoURL": "https://goerli.net/#about",
-            "shortName": "gor",
-            "chainId": 5,
-            "networkId": 5,
-            "slip44": 1,
-            "ens": {
-                "registry": "0x112234455c3a32fd11230c42e7bccd4a84e02010"
-            },
-            "explorers": [
-                {
-                    "name": "etherscan-goerli",
-                    "url": "https://goerli.etherscan.io",
-                    "standard": "EIP3091"
-                },
-                {
-                    "name": "blockscout-goerli",
-                    "url": "https://eth-goerli.blockscout.com",
-                    "icon": "blockscout",
-                    "standard": "EIP3091"
-                }
-            ]
-        },
-    ]
+            chainId: 3441005,
+            chainName: "mantaTestnet"
+        }
+    ];
+    const chainIds = chainsFilter.map(item => item.chainId);
+    const data = allChain.filter(v => chainIds.includes(v.chainId))
 
     const outputs = data.map(v => {
         return {
@@ -165,14 +153,53 @@ async function main() {
     })
 
 
+
+
+    const mapChains = outputs.byMap(["chainId"]);
+
     console.log(`-------------------`);
-    console.log(outputs.byMap(["chainId"]));
+    console.log(mapChains);
     console.log(`-------------------`);
 
 
+    const hardhatConfig = chainsFilter.reduce((result, item,) => {
+        const { chainId, chainName } = item;
+        return {
+            ...result,
+            [chainName]: {
+                url: mapChains[`${chainId}`].rpcUrls[0],
+                chainId,
+                // gasPrice: 20000000000,
+                accounts: "[hexWalletDeployerPrivateKey]",
+            }
+        }
+    }, {});
+
+    const networkProvider = chainsFilter.reduce((result, item,) => {
+        const { chainId, chainName } = item;
+        return {
+            ...result,
+            [chainName]: {
+                NETWORK_PROVIDER: {
+                    URL_RPC: mapChains[`${chainId}`].rpcUrls[0],
+                    URL_SCAN: mapChains[`${chainId}`].blockExplorerUrls[0],
+                }
+            }
+        }
+    }, {});
 
 
 
+
+
+
+    console.log(`-------------------`);
+    console.log(hardhatConfig);
+    console.log(`-------------------`);
+
+    console.log(`-------------------`);
+    console.log(networkProvider);
+    console.log(`-------------------`);
 
 
 }

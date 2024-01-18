@@ -34,18 +34,7 @@ async function main() {
     console.log("Account balance:", formatEther(balance));
 
 
-    const ct = new Contract(
-        "0xbcc2e7dde130ef6cb20ad4daa360cfa4e6e2b9ac",
-        MintNftFactoryV2__factory.abi,
-        provider
-    ) as MintNftFactoryV2;
 
-
-    const a = await ct.managers("0x9fea1bf229764b0012cf9e70465f388c3e45a9d3");
-
-    console.log(`-------------------`);
-    console.log({ a });
-    console.log(`-------------------`);
 }
 
 main().catch((error) => {

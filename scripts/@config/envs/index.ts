@@ -25,3 +25,7 @@ export { default as lineaTestnet } from './lineaTestnet';
 
 export { default as ethMainnet } from './ethMainnet';
 export { default as ethTestnet } from './ethTestnet';
+
+
+export { default as mantaMainnet } from './mantaMainnet';
+export { default as mantaTestnet } from './mantaTestnet';
