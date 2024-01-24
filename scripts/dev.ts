@@ -33,7 +33,22 @@ async function main() {
     const balance = await deployer.getBalance();
     console.log("Account balance:", formatEther(balance));
 
+    const nftCt = new Contract("0xe1873e4eb7a85cb5432f14482e01de0c53d505ca", ERC721Template__factory.abi, provider) as ERC721Template;
 
+
+    const tokenUri = await nftCt.tokenURI(1)
+    const owner = await nftCt.owner();
+
+    console.log(`-------------------`);
+    console.log({
+        tokenUri,
+        owner
+    });
+    console.log(`-------------------`);
+
+    // const baseUrl = `${oldBaseUrl}/169`
+
+    // const {} = await ( await nftCt.connect(deployer).setBaseUrl(baseUrl))
 
 }
 

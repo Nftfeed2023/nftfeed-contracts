@@ -3,7 +3,7 @@ import { ethers } from "hardhat";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { join } from "path";
 import configArgs from "./config-args";
-import { delayTime } from "../@helpers/block-chain.helper";
+import { delayTime, formatAmountToken } from "../@helpers/block-chain.helper";
 
 
 const { utils, getSigners, getContractFactory, provider } = ethers;
@@ -23,12 +23,18 @@ async function main() {
     })
 
     const tokenFactory = await getContractFactory("MintNftFactoryV2");
+    const deploymentTransaction = tokenFactory.getDeployTransaction(royaltyAddress,
+        royaltyFee);
 
+    const gasEstimation = await ethers.provider.estimateGas(deploymentTransaction);
+    console.log("Estimated Gas for Deployment:", formatEther(gasEstimation));
 
     const params = {
 
     }
-    if (NODE_ENV === 'maticMainnet') {
+
+    const specialChains = ["maticMainnet"]
+    if (NODE_ENV && specialChains.includes(NODE_ENV)) {
 
         const estimateGas = await provider.getGasPrice();
         const tokenCt = await (tokenFactory as any).deploy(
@@ -39,6 +45,8 @@ async function main() {
                 maxPriorityFeePerGas: estimateGas.toNumber() + 20000000000
             }
         );
+
+
         await tokenCt.deployed();
 
 
@@ -78,11 +86,12 @@ async function main() {
 
     }
 
+
+
     const tokenCt = await tokenFactory.deploy(
         royaltyAddress,
         royaltyFee,
     );
-
     await tokenCt.deployed();
 
 

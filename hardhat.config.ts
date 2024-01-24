@@ -110,13 +110,13 @@ const config: HardhatUserConfig = {
       // url: "https://goerli.optimism.io/",
       url: "https://testnet.era.zksync.dev",
       chainId: 280,
-      gasPrice: 20000000000,
+      // gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
     zksyncMainnet: {
       url: "https://mainnet.era.zksync.io",
       chainId: 324,
-      gasPrice: 20000000000,
+      //  gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
 
@@ -213,8 +213,9 @@ const config: HardhatUserConfig = {
     },
 
     mantaMainnet: {
-      url: 'https://pacific-rpc.manta.network/http',
+      url: 'https://1rpc.io/manta',
       chainId: 169,
+      // gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey]
     },
     mantaTestnet: {
