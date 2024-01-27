@@ -19,7 +19,7 @@ contract TokenFactoryV1 is Ownable, ReentrancyGuard {
 
     mapping(address => bool) public admins;
 
-    event DeployToken(uint256 tokenIdex, address tokenAddress, address owner);
+    event DeployToken(string name, string symbol, uint256 totalSupply);
 
     modifier onlyAdmin() {
         require(admins[_msgSender()], "Admin: caller is not the admin");
@@ -57,8 +57,8 @@ contract TokenFactoryV1 is Ownable, ReentrancyGuard {
             _totalSupply,
             msg.sender
         );
-        emit DeployToken(totalToken, address(token), msg.sender);
         payable(royaltyAddress).transfer(creationFee);
+        emit DeployToken(_name, _symbol, _totalSupply);
         return (address(token));
     }
 
