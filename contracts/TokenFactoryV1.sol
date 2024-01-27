@@ -13,7 +13,7 @@ contract TokenFactoryV1 is Ownable, ReentrancyGuard {
     // address fee
     address public royaltyAddress;
     // value fee to Native token
-    uint256 public royaltyFee;
+    uint256 public creationFee;
 
     uint256 public totalToken;
 
@@ -26,13 +26,13 @@ contract TokenFactoryV1 is Ownable, ReentrancyGuard {
         _;
     }
 
-    constructor(address _royaltyAddress, uint256 _royaltyFee) {
+    constructor(address _royaltyAddress, uint256 _creationFee) {
         require(
             _royaltyAddress != address(0),
             "Royalty Address is Zero address"
         );
         royaltyAddress = _royaltyAddress;
-        royaltyFee = _royaltyFee;
+        creationFee = _creationFee;
         admins[_msgSender()] = true;
     }
 
@@ -48,7 +48,7 @@ contract TokenFactoryV1 is Ownable, ReentrancyGuard {
         string memory _name,
         string memory _symbol,
         uint256 _totalSupply
-    ) external payable nonReentrant {
+    ) external payable nonReentrant returns (address tokenAddress) {
         // create token
         totalToken++;
         ERC20Template token = new ERC20Template(
@@ -58,7 +58,8 @@ contract TokenFactoryV1 is Ownable, ReentrancyGuard {
             msg.sender
         );
         emit DeployToken(totalToken, address(token), msg.sender);
-        payable(royaltyAddress).transfer(royaltyFee);
+        payable(royaltyAddress).transfer(creationFee);
+        return (address(token));
     }
 
     function changeRoyaltyAddress(
@@ -67,9 +68,9 @@ contract TokenFactoryV1 is Ownable, ReentrancyGuard {
         royaltyAddress = _royaltyAddress;
     }
 
-    function changeRoyaltyFee(
-        uint256 _royaltyFee
+    function changeCreationFee(
+        uint256 _creationFee
     ) external onlyAdmin nonReentrant {
-        royaltyFee = _royaltyFee;
+        creationFee = _creationFee;
     }
 }

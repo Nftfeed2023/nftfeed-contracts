@@ -99,7 +99,12 @@ contract PresaleFairLaunchFactoryV1 is Ownable, ReentrancyGuard {
         uint256 _softCap,
         uint256 _maxContribution,
         address _dexRouter
-    ) external nonReentrant returns (uint256 poolId, address poolAddress) {
+    )
+        external
+        payable
+        nonReentrant
+        returns (uint256 poolId, address poolAddress)
+    {
         totalPool++;
         uint256 tokensForLiquidity = calculateTokensForLiquidity(
             _percentForLiquidity,

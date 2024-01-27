@@ -9,7 +9,7 @@ import { delayTime, formatAmountToken } from "../@helpers/block-chain.helper";
 const { utils, getSigners, getContractFactory, provider } = ethers;
 const { formatEther } = utils;
 
-const { NODE_ENV, NETWORK_PROVIDER, royaltyAddress, royaltyFee } = configArgs;
+const { NODE_ENV, NETWORK_PROVIDER, royaltyAddress, creationFee } = configArgs;
 
 
 async function main() {
@@ -23,7 +23,7 @@ async function main() {
     })
 
     const tokenFactory = await getContractFactory("TokenFactoryV1");
-    const deploymentTransaction = tokenFactory.getDeployTransaction(royaltyAddress, royaltyFee);
+    const deploymentTransaction = tokenFactory.getDeployTransaction(royaltyAddress, creationFee);
 
     const gasEstimation = await ethers.provider.estimateGas(deploymentTransaction);
     console.log("Estimated Gas for Deployment:", formatEther(gasEstimation));
@@ -38,7 +38,7 @@ async function main() {
         const estimateGas = await provider.getGasPrice();
         const tokenCt = await (tokenFactory as any).deploy(
             royaltyAddress,
-            royaltyFee,
+            creationFee,
             {
                 maxFeePerGas: estimateGas.toNumber() + 50000000000,
                 maxPriorityFeePerGas: estimateGas.toNumber() + 20000000000
@@ -60,7 +60,7 @@ async function main() {
                 address: tokenCt.address,
                 constructorArguments: [
                     royaltyAddress,
-                    royaltyFee
+                    creationFee
                 ],
                 contract: "contracts/TokenFactoryV1.sol:TokenFactoryV1"
             }
@@ -89,7 +89,7 @@ async function main() {
 
     const tokenCt = await tokenFactory.deploy(
         royaltyAddress,
-        royaltyFee,
+        creationFee,
     );
     await tokenCt.deployed();
 
@@ -105,7 +105,7 @@ async function main() {
             address: tokenCt.address,
             constructorArguments: [
                 royaltyAddress,
-                royaltyFee
+                creationFee
             ],
             contract: "contracts/TokenFactoryV1.sol:TokenFactoryV1"
         }

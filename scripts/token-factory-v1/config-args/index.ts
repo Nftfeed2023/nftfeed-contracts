@@ -13,12 +13,12 @@ const { NETWORK_PROVIDER, TOKEN_ADDRESS, DEX_CONTRACT } = configEnv();
 
 
 const defaultFee = parseAmountToken(0.002)
-const mapRoyaltyFee = {
+const mapCreationFee = {
     ["zetaMainnet"]: parseAmountToken(10),
 }
 
 const royaltyAddress = ROYALTY_ADDRESS.trim();
-const royaltyFee = mapRoyaltyFee[NODE_ENV] || defaultFee;
+const creationFee = mapCreationFee[NODE_ENV] || defaultFee;
 
 export default {
     NODE_ENV,
@@ -26,6 +26,6 @@ export default {
     TOKEN_ADDRESS,
     DEX_CONTRACT,
     royaltyAddress,
-    royaltyFee,
+    creationFee,
 }
 
