@@ -21,7 +21,6 @@ contract PresaleFairLaunchFactoryV1 is Ownable, ReentrancyGuard {
     uint256 public creationFee;
     // value fee to Native token
     uint256 public percentFeeRaised;
-
     // % fee Raised
     uint256 public percentRefund;
 
@@ -32,19 +31,11 @@ contract PresaleFairLaunchFactoryV1 is Ownable, ReentrancyGuard {
     // poolId => pool Address
     mapping(uint256 => address) public containerPools;
 
-    // pool address => address manager
-    mapping(address => address) public managers;
-
     // pool address => address token
     mapping(address => address) public tokens;
 
     // pool address => address dexRouter
     mapping(address => address) public dexRouters;
-
-    // pool address => start end
-    mapping(address => uint256) public startTimes;
-    // pool address => time end
-    mapping(address => uint256) public endTimes;
 
     event DeployPool(uint256 poolId, address poolAddress, address manager);
 
@@ -53,13 +44,28 @@ contract PresaleFairLaunchFactoryV1 is Ownable, ReentrancyGuard {
         _;
     }
 
-    constructor(address _royaltyAddress, uint256 _creationFee) {
+    constructor(
+        address _royaltyAddress,
+        uint256 _creationFee,
+        uint256 _percentFeeRaised,
+        uint256 _percentRefund
+    ) {
         require(
             _royaltyAddress != address(0),
             "Royalty Address is Zero address"
         );
+        require(
+            _percentFeeRaised <= MAX_PERCENT_FEE_SYSTEM,
+            "Percent fee raised over"
+        );
+        require(
+            _percentRefund <= MAX_PERCENT_FEE_SYSTEM,
+            "Percent fee refund over"
+        );
         royaltyAddress = _royaltyAddress;
         creationFee = _creationFee;
+        percentFeeRaised = _percentFeeRaised;
+        percentRefund = _percentRefund;
         admins[_msgSender()] = true;
     }
 
@@ -92,7 +98,6 @@ contract PresaleFairLaunchFactoryV1 is Ownable, ReentrancyGuard {
         uint256 _endTime,
         uint256 _softCap,
         uint256 _maxContribution,
-        address _manager,
         address _dexRouter
     ) external nonReentrant returns (uint256 poolId, address poolAddress) {
         totalPool++;
@@ -102,7 +107,7 @@ contract PresaleFairLaunchFactoryV1 is Ownable, ReentrancyGuard {
         );
         payable(royaltyAddress).transfer(creationFee);
         IERC20(_tokenAddress).safeTransferFrom(
-            address(msg.sender),
+            address(_msgSender()),
             address(this),
             tokensForLiquidity + _tokensForPresale
         );
@@ -117,9 +122,12 @@ contract PresaleFairLaunchFactoryV1 is Ownable, ReentrancyGuard {
             _endTime,
             _softCap,
             _maxContribution,
-            _manager,
+            _msgSender(),
             _dexRouter
         );
+        containerPools[totalPool] = address(pool);
+        emit DeployPool(totalPool, address(pool), _msgSender());
+        return (totalPool, address(pool));
     }
 
     function changeRoyaltyAddress(

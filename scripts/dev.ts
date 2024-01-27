@@ -38,19 +38,6 @@ async function main() {
 
     const tokenFactory = await getContractFactory("PresaleFairLaunchTemplateV1");
 
-    // address _royaltyAddress,
-    // uint256 _percentFeeRaised,
-    // uint256 _percentRefund,
-    // address _tokenAddress,
-    // uint256 _tokensForLiquidity,
-    // uint256 _tokensForPresale,
-    // uint256 _startTime,
-    // uint256 _endTime,
-    // uint256 _softCap,
-    // uint256 _maxContribution,
-    // address _manager,
-    // address _dexRouter
-
 
 
     const ONE_HUNDRED_PERCENT = 100 * 100;
