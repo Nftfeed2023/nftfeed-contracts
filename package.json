@@ -52,7 +52,9 @@
     "rex-fee-factory:update-fee": "hardhat run scripts/rex-fee-factory/update-fee.ts",
     "rex-fee-factory:verify": "hardhat run scripts/rex-fee-factory/verify.ts",
     "token-factory-v1:deploy": "hardhat run scripts/token-factory-v1/deploy.ts",
-    "token-factory-v1:verify": "hardhat run scripts/token-factory-v1/verify.ts"
+    "token-factory-v1:verify": "hardhat run scripts/token-factory-v1/verify.ts",
+    "presale-fair-launch-factory-v1:deploy": "hardhat run scripts/presale-fair-launch-factory-v1/deploy.ts",
+    "presale-fair-launch-factory-v1:verify": "hardhat run scripts/presale-fair-launch-factory-v1/verify.ts"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.3",
