@@ -10,9 +10,7 @@ import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.
 import {ERC20Template} from "./ERC20Template.sol";
 
 contract TokenFactoryV1 is Ownable, ReentrancyGuard {
-    uint256 public constant ONE_HUNDRED_PERCENT = 100 * 100; // 100%
-    uint256 public constant MAX_PERCENT_AFF = 5000; // 50%
-
+    // address fee
     address public royaltyAddress;
     // value fee to Native token
     uint256 public royaltyFee;
