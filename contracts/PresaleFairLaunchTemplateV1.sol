@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 pragma abicoder v2;
 
-// import "hardhat/console.sol";
+import "hardhat/console.sol";
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
@@ -138,23 +138,34 @@ contract PresaleFairLaunchTemplateV1 is Ownable, ReentrancyGuard {
         );
     }
 
-    function getStatus() public view returns (EStatus) {
+    function getStatus() public view returns (EStatus status) {
+        console.log(
+            " block.timestamp:  %s, startTime: %s, endTime: %s",
+            block.timestamp,
+            startTime,
+            endTime
+        );
         if (isCanceled) {
+            console.log("Step 1");
             return EStatus.Canceled;
         }
-        if (startTime < block.timestamp) {
+        if (block.timestamp < startTime) {
+            console.log("Step 2");
             return EStatus.Upcoming;
         }
         if (block.timestamp <= endTime) {
+            console.log("Step 3");
             return EStatus.Live;
         }
         if (totalRaised < softCap) {
+            console.log("Step 4");
             return EStatus.Failed;
         }
-
         if (isListed) {
+            console.log("Step 5");
             return EStatus.Listed;
         }
+        console.log("Step 6");
         return EStatus.Success;
     }
 
@@ -217,12 +228,15 @@ contract PresaleFairLaunchTemplateV1 is Ownable, ReentrancyGuard {
         softCap = _softCap;
     }
 
-    function updateDexRouter(
-        address _dexRouter
-    ) external onlyManager nonReentrant {
+    function updateDexRouter(address _dexRouter) external nonReentrant {
         require(
             getStatus() < EStatus.Listed,
             "You cannot change soft cap once the pool has listed"
+        );
+
+        require(
+            manager == _msgSender() || owner() == _msgSender(),
+            "Caller is not the manager or manager"
         );
         dexRouter = _dexRouter;
     }
@@ -308,6 +322,7 @@ contract PresaleFairLaunchTemplateV1 is Ownable, ReentrancyGuard {
         // totalContributors--;
         // totalRaised -= amountAvailable;
         payable(_msgSender()).transfer(amountAvailable);
+        userAllocations[_msgSender()] = 0;
     }
 
     // x NativeToken = y token
@@ -328,6 +343,7 @@ contract PresaleFairLaunchTemplateV1 is Ownable, ReentrancyGuard {
         require(getStatus() == EStatus.Listed, "Pool is not listed");
         uint256 amountAvailable = userAllocations[_msgSender()];
         require(amountAvailable > 0, "Amount available is zero");
+        require(!userClaimed[_msgSender()], "User claimed");
         // send token for user
         uint256 amountClaim = calculateSwapRate(amountAvailable);
         userClaimed[_msgSender()] = true;

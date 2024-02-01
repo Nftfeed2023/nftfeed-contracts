@@ -98,13 +98,7 @@ const config: HardhatUserConfig = {
       // gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
-    zetaTestnet: {
-      accounts: [hexWalletDeployerPrivateKey],
-      chainId: 7001,
-      gas: 5000000,
-      gasPrice: 80000000000,
-      url: 'https://zetachain-athens-evm.blockpi.network/v1/rpc/public'
-    },
+
 
     zksyncTestnet: {
       // url: "https://goerli.optimism.io/",
@@ -221,6 +215,20 @@ const config: HardhatUserConfig = {
     mantaTestnet: {
       url: 'https://manta-testnet.calderachain.xyz/http',
       chainId: 3441005,
+      accounts: [hexWalletDeployerPrivateKey]
+    },
+
+    zetaTestnet: {
+      accounts: [hexWalletDeployerPrivateKey],
+      chainId: 7001,
+      gas: 5000000,
+      gasPrice: 80000000000,
+      url: 'https://zetachain-athens-evm.blockpi.network/v1/rpc/public'
+    },
+
+    zetaMainnet: {
+      url: 'https://zetachain-evm.blockpi.network/v1/rpc/public',
+      chainId: 7000,
       accounts: [hexWalletDeployerPrivateKey]
     }
 

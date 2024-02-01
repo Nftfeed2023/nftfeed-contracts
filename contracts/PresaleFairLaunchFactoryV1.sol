@@ -111,11 +111,6 @@ contract PresaleFairLaunchFactoryV1 is Ownable, ReentrancyGuard {
             _tokensForPresale
         );
         payable(royaltyAddress).transfer(creationFee);
-        IERC20(_tokenAddress).safeTransferFrom(
-            address(_msgSender()),
-            address(this),
-            tokensForLiquidity + _tokensForPresale
-        );
         PresaleFairLaunchTemplateV1 pool = new PresaleFairLaunchTemplateV1(
             royaltyAddress,
             percentFeeRaised,
@@ -129,6 +124,11 @@ contract PresaleFairLaunchFactoryV1 is Ownable, ReentrancyGuard {
             _maxContribution,
             _msgSender(),
             _dexRouter
+        );
+        IERC20(_tokenAddress).safeTransferFrom(
+            address(_msgSender()),
+            address(pool),
+            tokensForLiquidity + _tokensForPresale
         );
         containerPools[totalPool] = address(pool);
         emit DeployPool(totalPool, address(pool), _msgSender());
@@ -166,4 +166,14 @@ contract PresaleFairLaunchFactoryV1 is Ownable, ReentrancyGuard {
         );
         percentRefund = _percentRefund;
     }
+
+    // function changeDexRouter(
+    //     address _dexRouter
+    // ) external onlyOwner nonReentrant {
+    //     require(
+    //         _percentRefund <= MAX_PERCENT_FEE_SYSTEM,
+    //         "Percent fee refund over"
+    //     );
+    //     percentRefund = _percentRefund;
+    // }
 }

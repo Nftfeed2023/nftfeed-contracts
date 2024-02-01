@@ -22,6 +22,7 @@ async function main() {
         DEPLOYER_ADDRESS: deployer.address,
     })
 
+
     const tokenFactory = await getContractFactory("MintNftFactoryV2");
     const deploymentTransaction = tokenFactory.getDeployTransaction(royaltyAddress,
         royaltyFee);

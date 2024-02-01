@@ -4,7 +4,7 @@ export { default as baseTestnet } from './baseTestnet';
 export { default as opTestnet } from './opTestnet';
 export { default as opMainnet } from './opMainnet';
 export { default as baseMainnet } from './baseMainnet';
-export { default as zetaTestnet } from './zetaTestnet';
+
 export { default as zksyncTestnet } from './zksyncTestnet';
 export { default as zksyncMainnet } from './zksyncMainnet';
 export { default as arbitrumTestnet } from './arbitrumTestnet';
@@ -29,3 +29,7 @@ export { default as ethTestnet } from './ethTestnet';
 
 export { default as mantaMainnet } from './mantaMainnet';
 export { default as mantaTestnet } from './mantaTestnet';
+
+
+export { default as zetaTestnet } from './zetaTestnet';
+export { default as zetaMainnet } from './zetaMainnet';

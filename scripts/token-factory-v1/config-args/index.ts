@@ -14,7 +14,8 @@ const { NETWORK_PROVIDER, TOKEN_ADDRESS, DEX_CONTRACT } = configEnv();
 
 const defaultFee = parseAmountToken(0.002)
 const mapCreationFee = {
-    ["zetaMainnet"]: parseAmountToken(10),
+    ["zetaTestnet"]: parseAmountToken(50),
+    ["zetaMainnet"]: parseAmountToken(50),
 }
 
 const royaltyAddress = ROYALTY_ADDRESS.trim();

@@ -127,15 +127,10 @@ async function main() {
 
 
     const chainsFilter = [
-
         {
-            chainId: 169,
-            chainName: "mantaMainnet"
+            chainId: 7000,
+            chainName: "zetaMainnet"
         },
-        {
-            chainId: 3441005,
-            chainName: "mantaTestnet"
-        }
     ];
     const chainIds = chainsFilter.map(item => item.chainId);
     const data = allChain.filter(v => chainIds.includes(v.chainId))
@@ -164,10 +159,17 @@ async function main() {
 
     const hardhatConfig = chainsFilter.reduce((result, item,) => {
         const { chainId, chainName } = item;
+        const { rpcUrls } = mapChains[`${chainId}`];
+        const randIdx = Math.floor(Math.random() * 50) % rpcUrls.length;
+        console.log(`-------------------`);
+        console.log({ randIdx });
+        console.log(`-------------------`);
+        const url = rpcUrls[randIdx]
+
         return {
             ...result,
             [chainName]: {
-                url: mapChains[`${chainId}`].rpcUrls[0],
+                url,
                 chainId,
                 // gasPrice: 20000000000,
                 accounts: "[hexWalletDeployerPrivateKey]",
@@ -177,6 +179,7 @@ async function main() {
 
     const networkProvider = chainsFilter.reduce((result, item,) => {
         const { chainId, chainName } = item;
+
         return {
             ...result,
             [chainName]: {
