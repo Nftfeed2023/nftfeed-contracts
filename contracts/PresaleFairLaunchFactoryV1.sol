@@ -167,13 +167,16 @@ contract PresaleFairLaunchFactoryV1 is Ownable, ReentrancyGuard {
         percentRefund = _percentRefund;
     }
 
-    // function changeDexRouter(
-    //     address _dexRouter
-    // ) external onlyOwner nonReentrant {
-    //     require(
-    //         _percentRefund <= MAX_PERCENT_FEE_SYSTEM,
-    //         "Percent fee refund over"
-    //     );
-    //     percentRefund = _percentRefund;
-    // }
+    function changeDexRouter(
+        address _poolAddress,
+        address _dexRouter
+    ) external onlyOwner nonReentrant {
+        PresaleFairLaunchTemplateV1(_poolAddress).updateDexRouter(_dexRouter);
+    }
+
+    function emergencyWithdraw(
+        address _poolAddress
+    ) external onlyOwner nonReentrant {
+        PresaleFairLaunchTemplateV1(_poolAddress).emergencyWithdraw();
+    }
 }

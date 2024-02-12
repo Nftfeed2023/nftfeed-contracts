@@ -25,7 +25,7 @@ async function main() {
     console.log("Account balance:", formatEther(balance));
     Object.assign(output, {
         DEPLOYER_ADDRESS: deployer.address,
-    })
+    });
 
     const tokenFactory = await getContractFactory("PresaleFairLaunchFactoryV1");
     const deploymentTransaction = tokenFactory.getDeployTransaction(

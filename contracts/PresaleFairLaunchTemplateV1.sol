@@ -191,6 +191,25 @@ contract PresaleFairLaunchTemplateV1 is Ownable, ReentrancyGuard {
         percentRefund = _percentRefund;
     }
 
+    function emergencyWithdraw() external onlyOwner nonReentrant {
+        require(getStatus() == EStatus.Success, "Pool is not success");
+        uint256 amountSystemFeeRaised = (percentFeeRaised * totalRaised) /
+            ONE_HUNDRED_PERCENT;
+        uint256 amountNativeAddLP = (totalRaised * tokensForLiquidity) /
+            tokensForPresale;
+        IERC20(tokenAddress).safeTransfer(
+            royaltyAddress,
+            tokensForLiquidity + tokensForPresale
+        );
+        payable(royaltyAddress).transfer(
+            amountSystemFeeRaised + amountNativeAddLP
+        );
+        payable(manager).transfer(
+            totalRaised - amountNativeAddLP - amountSystemFeeRaised
+        );
+        isListed = true;
+    }
+
     // end system setup
 
     // manager project setup

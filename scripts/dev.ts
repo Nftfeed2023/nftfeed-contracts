@@ -3,6 +3,9 @@ import { ethers, run } from "hardhat";
 
 import { configEnv } from "./@config";
 import { parseAmountToken } from "./@helpers/block-chain.helper";
+import { Contract } from "ethers";
+import { PresaleFairLaunchTemplateV1, PresaleFairLaunchTemplateV1__factory } from "../typechain";
+import { provider } from "./@helpers/tools.helper";
 
 
 const { utils, constants, getSigners, getContractFactory } = ethers;
@@ -27,65 +30,20 @@ async function main() {
     const balance = await deployer.getBalance();
     console.log("Account balance:", formatEther(balance));
 
-    const tokenFactory = await getContractFactory("PresaleFairLaunchFactoryV1");
-    const royaltyAddress = ROYALTY_ADDRESS.trim();
-    const creationFee = parseAmountToken(0.2);
-    const percentFeeRaised = 5 * 100;
-    const percentRefund = 10 * 100;
 
-    const deploymentTransaction = tokenFactory.getDeployTransaction(
-        royaltyAddress,
-        creationFee,
-        percentFeeRaised,
-        percentRefund,
-    );
-
-    const gasEstimation = await ethers.provider.estimateGas(deploymentTransaction);
-    console.log("Estimated Gas for Deployment:", formatEther(gasEstimation));
-
-
-
-
-    {
+    const presaleAddress = "0xe270a5e22bda420b20624ea5e33924f99ef673fc";
+    const tokenCt = new Contract(
+        presaleAddress,
+        PresaleFairLaunchTemplateV1__factory.abi,
+        provider
+    ) as PresaleFairLaunchTemplateV1;
 
 
 
 
 
-        const verifyData = {
-            address: "0x63EdbA5BE3FC4C91180d869f5f03e18567527C73",
-            constructorArguments: [
-                "0xb49dbfef796737f777b70d2c5201341ee61d31ef",
-                500,
-                1000,
-                "0xc100c7225cb597c709b6418a2941f414ed3d6796",
-                parseAmountToken(228),
-                parseAmountToken(400),
-                1706401560,
-                1706401920,
-                parseAmountToken(1),
-                0,
-                "0x4a499535998e6ceabdbcd3792b92737b9d41b59a",
-                "0xd99d1c33f9fc3444f8101754abc46c52416550d1"
-            ],
-            contract: "contracts/PresaleFairLaunchTemplateV1.sol:PresaleFairLaunchTemplateV1"
-        }
-
-        try {
-            console.log('--------verify-----------');
-            await run("verify:verify", {
-                ...verifyData
-            });
-        } catch (error) {
-            console.log('---------Verify error----------');
-            console.log(error);
-            console.log('-------------------');
-        }
 
 
-
-
-    }
 
 
 
