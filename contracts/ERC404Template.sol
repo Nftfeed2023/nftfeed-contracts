@@ -13,7 +13,7 @@ contract ERC404Template is ERC404 {
         string memory _baseUrl,
         address _owner
     ) ERC404(_name, _symbol, 18, _totalSupply, _owner) {
-        balanceOf[owner] = totalSupply * 10 ** 18;
+        balanceOf[_owner] = _totalSupply * 10 ** 18;
         baseUrl = _baseUrl;
     }
 
