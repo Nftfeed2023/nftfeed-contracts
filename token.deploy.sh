@@ -1,6 +1,6 @@
 
-NODE_ENV=bscTestnet yarn token-factory-v2:deploy;
-NODE_ENV=bscTestnet yarn token-factory-v2:verify;
+NODE_ENV=baseMainnet yarn token-tool:deploy;
+NODE_ENV=baseMainnet yarn token-tool:verify;
 
 
 

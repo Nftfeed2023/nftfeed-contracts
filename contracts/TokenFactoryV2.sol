@@ -18,6 +18,8 @@ contract TokenFactoryV2 is Ownable, ReentrancyGuard {
 
     uint256 public totalToken;
 
+    mapping(uint256 => address) public containerTokens;
+
     mapping(address => bool) public admins;
 
     event DeployToken(
@@ -65,6 +67,7 @@ contract TokenFactoryV2 is Ownable, ReentrancyGuard {
             _baseUrl,
             msg.sender
         );
+        containerTokens[totalToken] = address(token);
         payable(royaltyAddress).transfer(creationFee);
         emit DeployToken(address(token), _name, _symbol, _totalSupply);
         return (address(token));
@@ -83,6 +86,7 @@ contract TokenFactoryV2 is Ownable, ReentrancyGuard {
             _totalSupply,
             msg.sender
         );
+        containerTokens[totalToken] = address(token);
         payable(royaltyAddress).transfer(creationFee);
         emit DeployToken(address(token), _name, _symbol, _totalSupply);
         return (address(token));

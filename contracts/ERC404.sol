@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.0;
 
 abstract contract Ownable {
     event OwnershipTransferred(address indexed user, address indexed newOwner);
@@ -139,10 +139,7 @@ abstract contract ERC404 is Ownable {
     mapping(uint256 => uint256) internal _ownedIndex;
 
     /// @dev Addresses whitelisted from minting / burning for gas savings (pairs, routers, etc)
-    mapping(address => bool) public exemptFee;
-
-    /// @dev start mint
-    bool public started = false;
+    mapping(address => bool) public whitelist;
 
     // Constructor
     constructor(
@@ -160,14 +157,8 @@ abstract contract ERC404 is Ownable {
 
     /// @notice Initialization function to set pairs / etc
     ///         saving gas by avoiding mint / burn on unnecessary targets
-    function setExemptFee(address target, bool state) public onlyOwner {
-        exemptFee[target] = state;
-    }
-
-    /// @dev start mint
-    function startMint() public onlyOwner {
-        require(started == false, "Mint has already been initiated!");
-        started = true;
+    function setWhitelist(address target, bool state) public onlyOwner {
+        whitelist[target] = state;
     }
 
     /// @notice Function to find owner of a given native token
@@ -210,6 +201,7 @@ abstract contract ERC404 is Ownable {
     /// @notice Function native approvals
     function setApprovalForAll(address operator, bool approved) public virtual {
         isApprovedForAll[msg.sender][operator] = approved;
+
         emit ApprovalForAll(msg.sender, operator, approved);
     }
 
@@ -329,24 +321,21 @@ abstract contract ERC404 is Ownable {
             balanceOf[to] += amount;
         }
 
-        // Check if start
-        if (started == true) {
-            // Skip burn for certain addresses to save gas
-            if (!exemptFee[from]) {
-                uint256 tokens_to_burn = (balanceBeforeSender / unit) -
-                    (balanceOf[from] / unit);
-                for (uint256 i = 0; i < tokens_to_burn; i++) {
-                    _burn(from);
-                }
+        // Skip burn for certain addresses to save gas
+        if (!whitelist[from]) {
+            uint256 tokens_to_burn = (balanceBeforeSender / unit) -
+                (balanceOf[from] / unit);
+            for (uint256 i = 0; i < tokens_to_burn; i++) {
+                _burn(from);
             }
+        }
 
-            // Skip minting for certain addresses to save gas
-            if (!exemptFee[to]) {
-                uint256 tokens_to_mint = (balanceOf[to] / unit) -
-                    (balanceBeforeReceiver / unit);
-                for (uint256 i = 0; i < tokens_to_mint; i++) {
-                    _mint(to);
-                }
+        // Skip minting for certain addresses to save gas
+        if (!whitelist[to]) {
+            uint256 tokens_to_mint = (balanceOf[to] / unit) -
+                (balanceBeforeReceiver / unit);
+            for (uint256 i = 0; i < tokens_to_mint; i++) {
+                _mint(to);
             }
         }
 

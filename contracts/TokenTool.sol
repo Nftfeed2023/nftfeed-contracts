@@ -5,10 +5,8 @@ pragma abicoder v2;
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 
 contract TokenTool is Ownable, ReentrancyGuard, ERC721Holder {
@@ -17,24 +15,21 @@ contract TokenTool is Ownable, ReentrancyGuard, ERC721Holder {
 
     constructor() {}
 
-    function transferFullErc721(address _erc721, address _to) external {
-        uint256 balance = IERC721(_erc721).balanceOf(address(msg.sender));
-        for (uint256 i = 0; i < balance; i++) {
-            uint256 tokenId = IERC721Enumerable(_erc721).tokenOfOwnerByIndex(
-                address(msg.sender),
-                0
-            );
+    function transferErc721(
+        address _erc721,
+        uint256[] calldata _tokenIds,
+        address[] calldata _tos
+    ) external {
+        for (uint256 i = 0; i < _tokenIds.length; i++) {
             IERC721(_erc721).safeTransferFrom(
                 address(msg.sender),
-                _to,
-                tokenId
+                _tos[i],
+                _tokenIds[i]
             );
         }
     }
 
-    receive() external payable {}
-
-    function batchTranferNative(
+    function batchTransferNative(
         address[] calldata _tos,
         uint256[] calldata _amounts
     ) external nonReentrant {
@@ -43,7 +38,7 @@ contract TokenTool is Ownable, ReentrancyGuard, ERC721Holder {
         }
     }
 
-    function batchTranferErc20(
+    function batchTransferErc20(
         address _erc20,
         address[] calldata _tos,
         uint256[] calldata _amounts

@@ -17,9 +17,7 @@ contract ERC404Template is ERC404 {
         baseUrl = _baseUrl;
     }
 
-    function tokenURI(
-        uint256 _tokenId
-    ) public view override returns (string memory) {
+    function tokenURI(uint256 id) public view override returns (string memory) {
         return (
             string(
                 abi.encodePacked(
@@ -27,7 +25,7 @@ contract ERC404Template is ERC404 {
                     "/",
                     Strings.toHexString(uint160(address(this)), 20),
                     "/",
-                    Strings.toString(_tokenId)
+                    Strings.toString(id)
                 )
             )
         );
@@ -35,12 +33,5 @@ contract ERC404Template is ERC404 {
 
     function setBaseUrl(string memory _baseUrl) public onlyOwner {
         baseUrl = _baseUrl;
-    }
-
-    function setNameSymbol(
-        string memory _name,
-        string memory _symbol
-    ) public onlyOwner {
-        _setNameSymbol(_name, _symbol);
     }
 }
