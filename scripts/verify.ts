@@ -8,7 +8,7 @@ const { utils, getSigners, getContractFactory, provider } = ethers;
 const { NODE_ENV = "bscTestnet" } = process.env;
 
 async function main() {
-  const address = "0xA8a9246d74815F23736C0a77b2d0450E7661f21E";
+  const address = "0xe1873e4eb7a85cb5432f14482e01de0c53d505ca";
 
   // string memory _name,
   // string memory _symbol,

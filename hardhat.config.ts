@@ -140,7 +140,7 @@ const config: HardhatUserConfig = {
     },
 
     avaxMainnet: {
-      url: "https://avalanche.drpc.org",
+      url: "https://api.avax.network/ext/bc/C/rpc",
       chainId: 43114,
       //   gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
