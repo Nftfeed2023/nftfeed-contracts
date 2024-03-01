@@ -220,6 +220,19 @@ const config: HardhatUserConfig = {
       chainId: 7000,
       accounts: [hexWalletDeployerPrivateKey],
     },
+    blastTestnet: {
+      url: "https://sepolia.blast.io",
+      chainId: 168587773,
+      // gasPrice: 1000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+
+    blastMainnet: {
+      url: "https://rpc.ankr.com/blast",
+      chainId: 81457,
+      // gasPrice: 1000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
   },
   solidity: {
     compilers: [
@@ -323,6 +336,24 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api.lineascan.build/api",
           browserURL: "https://lineascan.build/",
+        },
+      },
+      {
+        network: "blastTestnet",
+        chainId: 168587773,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/testnet/evm/168587773/etherscan",
+          browserURL: "https://sepolia.blastscan.io",
+        },
+      },
+      {
+        network: "blastMainnet",
+        chainId: 81457,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/mainnet/evm/81457/etherscan",
+          browserURL: "https://blastexplorer.io",
         },
       },
     ],
