@@ -221,7 +221,7 @@ const config: HardhatUserConfig = {
       accounts: [hexWalletDeployerPrivateKey],
     },
     blastTestnet: {
-      url: "https://sepolia.blast.io",
+      url: "https://blast-sepolia.blockpi.network/v1/rpc/public",
       chainId: 168587773,
       // gasPrice: 1000000000,
       accounts: [hexWalletDeployerPrivateKey],

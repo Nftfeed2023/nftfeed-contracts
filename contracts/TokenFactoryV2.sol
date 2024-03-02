@@ -73,7 +73,7 @@ contract TokenFactoryV2 is Ownable, ReentrancyGuard {
         return (address(token));
     }
 
-    function deployERC20(
+    function deploy(
         string memory _name,
         string memory _symbol,
         uint256 _totalSupply
