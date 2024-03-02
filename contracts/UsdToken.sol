@@ -18,6 +18,10 @@ contract UsdToken is ERC20 {
         minter = msg.sender;
     }
 
+    function decimals() public view virtual override returns (uint8) {
+        return 6;
+    }
+
     /// @notice Creates `_amount` token to `_to`.
     function mint(address _to, uint256 _amount) external onlyMinter {
         super._mint(_to, _amount);

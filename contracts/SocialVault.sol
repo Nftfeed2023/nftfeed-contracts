@@ -7,10 +7,12 @@ import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-import {ERC20Template} from "./ERC20Template.sol";
-import {ERC404Template} from "./ERC404Template.sol";
+import {SafeERC20, IERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract SocialVault is Ownable, ReentrancyGuard {
+    using SafeERC20 for IERC20;
+
     mapping(address => bool) public admins;
 
     // address fee
@@ -25,23 +27,33 @@ contract SocialVault is Ownable, ReentrancyGuard {
 
     mapping(address => bool) public nftsRegistered;
 
-    /// @dev nft address => tokenBonus
-    mapping(address => address) public tokensBonus;
+    /// @dev nft address => token bonus
+    mapping(address => address) public tokens;
 
     /// @dev nft address => total amount bonus
     mapping(address => uint256) public totalAmountBonus;
 
     /// @dev nft address => address manager
-    mapping(address => address) public managers;
+    mapping(address => address) public creators;
     /// @dev nft address => start end
     mapping(address => uint256) public startTimes;
     /// @dev nft address => time end
     mapping(address => uint256) public endTimes;
 
+    bool public isClose;
+
     modifier onlyAdmin() {
         require(admins[_msgSender()], "Admin: caller is not the admin");
         _;
     }
+
+    event CreateCampaign(
+        uint256 campaignId,
+        address creator,
+        address nftAddress,
+        address tokenAddress,
+        uint256 totalAmountBonus
+    );
 
     constructor(address _royaltyAddress, uint256 _creationFee) {
         require(
@@ -75,16 +87,49 @@ contract SocialVault is Ownable, ReentrancyGuard {
 
     function createCampaign(
         address _ntfAddress,
-        address _token,
+        address _tokenAddress,
         uint256 _totalAmountBonus,
         uint256 _startTime,
         uint256 _endTime
     ) external payable nonReentrant returns (uint256 poolId) {
+        require(!nftsRegistered[_ntfAddress], "Collection is create campaign");
+        require(_endTime > _startTime, "endTime <= startTime");
+        require(_endTime > block.timestamp, "Endtime error");
+        payable(royaltyAddress).transfer(creationFee);
+        IERC20(_tokenAddress).safeTransferFrom(
+            address(_msgSender()),
+            address(this),
+            _totalAmountBonus
+        );
         // create token
         totalCampaign++;
+        containers[poolId] = _ntfAddress;
+        tokens[_ntfAddress] = _tokenAddress;
+        nftsRegistered[_ntfAddress] = true;
+        creators[_ntfAddress] = _msgSender();
+        totalAmountBonus[_ntfAddress] = _totalAmountBonus;
+        startTimes[_ntfAddress] = _startTime;
+        endTimes[_ntfAddress] = _endTime;
+        emit CreateCampaign(
+            totalCampaign,
+            _msgSender(),
+            _ntfAddress,
+            _tokenAddress,
+            _totalAmountBonus
+        );
+        return totalCampaign;
+    }
 
-        payable(royaltyAddress).transfer(creationFee);
-
-        return 1;
+    function finalize(
+        address _ntfAddress,
+        address[] calldata _users
+    ) external onlyAdmin nonReentrant {
+        require(!isClose, "Campaign final");
+        require(_users.length > 0, "List user is empty");
+        uint256 amount = totalAmountBonus[_ntfAddress] / _users.length;
+        for (uint i = 0; i < _users.length; i++) {
+            IERC20(tokens[_ntfAddress]).safeTransfer(_users[i], amount);
+        }
+        isClose = true;
     }
 }

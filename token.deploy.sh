@@ -1,6 +1,6 @@
 
-NODE_ENV=baseMainnet yarn token-tool:deploy;
-NODE_ENV=baseMainnet yarn token-tool:verify;
+NODE_ENV=bscTestnet yarn social-vault:deploy;
+NODE_ENV=bscTestnet yarn social-vault:verify;
 
 
 

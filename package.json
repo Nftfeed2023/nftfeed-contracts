@@ -56,7 +56,9 @@
     "token-factory-v2:deploy": "hardhat run scripts/token-factory-v2/deploy.ts",
     "token-factory-v2:verify": "hardhat run scripts/token-factory-v2/verify.ts",
     "presale-fair-launch-factory-v1:deploy": "hardhat run scripts/presale-fair-launch-factory-v1/deploy.ts",
-    "presale-fair-launch-factory-v1:verify": "hardhat run scripts/presale-fair-launch-factory-v1/verify.ts"
+    "presale-fair-launch-factory-v1:verify": "hardhat run scripts/presale-fair-launch-factory-v1/verify.ts",
+    "social-vault:deploy": "hardhat run scripts/social-vault/deploy.ts",
+    "social-vault:verify": "hardhat run scripts/social-vault/verify.ts"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.3",
