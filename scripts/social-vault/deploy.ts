@@ -8,7 +8,14 @@ import { delayTime } from "../@helpers/block-chain.helper";
 const { utils, getSigners, getContractFactory, provider } = ethers;
 const { formatEther } = utils;
 
-const { NODE_ENV, NETWORK_PROVIDER, royaltyAddress, creationFee } = configArgs;
+const {
+  NODE_ENV,
+  NETWORK_PROVIDER,
+  royaltyAddress,
+  creationFee,
+  minAmountClaim,
+  systemAddress,
+} = configArgs;
 
 async function main() {
   const contractName = "SocialVault";
@@ -25,7 +32,9 @@ async function main() {
   const tokenFactory = await getContractFactory(contractName);
   const deploymentTransaction = tokenFactory.getDeployTransaction(
     royaltyAddress,
-    creationFee
+    creationFee,
+    minAmountClaim,
+    systemAddress
   );
 
   const gasEstimation = await ethers.provider.estimateGas(
@@ -39,6 +48,8 @@ async function main() {
     const tokenCt = await (tokenFactory as any).deploy(
       royaltyAddress,
       creationFee,
+      minAmountClaim,
+      systemAddress,
       {
         maxFeePerGas: estimateGas.toNumber() + 50000000000,
         maxPriorityFeePerGas: estimateGas.toNumber() + 20000000000,
@@ -57,7 +68,12 @@ async function main() {
       TOKEN_ADDRESS: tokenCt.address,
       verifyData: {
         address: tokenCt.address,
-        constructorArguments: [royaltyAddress, creationFee],
+        constructorArguments: [
+          royaltyAddress,
+          creationFee,
+          minAmountClaim,
+          systemAddress,
+        ],
         contract: `contracts/${contractName}.sol:${contractName}`.trim(),
       },
     });
@@ -77,7 +93,12 @@ async function main() {
     return;
   }
 
-  const tokenCt = await tokenFactory.deploy(royaltyAddress, creationFee);
+  const tokenCt = await tokenFactory.deploy(
+    royaltyAddress,
+    creationFee,
+    minAmountClaim,
+    systemAddress
+  );
   await tokenCt.deployed();
 
   console.log(`${contractName} deployed to:`, tokenCt.address);
@@ -90,7 +111,12 @@ async function main() {
     TOKEN_ADDRESS: tokenCt.address,
     verifyData: {
       address: tokenCt.address,
-      constructorArguments: [royaltyAddress, creationFee],
+      constructorArguments: [
+        royaltyAddress,
+        creationFee,
+        minAmountClaim,
+        systemAddress,
+      ],
       contract: `contracts/${contractName}.sol:${contractName}`.trim(),
     },
   });
