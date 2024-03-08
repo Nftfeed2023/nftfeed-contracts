@@ -1,6 +1,6 @@
 
-NODE_ENV=bscTestnet yarn social-vault:deploy;
-NODE_ENV=bscTestnet yarn social-vault:verify;
+NODE_ENV=maticMainnet yarn social-vault:deploy;
+NODE_ENV=maticMainnet yarn social-vault:verify;
 
 
 
