@@ -1,6 +1,6 @@
 
-# NODE_ENV=maticMainnet yarn social-vault:deploy;
-# NODE_ENV=maticMainnet yarn social-vault:verify;
+NODE_ENV=vicMainnet yarn social-vault:deploy;
+NODE_ENV=vicMainnet yarn social-vault:verify;
 
 
 
@@ -11,5 +11,5 @@
 
 
 
-NODE_ENV=bscMainnet yarn feed-agg:deploy;
-NODE_ENV=bscMainnet yarn feed-agg:verify;
+# NODE_ENV=vicMainnet yarn feed-agg:deploy;
+# NODE_ENV=vicMainnet yarn feed-agg:verify;

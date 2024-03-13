@@ -233,6 +233,12 @@ const config: HardhatUserConfig = {
       // gasPrice: 1000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
+    vicMainnet: {
+      url: "https://rpc.viction.xyz",
+      chainId: 88,
+      // gasPrice: 1000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
   },
   solidity: {
     compilers: [
