@@ -1,7 +1,8 @@
 
-NODE_ENV=vicMainnet yarn social-vault:deploy;
-NODE_ENV=vicMainnet yarn social-vault:verify;
-
+NODE_ENV=arbitrumMainnet yarn social-vault:deploy;
+NODE_ENV=arbitrumMainnet yarn social-vault:verify;
+NODE_ENV=arbitrumMainnet yarn feed-agg:deploy;
+NODE_ENV=arbitrumMainnet yarn feed-agg:verify;
 
 
 # NODE_ENV=blastTestnet yarn token-factory-v2:deploy;
@@ -11,5 +12,3 @@ NODE_ENV=vicMainnet yarn social-vault:verify;
 
 
 
-# NODE_ENV=vicMainnet yarn feed-agg:deploy;
-# NODE_ENV=vicMainnet yarn feed-agg:verify;

@@ -91,7 +91,7 @@ const config: HardhatUserConfig = {
       accounts: [hexWalletDeployerPrivateKey],
     },
     opMainnet: {
-      url: "https://mainnet.optimism.io/",
+      url: "https://mainnet.optimism.io",
       chainId: 10,
       // gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
@@ -119,7 +119,7 @@ const config: HardhatUserConfig = {
       accounts: [hexWalletDeployerPrivateKey],
     },
     arbitrumMainnet: {
-      url: "https://arbitrum.llamarpc.com",
+      url: "https://arbitrum.drpc.org",
       chainId: 42161,
       //   gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
