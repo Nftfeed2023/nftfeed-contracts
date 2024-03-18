@@ -37,6 +37,7 @@
     "free-mint-factory:verify": "hardhat run scripts/free-mint-factory/verify.ts",
     "free-mint-factory-v2:deploy": "hardhat run scripts/free-mint-factory-v2/deploy.ts",
     "free-mint-factory-v2:verify": "hardhat run scripts/free-mint-factory-v2/verify.ts",
+    "free-mint-factory-v2:update-fee": "hardhat run scripts/free-mint-factory-v2/update-fee.ts",
     "stake-multiple-erc721:deploy": "hardhat run scripts/stake-multiple-erc721/deploy.ts",
     "stake-multiple-erc721:update-params": "hardhat run scripts/stake-multiple-erc721/update-params.ts",
     "stake-multiple-erc721:verify": "hardhat run scripts/stake-multiple-erc721/verify.ts",
