@@ -3,6 +3,7 @@ import { ethers } from "hardhat";
 import configArgs from "./config-args";
 import { Contract } from "ethers";
 import { MintNftFactoryV2, MintNftFactoryV2__factory } from "../../typechain";
+import { formatAmountToken } from "../@helpers/block-chain.helper";
 
 const { utils, getSigners, getContractFactory, provider } = ethers;
 const { formatEther } = utils;
@@ -23,6 +24,9 @@ async function main() {
     MintNftFactoryV2__factory.abi,
     provider
   ) as MintNftFactoryV2;
+
+  console.log(`=====royaltyFee=====`, formatAmountToken(royaltyFee));
+
   const { transactionHash } = await (
     await poolCt.connect(deployer).changeRoyaltyFee(royaltyFee)
   ).wait();
