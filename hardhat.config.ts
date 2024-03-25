@@ -228,7 +228,7 @@ const config: HardhatUserConfig = {
     },
 
     blastMainnet: {
-      url: "https://rpc.ankr.com/blast",
+      url: "https://rpc.blast.io",
       chainId: 81457,
       // gasPrice: 1000000000,
       accounts: [hexWalletDeployerPrivateKey],
@@ -237,6 +237,11 @@ const config: HardhatUserConfig = {
       url: "https://rpc.viction.xyz",
       chainId: 88,
       // gasPrice: 1000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
+    kromaMainnet: {
+      url: "https://api.kroma.network",
+      chainId: 255,
       accounts: [hexWalletDeployerPrivateKey],
     },
   },

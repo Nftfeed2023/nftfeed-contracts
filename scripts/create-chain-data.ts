@@ -154,8 +154,8 @@ async function main() {
 
   const chainsFilter = [
     {
-      chainId: 88,
-      chainName: "vicMainnet",
+      chainId: 255,
+      chainName: "kromaMainnet",
     },
   ];
   const chainIds = chainsFilter.map((item) => item.chainId);

@@ -19,7 +19,7 @@ const config: IEnvConfig = {
   ],
   NETWORK_PROVIDER: {
     URL_RPC: "https://sepolia.blast.io",
-    URL_SCAN: "https://sepolia.blastscan.io",
+    URL_SCAN: "https://testnet.blastscan.io",
   },
 };
 
