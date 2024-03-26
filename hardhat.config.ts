@@ -85,7 +85,7 @@ const config: HardhatUserConfig = {
     },
     opTestnet: {
       // url: "https://goerli.optimism.io/",
-      url: "https://optimism-goerli.public.blastapi.io/",
+      url: "https://optimism-goerli.gateway.tenderly.co",
       chainId: 420,
       // gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
@@ -113,7 +113,7 @@ const config: HardhatUserConfig = {
 
     arbitrumTestnet: {
       // url: "https://goerli.optimism.io/",
-      url: "https://arbitrum-goerli.publicnode.com",
+      url: "https://arbitrum-goerli.public.blastapi.io",
       chainId: 421613,
       gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
@@ -183,8 +183,8 @@ const config: HardhatUserConfig = {
 
     ethTestnet: {
       // url: "https://goerli.optimism.io/",
-      url: "https://ethereum-goerli.publicnode.com",
-      chainId: 5,
+      url: "https://eth-sepolia.public.blastapi.io",
+      chainId: 11155111,
       // gasPrice: 20000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
@@ -365,6 +365,14 @@ const config: HardhatUserConfig = {
           apiURL:
             "https://api.routescan.io/v2/network/mainnet/evm/81457/etherscan",
           browserURL: "https://blastexplorer.io",
+        },
+      },
+      {
+        network: "ethTestnet",
+        chainId: 11155111,
+        urls: {
+          apiURL: "https://api-sepolia.etherscan.io/api",
+          browserURL: "https://sepolia.etherscan.io",
         },
       },
     ],

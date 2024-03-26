@@ -62,6 +62,14 @@ contract BlastMintNftFactoryV2 is Ownable, ReentrancyGuard {
     mapping(address => uint256[]) public promotionPercents;
 
     event DeployNft(uint256 poolId, address nftAddress, address manager);
+    event MintCollection(
+        address nftAddress,
+        uint256 qty,
+        uint256[] tokenIds,
+        uint256 amount,
+        address minter,
+        address ref
+    );
 
     modifier onlyAdmin() {
         require(admins[_msgSender()], "Admin: caller is not the admin");
@@ -185,6 +193,10 @@ contract BlastMintNftFactoryV2 is Ownable, ReentrancyGuard {
         }
         payable(royaltyAddress).transfer(royaltyFee - amountAffSystem);
         tokenId = ERC721Template(_nft).mint(address(msg.sender));
+        uint256[] memory tokenIds = new uint256[](1);
+        tokenIds[0] = tokenId;
+        emit MintCollection(_nft, 1, tokenIds, amount, _msgSender(), _ref);
+
         return tokenId;
     }
 
@@ -267,6 +279,14 @@ contract BlastMintNftFactoryV2 is Ownable, ReentrancyGuard {
         }
         payable(royaltyAddress).transfer(systemFeeAmount - amountAffSystem);
         tokenIds = ERC721Template(_nft).mintBatch(address(msg.sender), _qty);
+        emit MintCollection(
+            _nft,
+            _qty,
+            tokenIds,
+            promotionalAmount + systemFeeAmount,
+            _msgSender(),
+            _ref
+        );
         return tokenIds;
     }
 

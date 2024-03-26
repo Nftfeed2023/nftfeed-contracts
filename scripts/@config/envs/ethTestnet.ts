@@ -1,4 +1,4 @@
-import { IEnvConfig } from '..';
+import { IEnvConfig } from "..";
 
 const config: IEnvConfig = {
   TOKEN_ADDRESS: {
@@ -18,10 +18,9 @@ const config: IEnvConfig = {
     //    "".trim(), // Cloud base ,
   ],
   NETWORK_PROVIDER: {
-    URL_RPC: "https://ethereum-goerli.publicnode.com",
-    URL_SCAN: "https://goerli.etherscan.io"
-  }
-}
-
+    URL_RPC: "https://eth-sepolia.public.blastapi.io",
+    URL_SCAN: "https://sepolia.etherscan.io",
+  },
+};
 
 export default config;

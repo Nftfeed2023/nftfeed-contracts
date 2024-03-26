@@ -1,2 +1,2 @@
-NODE_ENV=blastTestnet yarn free-mint-factory-v2:deploy;
-NODE_ENV=blastTestnet yarn free-mint-factory-v2:verify;
+NODE_ENV=ethTestnet yarn free-mint-factory-v2:deploy;
+NODE_ENV=ethTestnet yarn free-mint-factory-v2:verify;
