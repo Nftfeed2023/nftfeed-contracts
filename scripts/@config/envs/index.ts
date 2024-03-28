@@ -33,4 +33,7 @@ export { default as zetaMainnet } from "./zetaMainnet";
 
 export { default as blastTestnet } from "./blastTestnet";
 export { default as blastMainnet } from "./blastMainnet";
+
 export { default as vicMainnet } from "./vicMainnet";
+
+export { default as kromaMainnet } from "./kromaMainnet";
