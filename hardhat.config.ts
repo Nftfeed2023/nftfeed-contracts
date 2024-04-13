@@ -375,6 +375,14 @@ const config: HardhatUserConfig = {
           browserURL: "https://sepolia.etherscan.io",
         },
       },
+      {
+        network: "kromaMainnet",
+        chainId: 255,
+        urls: {
+          apiURL: "https://api.kromascan.com/api",
+          browserURL: "https://kromascan.com",
+        },
+      },
     ],
   },
 };
