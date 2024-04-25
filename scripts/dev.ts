@@ -35,59 +35,66 @@ async function main() {
   const balance = await deployer.getBalance();
   console.log("Account balance:", formatEther(balance));
 
-  const tokenAddress = "0x03d8a7ad755e5645145d0a7c3cfd0dcf5f52df8c";
 
-  const tokenToolAddress = "0x39639eCe70A2EC67E627262f0bFc9C6eF60804A4";
-
-  const tokenCt = new Contract(
-    tokenAddress,
-    ERC20__factory.abi,
-    provider
-  ) as ERC20;
-
-  const tokenToolCt = new Contract(
-    tokenToolAddress,
-    TokenTool__factory.abi,
-    provider
-  ) as TokenTool;
-
-  const total = await tokenCt.totalSupply();
   console.log(`-------------------`);
-  console.log(formatAmountToken(total));
+  console.log({
+    amount: parseAmountToken(50, 6).toString()
+  });
   console.log(`-------------------`);
 
-  //   {
+  // const tokenAddress = "0x03d8a7ad755e5645145d0a7c3cfd0dcf5f52df8c";
+
+  // const tokenToolAddress = "0x39639eCe70A2EC67E627262f0bFc9C6eF60804A4";
+
+  // const tokenCt = new Contract(
+  //   tokenAddress,
+  //   ERC20__factory.abi,
+  //   provider
+  // ) as ERC20;
+
+  // const tokenToolCt = new Contract(
+  //   tokenToolAddress,
+  //   TokenTool__factory.abi,
+  //   provider
+  // ) as TokenTool;
+
+  // const total = await tokenCt.totalSupply();
+  // console.log(`-------------------`);
+  // console.log(formatAmountToken(total));
+  // console.log(`-------------------`);
+
+  // //   {
+  // //     const { transactionHash } = await (
+  // //       await tokenCt.connect(deployer).approve(tokenToolAddress, total)
+  // //     ).wait();
+  // //     console.log(`=====Approve=====`, transactionHash);
+  // //   }
+
+  // {
+  //   const inputs = (await readTextToJson({
+  //     pathFile: "./inputs/raw.txt",
+  //     keyIndexObj: ["walletAddress", "amount"],
+  //   })) as { walletAddress: string; amount: string }[];
+
+  //   const data = inputs.filter((v) => isAddress(v.walletAddress));
+
+  //   const step = 250;
+
+  //   for (let index = 751; index < data.length; index += step) {
+  //     const inputSteps = data.slice(index, index + step);
+  //     const tos = inputSteps.map((v) => v.walletAddress);
+  //     const amounts = inputSteps.map((v) => parseAmountToken(v.amount));
   //     const { transactionHash } = await (
-  //       await tokenCt.connect(deployer).approve(tokenToolAddress, total)
+  //       await tokenToolCt
+  //         .connect(deployer)
+  //         .batchTransferErc20(tokenAddress, tos, amounts)
   //     ).wait();
-  //     console.log(`=====Approve=====`, transactionHash);
+  //     console.log(
+  //       `=====batchTransferErc20 step: ${index} => ${index + step}=====`,
+  //       transactionHash
+  //     );
   //   }
-
-  {
-    const inputs = (await readTextToJson({
-      pathFile: "./inputs/raw.txt",
-      keyIndexObj: ["walletAddress", "amount"],
-    })) as { walletAddress: string; amount: string }[];
-
-    const data = inputs.filter((v) => isAddress(v.walletAddress));
-
-    const step = 250;
-
-    for (let index = 751; index < data.length; index += step) {
-      const inputSteps = data.slice(index, index + step);
-      const tos = inputSteps.map((v) => v.walletAddress);
-      const amounts = inputSteps.map((v) => parseAmountToken(v.amount));
-      const { transactionHash } = await (
-        await tokenToolCt
-          .connect(deployer)
-          .batchTransferErc20(tokenAddress, tos, amounts)
-      ).wait();
-      console.log(
-        `=====batchTransferErc20 step: ${index} => ${index + step}=====`,
-        transactionHash
-      );
-    }
-  }
+  // }
 }
 
 main().catch((error) => {

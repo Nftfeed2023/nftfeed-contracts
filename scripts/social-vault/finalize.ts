@@ -8,7 +8,7 @@ import { formatAmountToken } from "../@helpers/block-chain.helper";
 const { utils, getSigners, getContractFactory, provider } = ethers;
 const { formatEther } = utils;
 
-const { NODE_ENV, NETWORK_PROVIDER, royaltyAddress } = configArgs;
+const { NODE_ENV, NETWORK_PROVIDER, royaltyAddress, systemAddress } = configArgs;
 
 async function main() {
   const output: any = {};
@@ -31,21 +31,10 @@ async function main() {
 
   console.log(`=====royaltyFee=====`);
 
-  const collectionAddress = "0x79351cfaa005f3d01658547fb37301a9f42dd4ed";
+  const collectionAddress = "0xe857f29653a2e22bf7862688821703b60a750680";
   const users = [
-    "0x782a70e14766a8e8f89704e3522d6aa3125f71eb",
-    "0x4bcb10f6084deb7b902349082d378dd3c7133010",
-    "0x072BcaaD73D640912E63F04d71A98F18433aA306",
-    "0x668ae12b8d14110204d791912606366ae848c85d",
-    "0xd8fd57b26322945b0bdb23ed6be87e07c5c51662",
-    "0xaefa34eed6dfde9d42e8b28954e63d4de90f74e3",
-    "0x2d86f634042674cf0de727fe625b64e0dad32517",
-    "0x552eb4e4aa693d61d342d05dcd8d09826d41955f",
-    "0xa68c30d2d6da1d0f6fc9d68a21c458b7b3c1ffdd",
-    "0x43d6d40fc854752d05959c495b69bc47dd59eb12",
-    "0x072BcaaD73D640912E63F04d71A98F18433aA306",
+    "0x072BcaaD73D640912E63F04d71A98F18433aA306"
   ];
-
   const { transactionHash } = await (
     await poolCt.connect(deployer).finalize(collectionAddress, users)
   ).wait();

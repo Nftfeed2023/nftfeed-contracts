@@ -44,7 +44,8 @@ contract SocialVault is Ownable, ReentrancyGuard {
     /// @dev nft address => time end
     mapping(address => uint256) public endTimes;
 
-    bool public isClose;
+    /// @dev nft address => time end
+    mapping(address => bool) public isCloses;
 
     //user tokenAddress => userAddress => amount
     mapping(address => mapping(address => uint256)) public amountUsers;
@@ -142,6 +143,7 @@ contract SocialVault is Ownable, ReentrancyGuard {
         );
         // create token
         totalCampaign++;
+        poolId = totalCampaign;
         containers[poolId] = _ntfAddress;
         tokens[_ntfAddress] = _tokenAddress;
         nftsRegistered[_ntfAddress] = true;
@@ -164,14 +166,13 @@ contract SocialVault is Ownable, ReentrancyGuard {
         address _ntfAddress,
         address[] calldata _users
     ) external onlyAdmin nonReentrant {
-        require(!isClose, "Campaign final");
+        require(!isCloses[_ntfAddress], "Campaign final");
         require(_users.length > 0, "List user is empty");
         uint256 amount = totalAmountBonus[_ntfAddress] / _users.length;
         for (uint i = 0; i < _users.length; i++) {
-            // IERC20(tokens[_ntfAddress]).safeTransfer(_users[i], amount);
             amountUsers[tokens[_ntfAddress]][_users[i]] += amount;
         }
-        isClose = true;
+        isCloses[_ntfAddress] = true;
     }
 
     function claim(address _tokenAddress) external nonReentrant {
