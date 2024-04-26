@@ -61,6 +61,7 @@
     "social-vault:deploy": "hardhat run scripts/social-vault/deploy.ts",
     "social-vault:verify": "hardhat run scripts/social-vault/verify.ts",
     "social-vault:finalize": "hardhat run scripts/social-vault/finalize.ts",
+    "social-vault:create-campaign": "hardhat run scripts/social-vault/create-campaign.ts",
     "feed-agg:deploy": "hardhat run scripts/feed-agg/deploy.ts",
     "feed-agg:verify": "hardhat run scripts/feed-agg/verify.ts"
   },

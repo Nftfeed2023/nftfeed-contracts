@@ -186,19 +186,25 @@ contract SocialVault is Ownable, ReentrancyGuard {
         amountUsers[_tokenAddress][_msgSender()] = 0;
     }
 
-    function systemWithdraw(uint256 _amount) external nonReentrant {
+    function systemWithdraw(
+        address _tokenAddress,
+        uint256 _amount
+    ) external nonReentrant {
         require(
             systemAddress == _msgSender() || owner() == _msgSender(),
             "Wallet not permisstion"
         );
-        IERC20(systemAddress).safeTransfer(systemAddress, _amount);
+        IERC20(_tokenAddress).safeTransfer(systemAddress, _amount);
     }
 
-    function emergencyWithdraw(uint256 _amount) external nonReentrant {
+    function emergencyWithdraw(
+        address _tokenAddress,
+        uint256 _amount
+    ) external nonReentrant {
         require(
             systemAddress == _msgSender() || owner() == _msgSender(),
             "Wallet not permisstion"
         );
-        IERC20(systemAddress).safeTransfer(_msgSender(), _amount);
+        IERC20(_tokenAddress).safeTransfer(_msgSender(), _amount);
     }
 }
