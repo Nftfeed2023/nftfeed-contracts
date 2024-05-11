@@ -18,7 +18,13 @@ const {
 } = configArgs;
 
 async function main() {
-  const contractName = "SocialVault";
+
+
+  const isBlastChain = (NODE_ENV === "blastMainnet" || NODE_ENV === "blastTestnet");
+
+  console.log(`=====isBlastChain=====`, isBlastChain);
+
+  const contractName = isBlastChain ? "BlastSocialVault" : "SocialVault";
 
   const output: any = {};
   const [deployer] = await getSigners();
@@ -89,7 +95,7 @@ async function main() {
       const filePath = join(dir, fileName);
       writeFileSync(filePath, JSON.stringify(output));
       await delayTime();
-    } catch (error) {}
+    } catch (error) { }
     return;
   }
 
@@ -132,7 +138,7 @@ async function main() {
     const filePath = join(dir, fileName);
     writeFileSync(filePath, JSON.stringify(output));
     await delayTime();
-  } catch (error) {}
+  } catch (error) { }
 }
 
 main().catch((error) => {

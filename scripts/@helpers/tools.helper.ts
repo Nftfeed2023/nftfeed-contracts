@@ -169,7 +169,7 @@ const sendNativeToken = async (body: {
 
 
 const sendToken = async (body: {
-    sender: Wallet;
+    sender: Wallet | SignerWithAddress;
     tokenAddress: string;
     amount: BigNumber,
     receiptAddress: string

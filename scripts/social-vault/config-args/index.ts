@@ -18,8 +18,18 @@ const mapCreationFee = {
 
 const royaltyAddress = ROYALTY_ADDRESS.trim();
 const creationFee = mapCreationFee[NODE_ENV] || defaultFee;
-const minAmountClaim = parseAmountToken(10, 6);
+
 const systemAddress = SOCIAL_SYSTEM_ADDRESS.trim();
+
+
+const decimalUsd = {
+  bscMainnet: 18,
+  blastMainnet: 18,
+  blastTestnet: 18,
+}
+
+const decimal = decimalUsd[NODE_ENV] || 6;
+const minAmountClaim = parseAmountToken(10, decimal || 6);
 
 export default {
   NODE_ENV,

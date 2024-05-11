@@ -239,6 +239,12 @@ const config: HardhatUserConfig = {
       // gasPrice: 1000000000,
       accounts: [hexWalletDeployerPrivateKey],
     },
+    vicTestnet: {
+      url: "https://rpc-testnet.viction.xyz",
+      chainId: 89,
+      // gasPrice: 1000000000,
+      accounts: [hexWalletDeployerPrivateKey],
+    },
     kromaMainnet: {
       url: "https://api.kroma.network",
       chainId: 255,

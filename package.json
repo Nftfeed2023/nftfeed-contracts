@@ -63,7 +63,10 @@
     "social-vault:finalize": "hardhat run scripts/social-vault/finalize.ts",
     "social-vault:create-campaign": "hardhat run scripts/social-vault/create-campaign.ts",
     "feed-agg:deploy": "hardhat run scripts/feed-agg/deploy.ts",
-    "feed-agg:verify": "hardhat run scripts/feed-agg/verify.ts"
+    "feed-agg:verify": "hardhat run scripts/feed-agg/verify.ts",
+    "vix-faucet-pool:deploy": "hardhat run scripts/vix-faucet-pool/deploy.ts",
+    "vix-faucet-pool:send-token": "hardhat run scripts/vix-faucet-pool/send-token.ts",
+    "vix-faucet-pool:verify": "hardhat run scripts/vix-faucet-pool/verify.ts"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.3",

@@ -51,7 +51,44 @@ async function main() {
         totalAmountBonus: 50,
       }
     ],
-
+    baseMainnet: [
+      {
+        ntfAddress: "0xe857f29653a2e22bf7862688821703b60a750680",
+        totalAmountBonus: 50,
+      }
+    ],
+    bscMainnet: [
+      {
+        ntfAddress: "0x5b067f626e113369f3b1a6f11a63bc61c9c7e4ac",
+        totalAmountBonus: 50,
+      },
+      {
+        ntfAddress: "0x79351cfaa005f3d01658547fb37301a9f42dd4ed",
+        totalAmountBonus: 40,
+      }
+    ],
+    opMainnet: [
+      {
+        ntfAddress: "0x5d85370bcf34c172167e361f1528b5cbf97a73f6",
+        totalAmountBonus: 90,
+      },
+      {
+        ntfAddress: "0x5938362da72af8b8e8ac39ed7ff184f075fb7734",
+        totalAmountBonus: 100,
+      },
+      {
+        ntfAddress: "0x4134fd50cd9f5cb276a326721fa8a0ab98680a77",
+        totalAmountBonus: 100,
+      },
+      {
+        ntfAddress: "0x1be30c5751043727fb732b13b75695abf4c78173",
+        totalAmountBonus: 50,
+      },
+      {
+        ntfAddress: "0xc6ec26026cda9e76496639029cf1d12aad16328e",
+        totalAmountBonus: 50,
+      }
+    ],
   }
 
   const tokenAddress = USD_ADDRESS[NODE_ENV];

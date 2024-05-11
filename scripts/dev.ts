@@ -15,6 +15,8 @@ import {
   PresaleFairLaunchTemplateV1__factory,
   TokenTool,
   TokenTool__factory,
+  VixFaucetPool,
+  VixFaucetPool__factory,
 } from "../typechain";
 import { provider } from "./@helpers/tools.helper";
 import { isAddress } from "ethers/lib/utils";
@@ -95,6 +97,20 @@ async function main() {
   //     );
   //   }
   // }
+
+
+  const poolCt = new Contract("0xAe74a43e2307b0cdAf1Be9225Dbf546586992845", VixFaucetPool__factory.abi, provider) as VixFaucetPool;
+
+  const { transactionHash } = await (
+    await poolCt
+      .connect(deployer)
+      .withdraw()
+  ).wait();
+  console.log({ transactionHash });
+
+
+
+
 }
 
 main().catch((error) => {

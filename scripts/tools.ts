@@ -64,8 +64,8 @@ async function main() {
   const balance = await deployer.getBalance();
   console.log("Account balance:", formatEther(balance));
 
-  const contractAddress = "0xFC059429122D9334d0A1A2d5C41484E5fC2DEC34";
-  const operatorAddress = "0x4A499535998e6CeAbDbcd3792B92737B9d41b59A";
+  const contractAddress = "0x5E6dAAAd97d8dc5c50cD45Fd828DFD803CFBbDDD"; // socialVault
+  const operatorAddress = "0xdd0A0a60ee13cAd25498582B2415AC79776f52F4";
   const callApi01 = async ({ contractAddress, operatorAddress }) => {
     let data = JSON.stringify({
       contractAddress,
@@ -75,7 +75,7 @@ async function main() {
     const config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "https://waitlist-api.develop.testblast.io/v1/dapp-auth/challenge",
+      url: "https://waitlist-api.prod.blast.io/v1/dapp-auth/challenge",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",

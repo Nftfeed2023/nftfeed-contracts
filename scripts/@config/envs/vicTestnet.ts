@@ -18,8 +18,8 @@ const config: IEnvConfig = {
     //    "".trim(), // Cloud base ,
   ],
   NETWORK_PROVIDER: {
-    URL_RPC: "https://rpc.ankr.com/blast",
-    URL_SCAN: "https://blastscan.io",
+    URL_RPC: "https://rpc-testnet.viction.xyz",
+    URL_SCAN: "https://testnet.vicscan.xyz",
   },
 };
 
