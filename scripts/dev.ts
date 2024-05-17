@@ -99,14 +99,6 @@ async function main() {
   // }
 
 
-  const poolCt = new Contract("0xAe74a43e2307b0cdAf1Be9225Dbf546586992845", VixFaucetPool__factory.abi, provider) as VixFaucetPool;
-
-  const { transactionHash } = await (
-    await poolCt
-      .connect(deployer)
-      .withdraw()
-  ).wait();
-  console.log({ transactionHash });
 
 
 

@@ -1,8 +1,0 @@
-{
-    "DEPLOYER_ADDRESS": "0xefe50209F15eDC61E10e6974A9bb7939313dD40e",
-    "TOKEN_ADDRESS": "0x03D8A7ad755E5645145D0a7c3CFD0DCF5F52DF8C",
-    "verifyData": {
-        "address": "0x03D8A7ad755E5645145D0a7c3CFD0DCF5F52DF8C",
-        "contract": "contracts/WrappedSharkie.sol:WrappedSharkie"
-    }
-}
