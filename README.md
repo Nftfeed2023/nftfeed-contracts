@@ -115,3 +115,10 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 
 - **SOCIAL_VAULT:** [0x19fb5a5ee3d93E8a5BdC330AC8D04B496C91792e](https://explorer.mode.network/address/0x19fb5a5ee3d93E8a5BdC330AC8D04B496C91792e)
 
+
+#### Mint Mainnet
+
+- **MINT_NFT_FACTORY_V2:** [0xe24165ba2bE15a27f5569d179C1bB07369Bc903a](https://explorer.mintchain.io/address/0xe24165ba2bE15a27f5569d179C1bB07369Bc903a)
+
+
+
